@@ -1,0 +1,12 @@
+# 분석할 유튜브 링크 목록 (한 줄에 하나, # 뒤는 주석)
+# 이 파일을 고쳐 push 하면 .github/workflows/youtube-analyze.yml 이 자동으로 돌아
+# docs/youtube/원자료/ 아래에 자막·음성·화면 추출 결과를 커밋한다.
+https://youtube.com/shorts/4IQZNDEjrJg
+https://youtu.be/XeRij5IJJ-I
+https://youtu.be/rn_7O-Kojf4
+https://youtu.be/3WpOw1IMU0s
+https://youtu.be/orK8McXy0NE
+https://youtu.be/2c3eTALLA2k
+https://youtu.be/OH61kfpMtag
+https://youtu.be/r7mP4GHI9Mw
+https://youtu.be/tNjvwt0V19g
