@@ -25,6 +25,7 @@ LLM이 하는 다음 단계다.
         --frame-interval 4   OCR 프레임 간격(초)
         --ocr-psm 11         tesseract 페이지 분할 모드
         --cookies FILE       로그인 쿠키(봇 차단 우회가 필요할 때)
+        --comments 20        상위 댓글 몇 개를 같이 저장 (0이면 생략)
         --keep-media         받은 오디오·비디오·프레임을 지우지 않음
 
 네트워크가 유튜브 본체(youtube.com, googlevideo.com)를 막는 환경에서는
@@ -316,7 +317,9 @@ WEB_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
           "(KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36")
 
 
-def innertube(endpoint: str, body: dict, retries: int = 3) -> dict | None:
+def innertube(endpoint: str, body: dict, retries: int = 5) -> dict | None:
+    """youtubei.googleapis.com 호출. 구글이 자동화 트래픽으로 보고 403(Sorry 페이지)을
+    돌려주는 일이 잦아서, 간격을 늘려가며 몇 번 다시 시도한다."""
     payload = {"context": {"client": {"clientName": "WEB", "clientVersion": "2.20250912.01.00",
                                       "hl": "ko", "gl": "KR"}}, **body}
     headers = {"Content-Type": "application/json", "User-Agent": WEB_UA,
@@ -332,7 +335,7 @@ def innertube(endpoint: str, body: dict, retries: int = 3) -> dict | None:
             log(f"  innertube/{endpoint} HTTP {e.code} (시도 {attempt + 1})")
         except Exception as e:  # noqa: BLE001
             log(f"  innertube/{endpoint} 실패: {e} (시도 {attempt + 1})")
-        time.sleep(4 * (attempt + 1))
+        time.sleep(6 * (attempt + 1))
     return None
 
 
@@ -359,10 +362,14 @@ def _runs(x) -> str:
     return "".join(r.get("text", "") for r in x.get("runs", []))
 
 
+_NEXT_CACHE: dict[str, dict] = {}
+
+
 def meta_from_innertube(vid: str) -> dict | None:
     d = innertube("next", {"videoId": vid})
     if not d:
         return None
+    _NEXT_CACHE[vid] = d
     vp = next(_walk(d, "videoPrimaryInfoRenderer"), {})
     vs = next(_walk(d, "videoSecondaryInfoRenderer"), {})
     owner = next(_walk(vs, "videoOwnerRenderer"), {})
@@ -399,6 +406,47 @@ def meta_from_innertube(vid: str) -> dict | None:
         "chapters": chapters,
         "source": "innertube-next",
     }
+
+
+def comments_from_innertube(vid: str, limit: int = 20, next_response: dict | None = None) -> dict | None:
+    """상위 댓글 몇 개를 받아온다(정렬은 유튜브 기본 '인기순'). 영상 내용 보조 자료."""
+    d = next_response or innertube("next", {"videoId": vid})
+    if not d:
+        return None
+    token = None
+    for isr in _walk(d, "itemSectionRenderer"):
+        if isr.get("sectionIdentifier") == "comment-item-section":
+            token = next(_walk(isr, "continuationCommand"), {}).get("token")
+            break
+    if not token:
+        return {"count_text": "", "comments": []}
+    comments: list[dict] = []
+    count_text = ""
+    while token and len(comments) < limit:
+        c = innertube("next", {"continuation": token})
+        if not c:
+            break
+        for h in _walk(c, "commentsHeaderRenderer"):
+            count_text = count_text or _runs(h.get("countText")) or _runs(h.get("commentsCount"))
+            break
+        for muts in _walk(c, "mutations"):
+            for mu in muts:
+                p = mu.get("payload", {}).get("commentEntityPayload")
+                text = p and p.get("properties", {}).get("content", {}).get("content")
+                if text:
+                    comments.append({
+                        "author": p.get("author", {}).get("displayName"),
+                        "likes": (p.get("toolbar", {}).get("likeCountNotliked") or "").strip(),
+                        "when": p.get("properties", {}).get("publishedTime"),
+                        "text": text,
+                    })
+        token = None
+        for cir in _walk(c, "continuationItemRenderer"):
+            token = next(_walk(cir, "continuationCommand"), {}).get("token")
+            if token:
+                break
+        time.sleep(1.5)
+    return {"count_text": count_text, "comments": comments[:limit]}
 
 
 def chapters_from_description(desc: str) -> list[dict]:
@@ -614,6 +662,14 @@ def write_report(v: dict, out_dir: Path) -> Path:
             lines.append(f"- `{fmt_ts(s['start'])}` {s['text']}")
         lines.append("")
 
+    cm = v.get("comments") or {}
+    if cm.get("comments"):
+        lines.append(f"## 댓글 (상위 {len(cm['comments'])}개{', 전체 ' + cm['count_text'] if cm.get('count_text') else ''})\n")
+        for c in cm["comments"]:
+            text = c["text"].replace("\n", " ").strip()
+            lines.append(f"- ({c.get('likes') or '0'}👍 {c.get('when') or ''}) {text}")
+        lines.append("")
+
     if subs.get("available"):
         lines.append("## 자막 트랙 목록\n")
         lines.append(f"- 제작자 자막: {', '.join(subs['available'].get('manual') or []) or '없음'}")
@@ -672,6 +728,12 @@ def process(url: str, vid: str, args) -> dict:
             log(f"  제목: {v['meta']['title']} / {v['meta']['channel']}")
         else:
             v["errors"].append("InnerTube 메타데이터도 실패")
+
+    # 댓글 (내용 보조 자료)
+    if args.comments > 0:
+        v["comments"] = comments_from_innertube(vid, args.comments, _NEXT_CACHE.get(vid))
+        if v["comments"]:
+            log(f"  댓글 {v['comments'].get('count_text') or ''} 중 {len(v['comments']['comments'])}개 확보")
 
     # 자막
     if not args.no_subs:
@@ -738,6 +800,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--frame-interval", type=float, default=4.0)
     ap.add_argument("--ocr-psm", type=int, default=11)
     ap.add_argument("--cookies", help="쿠키 파일 (Netscape 형식)")
+    ap.add_argument("--comments", type=int, default=20, help="받아올 상위 댓글 수 (0이면 생략)")
     ap.add_argument("--no-subs", action="store_true")
     ap.add_argument("--no-asr", action="store_true")
     ap.add_argument("--no-ocr", action="store_true")

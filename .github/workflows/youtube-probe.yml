@@ -28,19 +28,30 @@ jobs:
           pip install -q yt-dlp bgutil-ytdlp-pot-provider
           for i in $(seq 1 20); do curl -fsS http://127.0.0.1:4416/ping && break; sleep 2; done; echo
           docker logs bgutil 2>&1 | tail -5
+      - name: cookies (optional, only if YOUTUBE_COOKIES secret exists)
+        env:
+          YOUTUBE_COOKIES: ${{ secrets.YOUTUBE_COOKIES }}
+        run: |
+          if [ -n "$YOUTUBE_COOKIES" ]; then
+            printf '%s\n' "$YOUTUBE_COOKIES" > "$RUNNER_TEMP/cookies.txt"
+            echo "COOKIES_ARG=--cookies $RUNNER_TEMP/cookies.txt" >> "$GITHUB_ENV"
+            echo "using cookies"
+          else
+            echo "no cookies secret"
+          fi
       - name: yt-dlp with PO token provider, by client
         run: |
           mkdir -p probe && cd probe
           echo "=================== verbose default (first 60 lines)"
-          yt-dlp -v --skip-download --write-subs --write-auto-subs --sub-langs "ko.*,en.*" --sub-format "json3/srv3/vtt" -o "default.%(id)s.%(ext)s" "$PROBE_URL" 2>&1 | grep -vE "^\[download\]" | head -60 || true
+          yt-dlp -v --skip-download --write-subs --write-auto-subs --sub-langs "ko.*,en.*" --sub-format "json3/srv3/vtt" -o "default.%(id)s.%(ext)s" $COOKIES_ARG "$PROBE_URL" 2>&1 | grep -vE "^\[download\]" | head -60 || true
           ls -la | grep "default\." || echo "(no files for default)"
           for c in web mweb web_embedded tv web_safari; do
             echo "=================== client=$c"
-            yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs "ko.*,en.*" --sub-format "json3/srv3/vtt" -o "$c.%(id)s.%(ext)s" --extractor-args "youtube:player_client=$c" "$PROBE_URL" 2>&1 | grep -vE "^\[download\]" | tail -6 || true
+            yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs "ko.*,en.*" --sub-format "json3/srv3/vtt" -o "$c.%(id)s.%(ext)s" --extractor-args "youtube:player_client=$c" $COOKIES_ARG "$PROBE_URL" 2>&1 | grep -vE "^\[download\]" | tail -6 || true
             ls -la | grep "$c\." || echo "(no files for $c)"
           done
           echo "=================== audio 20s with default"
-          yt-dlp -f "ba[ext=m4a]/ba/b" --download-sections "*0-20" -o "%(id)s.audio.%(ext)s" "$PROBE_URL" 2>&1 | tail -5 || true
+          yt-dlp -f "ba[ext=m4a]/ba/b" --download-sections "*0-20" -o "%(id)s.audio.%(ext)s" $COOKIES_ARG "$PROBE_URL" 2>&1 | tail -5 || true
           ls -la
       - name: bgutil logs
         if: always()

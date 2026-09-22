@@ -1,0 +1,111 @@
+name: youtube-analyze
+# youtube-links.txt 를 고쳐 push 하거나, Actions 탭에서 수동 실행(Run workflow)하면
+# tools/youtube_analyze.py 로 자막·음성·화면 텍스트를 뽑아 docs/youtube/원자료/ 에 커밋한다.
+on:
+  push:
+    paths:
+      - "youtube-links.txt"
+      - "tools/youtube_analyze.py"
+      - ".github/workflows/youtube-analyze.yml"
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: "유튜브 링크 (공백으로 구분). 비우면 youtube-links.txt 사용"
+        default: ""
+        required: false
+      asr_model:
+        description: "Whisper 모델 (tiny/base/small/medium/large-v3)"
+        default: "small"
+        required: false
+      frame_interval:
+        description: "화면 OCR 프레임 간격(초)"
+        default: "4"
+        required: false
+      skip:
+        description: "생략할 단계 (예: asr,ocr)"
+        default: ""
+        required: false
+
+concurrency:
+  group: youtube-analyze-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: 시스템 패키지 (ffmpeg, tesseract kor/eng)
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg tesseract-ocr tesseract-ocr-kor tesseract-ocr-eng >/dev/null
+          ffmpeg -version | head -1; tesseract --version 2>&1 | head -1
+
+      - name: 파이썬 패키지
+        run: |
+          pip install -q -r tools/requirements-youtube.txt bgutil-ytdlp-pot-provider
+
+      - name: PO 토큰 제공자 (bgutil) 기동
+        run: |
+          docker run -d --name bgutil -p 4416:4416 brainicism/bgutil-ytdlp-pot-provider
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:4416/ping >/dev/null 2>&1 && break; sleep 2; done
+
+      - name: 쿠키 (선택, YOUTUBE_COOKIES 시크릿이 있을 때만)
+        env:
+          YOUTUBE_COOKIES: ${{ secrets.YOUTUBE_COOKIES }}
+        run: |
+          if [ -n "$YOUTUBE_COOKIES" ]; then
+            printf '%s\n' "$YOUTUBE_COOKIES" > "$RUNNER_TEMP/cookies.txt"
+            echo "COOKIES_ARG=--cookies $RUNNER_TEMP/cookies.txt" >> "$GITHUB_ENV"
+            echo "쿠키 사용"
+          else
+            echo "쿠키 없음 (봇 차단 시 YOUTUBE_COOKIES 시크릿을 추가하세요)"
+          fi
+
+      - name: 추출 실행
+        env:
+          URLS: ${{ inputs.urls }}
+          ASR_MODEL: ${{ inputs.asr_model || 'small' }}
+          FRAME_INTERVAL: ${{ inputs.frame_interval || '4' }}
+          SKIP: ${{ inputs.skip }}
+        run: |
+          ARGS="--out docs/youtube/원자료 --asr-model $ASR_MODEL --frame-interval $FRAME_INTERVAL --asr-lang ko $COOKIES_ARG"
+          case ",$SKIP," in *,asr,*) ARGS="$ARGS --no-asr";; esac
+          case ",$SKIP," in *,ocr,*) ARGS="$ARGS --no-ocr";; esac
+          case ",$SKIP," in *,subs,*) ARGS="$ARGS --no-subs";; esac
+          if [ -n "$URLS" ]; then
+            python3 tools/youtube_analyze.py $ARGS $URLS
+          else
+            python3 tools/youtube_analyze.py $ARGS --links-file youtube-links.txt
+          fi
+
+      - name: 결과 커밋
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/youtube/원자료
+          if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
+          git commit -m "유튜브 추출 결과 갱신 (youtube-analyze 워크플로) [skip ci]"
+          git pull --rebase origin "${{ github.ref_name }}" || true
+          git push origin "HEAD:${{ github.ref_name }}"
+
+      - name: 결과 아티팩트
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-analysis
+          path: docs/youtube/원자료
+          if-no-files-found: ignore

@@ -36,7 +36,15 @@ Actions 탭에서 `youtube-analyze` 를 수동 실행(Run workflow)해 링크·�
 
 GitHub 러너 IP 는 유튜브가 데이터센터로 보고 자주 막는다. 막히면 저장소 Settings →
 Secrets → `YOUTUBE_COOKIES` 에 브라우저에서 내보낸 cookies.txt 내용을 넣어 두면
-워크플로가 자동으로 그 쿠키를 쓴다.
+워크플로가 자동으로 그 쿠키를 쓴다. 쿠키가 먹히는지는 `youtube-probe` 워크플로(진단용,
+Actions 탭에서 수동 실행)를 돌려 로그의 자막 파일 목록으로 확인할 수 있다.
+
+## 결과물 위치
+
+- `docs/youtube/원자료/index.md` — 영상별 추출 상태 표
+- `docs/youtube/원자료/<영상ID>/<영상ID>.md` — 메타데이터·설명란·챕터·통합 타임라인·댓글
+- `docs/youtube/원자료/<영상ID>/data.json` — 같은 내용의 원자료(JSON)
+- `docs/youtube/사업자등록-영상-9편-분석.md` — 2026-09-22 요청분 9편의 분석 문서
 
 ## 이 저장소를 만든 세션(Claude Code 클라우드)의 제약
 
