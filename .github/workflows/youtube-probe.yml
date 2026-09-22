@@ -11,28 +11,88 @@ on:
         required: true
 env:
   PROBE_URL: ${{ inputs.url || 'https://youtu.be/XeRij5IJJ-I' }}
+  VID: XeRij5IJJ-I
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -q yt-dlp
-      - name: subtitles only
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: pip install -q yt-dlp youtube-transcript-api
+      - name: yt-dlp by player_client
         run: |
           mkdir -p probe && cd probe
-          yt-dlp --version
-          yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs "ko.*,en.*" --sub-format "json3/srv3/vtt" -o "%(id)s.%(ext)s" "$PROBE_URL" 2>&1 | tail -30 || true
-          ls -la
-      - name: audio (first 20 s) and formats
+          for c in default tv tv_simply mweb web_embedded android_vr ios web_safari; do
+            echo "=================== client=$c"
+            if [ "$c" = default ]; then EA=""; else EA="--extractor-args youtube:player_client=$c"; fi
+            yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs "ko.*,en.*" --sub-format "json3/srv3/vtt" -o "$c.%(id)s.%(ext)s" $EA "$PROBE_URL" 2>&1 | grep -vE "^\[download\]" | tail -8 || true
+            ls -la | grep "$c\." || echo "(no files for $c)"
+          done
+      - name: youtube-transcript-api
         run: |
-          cd probe
-          yt-dlp -F "$PROBE_URL" 2>&1 | tail -15 || true
-          yt-dlp -f "ba[ext=m4a]/ba/b" --download-sections "*0-20" -o "%(id)s.audio.%(ext)s" "$PROBE_URL" 2>&1 | tail -10 || true
-          ls -la
-      - name: dump json head
+          python3 - <<'PY' || true
+          from youtube_transcript_api import YouTubeTranscriptApi
+          try:
+              api = YouTubeTranscriptApi()
+              tl = api.list("XeRij5IJJ-I")
+              print("tracks:", [(t.language_code, t.is_generated) for t in tl])
+              t = api.fetch("XeRij5IJJ-I", languages=["ko", "en"])
+              print("fetched:", len(t.snippets), "snippets; first:", [(s.start, s.text) for s in t.snippets[:3]])
+          except Exception as e:
+              print("youtube-transcript-api failed:", type(e).__name__, str(e)[:400])
+          PY
+      - name: innertube via www.youtube.com (next / get_transcript / player)
         run: |
-          cd probe
-          yt-dlp --dump-json --skip-download "$PROBE_URL" 2>/dev/null | python3 -c "import json,sys; d=json.load(sys.stdin); print({k:d.get(k) for k in ('id','title','duration','upload_date','channel','view_count','like_count')}); print('subs:',list((d.get('subtitles') or {}).keys())); print('auto:',list((d.get('automatic_captions') or {}).keys())[:20])" || echo dump failed
+          python3 - <<'PY' || true
+          import json, urllib.request, urllib.error, time
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+          def call(host, ep, body, cn="1", cv="2.20250912.01.00", ua=UA, extra=None):
+              h={"Content-Type":"application/json","User-Agent":ua,"X-YouTube-Client-Name":cn,"X-YouTube-Client-Version":cv,"Origin":"https://www.youtube.com"}
+              if extra: h.update(extra)
+              req=urllib.request.Request(f"https://{host}/youtubei/v1/{ep}?prettyPrint=false", data=json.dumps(body).encode(), headers=h)
+              try:
+                  with urllib.request.urlopen(req, timeout=40) as r: return r.status, r.read()
+              except urllib.error.HTTPError as e: return e.code, e.read()
+          def walk(o,k):
+              if isinstance(o,dict):
+                  if k in o: yield o[k]
+                  for v in o.values(): yield from walk(v,k)
+              elif isinstance(o,list):
+                  for v in o: yield from walk(v,k)
+          vid="XeRij5IJJ-I"
+          web={"context":{"client":{"clientName":"WEB","clientVersion":"2.20250912.01.00","hl":"ko","gl":"KR"}}}
+          for host in ("www.youtube.com","youtubei.googleapis.com"):
+              st,b=call(host,"next",{**web,"videoId":vid}); print(host,"next:",st,len(b))
+              if st!=200: continue
+              d=json.loads(b); params=next(walk(d,"getTranscriptEndpoint"),{}).get("params")
+              print("  transcript params:", params and params[:40])
+              if params:
+                  st2,b2=call(host,"get_transcript",{**web,"params":params}); print("  get_transcript:",st2,len(b2),"segs=",b2.count(b"transcriptSegmentRenderer"), b2[:150] if st2!=200 else "")
+                  if st2==200 and b"transcriptSegmentRenderer" in b2:
+                      d2=json.loads(b2); segs=list(walk(d2,"transcriptSegmentRenderer"))
+                      print("  first segs:", [(s.get("startTimeText",{}).get("simpleText"), "".join(r.get("text","") for r in s.get("snippet",{}).get("runs",[]))) for s in segs[:3]])
+              time.sleep(1)
+          clients=[("ANDROID","3","19.44.38","com.google.android.youtube/19.44.38 (Linux; U; Android 11) gzip",{"androidSdkVersion":30}),
+                   ("TVHTML5","7","7.20250912.16.00","Mozilla/5.0 (ChromiumStylePlatform) Cobalt/Version",{}),
+                   ("IOS","5","19.45.4","com.google.ios.youtube/19.45.4 (iPhone16,2; U; CPU iOS 18_1_0 like Mac OS X;)",{"deviceModel":"iPhone16,2"}),
+                   ("WEB_EMBEDDED_PLAYER","56","1.20250912.01.00",UA,{}),
+                   ("MWEB","2","2.20250912.01.00","Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1",{})]
+          for name,cn,cv,ua,extra in clients:
+              body={"context":{"client":{"clientName":name,"clientVersion":cv,"hl":"ko","gl":"KR",**extra}},"videoId":vid,"contentCheckOk":True,"racyCheckOk":True}
+              st,b=call("www.youtube.com","player",body,cn,cv,ua); 
+              try:
+                  d=json.loads(b); ps=d.get("playabilityStatus",{}); caps=d.get("captions",{}).get("playerCaptionsTracklistRenderer",{}).get("captionTracks",[]); fm=d.get("streamingData",{}).get("adaptiveFormats",[])
+                  print(f"player {name}: {st} status={ps.get('status')} reason={str(ps.get('reason'))[:60]} captions={[(c.get('languageCode'),c.get('kind')) for c in caps]} formats={len(fm)} url={'yes' if fm and fm[0].get('url') else 'no'}")
+                  if caps:
+                      st3,b3=(lambda u: (lambda r:(r.status,r.read()))(urllib.request.urlopen(urllib.request.Request(u+"&fmt=json3",headers={"User-Agent":ua}),timeout=30)))(caps[0]["baseUrl"])
+                      print(f"   timedtext fetch: {st3} {len(b3)} bytes; events={b3.count(b'tStartMs')}")
+              except Exception as e:
+                  print(f"player {name}: {st} parse/err {e} {b[:120]}")
+              time.sleep(1)
+          PY
