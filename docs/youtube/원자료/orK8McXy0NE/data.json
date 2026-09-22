@@ -8,7 +8,7 @@
   "channel_url": null,
   "subscriber_text": "구독자 5.41천명",
   "upload_date_text": "2026. 3. 13.",
-  "view_text": "조회수 3,417회",
+  "view_text": "조회수 3,419회",
   "like_text": "다른 사용자 33명과 함께 이 동영상에 좋아요 표시",
   "description": "개인사업자 등록을 어떻게 하는지 방법을 정리해보았습니다.\n\n2026년판 사업자 등록하는 방법,\n로그인하는 방법부터\n사업자 등록하는 방법까지\n\n초보자도 5분이면 충분합니다!\n\n급하신 분들을 위해 링크 남겨두도록 하겠습니다\nhttps://cafe.naver.com/f-e/cafes/3165...\n\n#창업 #부업 #사업자등록 #사업자등록증 #개인사업자",
   "chapters": [],
@@ -18,12 +18,14 @@
  "asr": null,
  "ocr": null,
  "status": {
-  "subs": "생략",
-  "asr": "생략",
-  "ocr": "생략"
+  "subs": "실패 (영상 정보 없음)",
+  "asr": "실패 (오디오 내려받기)",
+  "ocr": "실패 (비디오 내려받기)"
  },
  "errors": [
-  "yt-dlp 정보 조회 실패: yt-dlp 미사용"
+  "yt-dlp 정보 조회 실패: DownloadError: ERROR: [youtube] orK8McXy0NE: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-d",
+  "오디오를 내려받지 못함 (네트워크 차단 또는 봇 차단)",
+  "비디오를 내려받지 못함 (네트워크 차단 또는 봇 차단)"
  ],
  "comments": {
   "count_text": "댓글 5개",

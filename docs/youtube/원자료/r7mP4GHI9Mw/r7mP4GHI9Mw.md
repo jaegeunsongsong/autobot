@@ -7,7 +7,7 @@
 - 조회수: 조회수 16,772회
 - 좋아요: 좋아요
 - 메타데이터 출처: innertube-next
-- 자막: 생략 / 음성인식: 생략 / 화면OCR: 생략
+- 자막: 실패 (영상 정보 없음) / 음성인식: 실패 (오디오 내려받기) / 화면OCR: 실패 (비디오 내려받기)
 
 ## 설명란
 
@@ -70,4 +70,6 @@ _확보된 자막·음성·화면 텍스트가 없다._
 
 ## 처리 중 문제
 
-- yt-dlp 정보 조회 실패: yt-dlp 미사용
+- yt-dlp 정보 조회 실패: DownloadError: ERROR: [youtube] r7mP4GHI9Mw: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-d
+- 오디오를 내려받지 못함 (네트워크 차단 또는 봇 차단)
+- 비디오를 내려받지 못함 (네트워크 차단 또는 봇 차단)

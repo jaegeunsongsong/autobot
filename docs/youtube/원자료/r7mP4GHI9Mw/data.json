@@ -18,12 +18,14 @@
  "asr": null,
  "ocr": null,
  "status": {
-  "subs": "생략",
-  "asr": "생략",
-  "ocr": "생략"
+  "subs": "실패 (영상 정보 없음)",
+  "asr": "실패 (오디오 내려받기)",
+  "ocr": "실패 (비디오 내려받기)"
  },
  "errors": [
-  "yt-dlp 정보 조회 실패: yt-dlp 미사용"
+  "yt-dlp 정보 조회 실패: DownloadError: ERROR: [youtube] r7mP4GHI9Mw: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-d",
+  "오디오를 내려받지 못함 (네트워크 차단 또는 봇 차단)",
+  "비디오를 내려받지 못함 (네트워크 차단 또는 봇 차단)"
  ],
  "comments": {
   "count_text": "댓글 12개",

@@ -8,7 +8,7 @@
   "channel_url": null,
   "subscriber_text": "구독자 14.3만명",
   "upload_date_text": "2024. 8. 27.",
-  "view_text": "조회수 123,463회",
+  "view_text": "조회수 123,466회",
   "like_text": "다른 사용자 1,808명과 함께 이 동영상에 좋아요 표시",
   "description": "",
   "chapters": [],
@@ -18,12 +18,14 @@
  "asr": null,
  "ocr": null,
  "status": {
-  "subs": "생략",
-  "asr": "생략",
-  "ocr": "생략"
+  "subs": "실패 (영상 정보 없음)",
+  "asr": "실패 (오디오 내려받기)",
+  "ocr": "실패 (비디오 내려받기)"
  },
  "errors": [
-  "yt-dlp 정보 조회 실패: yt-dlp 미사용"
+  "yt-dlp 정보 조회 실패: DownloadError: ERROR: [youtube] 4IQZNDEjrJg: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-d",
+  "오디오를 내려받지 못함 (네트워크 차단 또는 봇 차단)",
+  "비디오를 내려받지 못함 (네트워크 차단 또는 봇 차단)"
  ],
  "comments": {
   "count_text": "댓글 22개",
@@ -39,6 +41,12 @@
     "likes": "3",
     "when": "5개월 전",
     "text": "아.. 내생애 첫사업자가 아니라 그냥 광탈이네 ㅠ"
+   },
+   {
+    "author": "@ZeroPulse01917",
+    "likes": "5",
+    "when": "8개월 전",
+    "text": "에휴 서울에서 냈는데\n진짜 짜증난다..\n그렇게 많은곳에서 상담을 받았는데\n그 누구도 이걸 말 안해줌"
    },
    {
     "author": "@TheRlawoals",
@@ -59,6 +67,12 @@
     "text": "신청을 따로 해야되나요?"
    },
    {
+    "author": "@brunoyu9222",
+    "likes": "1",
+    "when": "6개월 전",
+    "text": "통신판매업으로 해도 쿠팡 로켓배송 입점에는 문제없나요?"
+   },
+   {
     "author": "@mong-r3o",
     "likes": "1",
     "when": "10개월 전",
@@ -66,27 +80,15 @@
    },
    {
     "author": "@ZeroPulse01917",
-    "likes": "5",
+    "likes": "",
     "when": "8개월 전",
-    "text": "에휴 서울에서 냈는데\n진짜 짜증난다..\n그렇게 많은곳에서 상담을 받았는데\n그 누구도 이걸 말 안해줌"
-   },
-   {
-    "author": "@brunoyu9222",
-    "likes": "1",
-    "when": "6개월 전",
-    "text": "통신판매업으로 해도 쿠팡 로켓배송 입점에는 문제없나요?"
+    "text": "진짜 다 해당되는데 서울에서 내서 50프로밖에 감면 못 받음 0원 낼걸 50프로 내야함 그 누구도 나한테 말을 안해줌 세무서들.."
    },
    {
     "author": "@쇼핑중독3기",
     "likes": "1",
     "when": "1년 전",
     "text": "의정부는 안되나요?"
-   },
-   {
-    "author": "@ZeroPulse01917",
-    "likes": "",
-    "when": "8개월 전",
-    "text": "진짜 다 해당되는데 서울에서 내서 50프로밖에 감면 못 받음 0원 낼걸 50프로 내야함 그 누구도 나한테 말을 안해줌 세무서들.."
    },
    {
     "author": "@leezzaur",
