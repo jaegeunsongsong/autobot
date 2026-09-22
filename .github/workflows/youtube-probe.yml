@@ -1,0 +1,33 @@
+name: youtube-probe
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "YouTube URL to probe"
+        default: "https://youtu.be/XeRij5IJJ-I"
+        required: true
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q yt-dlp
+      - name: subtitles only
+        run: |
+          mkdir -p probe && cd probe
+          yt-dlp --version
+          yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs "ko.*,en.*" --sub-format "json3/srv3/vtt" -o "%(id)s.%(ext)s" "${{ inputs.url }}" 2>&1 | tail -30 || true
+          ls -la
+      - name: audio (first 20 s) and formats
+        run: |
+          cd probe
+          yt-dlp -F "${{ inputs.url }}" 2>&1 | tail -15 || true
+          yt-dlp -f "ba[ext=m4a]/ba/b" --download-sections "*0-20" -o "%(id)s.audio.%(ext)s" "${{ inputs.url }}" 2>&1 | tail -10 || true
+          ls -la
+      - name: dump json head
+        run: |
+          cd probe
+          yt-dlp --dump-json --skip-download "${{ inputs.url }}" 2>/dev/null | python3 -c "import json,sys; d=json.load(sys.stdin); print({k:d.get(k) for k in ('id','title','duration','upload_date','channel','view_count','like_count')}); print('subs:',list((d.get('subtitles') or {}).keys())); print('auto:',list((d.get('automatic_captions') or {}).keys())[:20])" || echo dump failed
