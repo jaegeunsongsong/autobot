@@ -34,10 +34,30 @@ python3 tools/youtube_analyze.py --links-file youtube-links.txt --out out/youtub
 러너에서 위 파이프라인을 돌리고 결과를 `docs/youtube/원자료/` 에 커밋한다.
 Actions 탭에서 `youtube-analyze` 를 수동 실행(Run workflow)해 링크·모델을 직접 넣을 수도 있다.
 
-GitHub 러너 IP 는 유튜브가 데이터센터로 보고 자주 막는다. 막히면 저장소 Settings →
-Secrets → `YOUTUBE_COOKIES` 에 브라우저에서 내보낸 cookies.txt 내용을 넣어 두면
-워크플로가 자동으로 그 쿠키를 쓴다. 쿠키가 먹히는지는 `youtube-probe` 워크플로(진단용,
-Actions 탭에서 수동 실행)를 돌려 로그의 자막 파일 목록으로 확인할 수 있다.
+GitHub 러너 IP 는 유튜브가 데이터센터로 보고 항상 막는다("Sign in to confirm you're not a bot").
+로그인 쿠키를 넣어야만 풀린다.
+
+### 쿠키 시크릿 넣는 법 (한 번만)
+
+1. 크롬(또는 엣지)에 **"Get cookies.txt LOCALLY"** 같은 cookies.txt 내보내기 확장을 설치한다.
+   (Cookie-Editor 처럼 JSON 으로 내보내는 확장도 워크플로가 자동 변환하므로 써도 된다.)
+2. 시크릿(사생활 보호) 창을 열어 youtube.com 에 로그인한다. 아무 영상이나 한 번 연다.
+3. 확장으로 **youtube.com 도메인 쿠키를 내보낸다**. 첫 줄이 `# Netscape HTTP Cookie File` 인
+   텍스트 파일(cookies.txt)이 나온다.
+4. 그 시크릿 창은 **로그아웃하지 말고 그냥 닫는다** (로그아웃하면 쿠키가 무효가 된다).
+5. GitHub 저장소 → **Settings → Secrets and variables → Actions → "Secrets" 탭 →
+   New repository secret**. Name 은 정확히 `YOUTUBE_COOKIES`, Secret 에는 cookies.txt 파일
+   내용 **전체**를 붙여 넣는다.
+   - "Variables" 탭이 아니라 **"Secrets" 탭**이어야 한다. Variables 에 넣으면 워크플로가
+     오류로 알려 준다.
+   - Environment secrets 가 아니라 **Repository secrets** 여야 한다.
+6. Actions 탭 → `youtube-analyze` → Run workflow. 로그의 "쿠키" 단계에
+   `youtube.com 쿠키 줄 수: N | 로그인 쿠키 포함: True` 가 찍히면 정상이다.
+   `쿠키 사용` 대신 `시크릿이 비어 있습니다` 가 찍히면 5번을 다시 확인한다.
+
+쿠키는 개인 계정 정보다. 공용 저장소라면 유튜브용 별도 구글 계정을 만들어 쓰는 편이 안전하다.
+쿠키가 먹히는지만 빨리 보려면 `youtube-probe` 워크플로(진단용, Actions 탭에서 수동 실행)를
+돌려 로그의 자막 파일 목록으로 확인할 수 있다.
 
 ## 결과물 위치
 
