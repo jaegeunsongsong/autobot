@@ -1,185 +1,53 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>������-���������</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-<style>body{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","WenQuanYi Zen Hei",sans-serif;max-width:860px;margin:2em auto;padding:0 1em;line-height:1.7;font-size:15px}
-h1{font-size:1.5em;border-bottom:2px solid #333;padding-bottom:.3em}
-h2{font-size:1.25em;margin-top:2em;border-bottom:1px solid #999}
-h3{font-size:1.05em;margin-top:1.6em}
-blockquote{border:1px solid #666;padding:.4em 1em;margin:.6em 0;background:#fafafa}
-table{border-collapse:collapse;margin:.6em 0}td,th{border:1px solid #888;padding:.2em .7em}
-p{margin:.5em 0}
-@media print{body{max-width:none;font-size:12.5px}h2{page-break-before:auto}}
-
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>기하 정답 및 해설</title><style>
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Serif KR","Noto Sans KR","WenQuanYi Zen Hei","DejaVu Serif",serif;font-size:10.6pt;line-height:1.55;color:#000}
+.page{width:210mm;height:297mm;padding:12mm 12mm 10mm 12mm;page-break-after:always;position:relative;overflow:hidden}
+.page:last-child{page-break-after:auto}
+.hdr{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.2px solid #000;padding-bottom:2mm;margin-bottom:3mm}
+.hdr .l{font-size:10pt}.hdr .l .gyosi{display:inline-block;border:1.2px solid #000;border-radius:14px;padding:0 7px;font-size:10pt;margin-right:5mm}
+.hdr .c{font-size:21pt;font-weight:bold;letter-spacing:4px}
+.hdr .c small{font-size:14pt;letter-spacing:0}
+.hdr .r{font-size:12pt;font-weight:bold;border:1.6px solid #000;padding:0 6px}
+.hdr .pg{font-size:15pt;font-weight:bold}
+.top{font-size:10.5pt;text-align:center;margin-bottom:1mm}
+.cols{display:flex;height:252mm}
+.col{width:50%;padding:0 4mm 0 0}
+.col+.col{border-left:1px solid #000;padding:0 0 0 4mm}
+.secbox{display:inline-block;border:1.3px solid #000;padding:0 8px;font-weight:bold;margin:2mm 0 3mm}
+.prob{margin-bottom:9mm}
+.prob .num{font-weight:bold;margin-right:4px}
+.prob p{margin:0 0 1.2mm;text-align:justify}
+.prob .num+p{display:inline}
+.prob math[display=block]{margin:1.5mm 0}
+.choices{margin-top:3mm;display:flex;flex-wrap:wrap;gap:2mm 6mm}
+.choices .ch{white-space:nowrap}
+blockquote{border:1px solid #000;margin:2.5mm 2mm;padding:1.5mm 3mm;font-size:10.2pt}
+blockquote p{margin:0.5mm 0!important;display:block!important}
+img{display:block;margin:3mm auto;max-width:72mm;max-height:60mm}
+.fig-wide img{max-width:80mm}
+.foot{position:absolute;bottom:6mm;left:0;right:0;text-align:center;font-size:10.5pt}
+.foot span{border:1px solid #000;padding:0 6px}
+.confirm{border:1px solid #000;padding:2mm 3mm;font-size:9.6pt;position:absolute;bottom:14mm;right:12mm;width:87mm}
+.confirm p{margin:0.5mm 0}
 math{font-size:1.05em}
-</style>
-</head>
-<body>
+/* answer sheet */
+.ans .cols{display:block;height:auto;column-count:2;column-gap:8mm;column-rule:1px solid #000}
+.ans .sol{break-inside:avoid;margin-bottom:5mm}
+.ans .sol .h{display:flex;justify-content:space-between;border-bottom:1.5px solid #000;margin-bottom:1.5mm;font-weight:bold}
+.ans .sol .h .n{font-size:15pt;font-style:italic}
+.ans .sol p{margin:0 0 1mm}
+.ans table{border-collapse:collapse;margin:2mm auto;font-size:10pt}
+.ans td,.ans th{border:1px solid #000;padding:0.5mm 2.2mm;text-align:center}
+.ans .qa{break-inside:avoid;margin-bottom:5mm}
+.ans .qa .t{font-weight:bold;border:1px solid #000;display:inline-block;padding:0 8px;margin-bottom:2mm}
+.ans h2{font-size:12.5pt;border-bottom:1.5px solid #000;margin:2mm 0 3mm}
 
-<h1 id="강대모의고사k-23회-변형-문항-기하-선택자용-답안지">강대모의고사K
-23회 변형 문항 — 기하 선택자용 답안지</h1>
-<h2 id="빠른-정답">빠른 정답</h2>
-<table>
+    .ans .page{height:auto;min-height:297mm;overflow:visible;page-break-after:auto}
+    .ans .foot{display:none}</style></head><body class="ans"><div class="page">
+    <div class="top">2027학년도 대학수학능력시험 대비 — 강대모의고사K 23회 변형 (기하)</div>
+    <div class="hdr"><div class="l"></div><div class="c">수학 영역 <small>정답 및 해설</small></div><div class="r">변형형</div></div>
+    <div class="qa"><div class="t">빠른 정답</div><table>
 <thead>
 <tr class="header">
 <th>문항</th>
@@ -233,10 +101,8 @@ math{font-size:1.05em}
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="공통과목-해설">공통과목 해설</h2>
-<h3 id="정답-②">8. 정답 ②</h3>
-<p>곡선
+</div>
+    <h2>해설</h2><div class="cols"><div class="sol"><div class="h"><span class="n">8</span><span>정답 | ②</span></div><p>곡선
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msub><mo>log</mo><mi>a</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">y=\log_a(x+3)</annotation></semantics></math>의
 점근선은 직선
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">x=-3</annotation></semantics></math>이므로
@@ -248,8 +114,7 @@ math{font-size:1.05em}
 따라서
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mn>4</mn></msup><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">a^4=3</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><msup><mn>3</mn><mfrac><mn>1</mn><mn>4</mn></mfrac></msup></mrow><annotation encoding="application/x-tex">a=3^{\frac14}</annotation></semantics></math>.</p>
-<h3 id="정답-④">9. 정답 ④</h3>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mi>′</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>n</mi><mi>x</mi><mo>−</mo><mn>24</mn></mrow><annotation encoding="application/x-tex">f&#39;(x)=3x^2+2nx-24</annotation></semantics></math>.
+</div><div class="sol"><div class="h"><span class="n">9</span><span>정답 | ④</span></div><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mi>′</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>n</mi><mi>x</mi><mo>−</mo><mn>24</mn></mrow><annotation encoding="application/x-tex">f&#39;(x)=3x^2+2nx-24</annotation></semantics></math>.
 포물선
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>f</mi><mi>′</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">y=f&#39;(x)</annotation></semantics></math>의
 축
@@ -267,8 +132,7 @@ math{font-size:1.05em}
 자연수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>4</mn><mo>,</mo><mn>5</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">n=4,5,\dots,10</annotation></semantics></math>
 → <strong>7개</strong>.</p>
-<h3 id="정답-③">10. 정답 ③</h3>
-<p>공비를
+</div><div class="sol"><div class="h"><span class="n">10</span><span>정답 | ③</span></div><p>공비를
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>r</mi><mo>&gt;</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">r\,(r&gt;0)</annotation></semantics></math>라
 하면
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>27</mn><msub><mi>a</mi><mn>1</mn></msub><mo>+</mo><mn>9</mn><msub><mi>a</mi><mn>1</mn></msub><mi>r</mi><mo>=</mo><mn>3</mn><msub><mi>a</mi><mn>1</mn></msub><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><msub><mi>a</mi><mn>1</mn></msub><msup><mi>r</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">27a_1+9a_1r=3a_1r^2+a_1r^3</annotation></semantics></math>에서
@@ -279,8 +143,7 @@ math{font-size:1.05em}
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>27</mn><msub><mi>a</mi><mn>1</mn></msub><mo>+</mo><mn>9</mn><mo>⋅</mo><mn>3</mn><msub><mi>a</mi><mn>1</mn></msub><mo>=</mo><mn>54</mn><msub><mi>a</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">27a_1+9\cdot3a_1=54a_1=1</annotation></semantics></math>에서
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>=</mo><mfrac displaystyle="true"><mn>1</mn><mn>54</mn></mfrac></mrow><annotation encoding="application/x-tex">a_1=\dfrac1{54}</annotation></semantics></math>.<br />
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>5</mn></msub><mo>=</mo><msub><mi>a</mi><mn>1</mn></msub><msup><mi>r</mi><mn>4</mn></msup><mo>=</mo><mfrac displaystyle="true"><mn>81</mn><mn>54</mn></mfrac><mo>=</mo><mfrac displaystyle="true"><mn>3</mn><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">a_5=a_1r^4=\dfrac{81}{54}=\dfrac32</annotation></semantics></math>.</p>
-<h3 id="정답-④-1">11. 정답 ④</h3>
-<p>두 점의 위치는
+</div><div class="sol"><div class="h"><span class="n">11</span><span>정답 | ④</span></div><p>두 점의 위치는
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>+</mo><msubsup><mo>∫</mo><mn>0</mn><mi>t</mi></msubsup><msub><mi>v</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">1+\displaystyle\int_0^t v_1(s)\,ds</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>+</mo><msubsup><mo>∫</mo><mn>0</mn><mi>t</mi></msubsup><msub><mi>v</mi><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">3+\displaystyle\int_0^t v_2(s)\,ds</annotation></semantics></math>.<br />
 위치가 같으려면
@@ -289,8 +152,7 @@ math{font-size:1.05em}
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>t</mi><mn>3</mn></msup><mo>−</mo><mn>2</mn><msup><mi>t</mi><mn>2</mn></msup><mo>+</mo><mi>t</mi><mo>−</mo><mn>2</mn><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo>−</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>t</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t^3-2t^2+t-2=(t-2)(t^2+1)=0</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">t=2</annotation></semantics></math>.<br />
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">v_2(2)=5</annotation></semantics></math>.</p>
-<h3 id="정답-③-1">12. 정답 ③</h3>
-<p>외접원 반지름을
+</div><div class="sol"><div class="h"><span class="n">12</span><span>정답 | ③</span></div><p>외접원 반지름을
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>1</mn></msub><mo>,</mo><msub><mi>R</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">R_1,R_2</annotation></semantics></math>라
 하면 넓이비
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>:</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">1:4</annotation></semantics></math>
@@ -307,8 +169,7 @@ math{font-size:1.05em}
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>m</mi><mn>2</mn></msup><mo>=</mo><mn>36</mn><mo>+</mo><mn>4</mn><msup><mi>m</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mo>⋅</mo><mn>6</mn><mo>⋅</mo><mn>2</mn><mi>m</mi><mo>⋅</mo><mfrac displaystyle="true"><mi>m</mi><mn>4</mn></mfrac><mo>=</mo><mn>36</mn><mo>−</mo><mn>2</mn><msup><mi>m</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">m^2=36+4m^2-2\cdot6\cdot2m\cdot\dfrac m4=36-2m^2</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>m</mi><mn>2</mn></msup><mo>=</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">m^2=12</annotation></semantics></math>.<br />
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">C</mi></mrow><mo accent="true">¯</mo></mover><mo>×</mo><mover><mrow><mi mathvariant="normal">B</mi><mi mathvariant="normal">C</mi></mrow><mo accent="true">¯</mo></mover><mo>=</mo><mn>2</mn><msup><mi>m</mi><mn>2</mn></msup><mo>=</mo><mn>24</mn></mrow><annotation encoding="application/x-tex">\overline{\mathrm{AC}}\times\overline{\mathrm{BC}}=2m^2=24</annotation></semantics></math>.</p>
-<h3 id="정답-④-2">13. 정답 ④</h3>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>12</mn><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f(x)=(x-4)^2+12&gt;0</annotation></semantics></math>,
+</div><div class="sol"><div class="h"><span class="n">13</span><span>정답 | ④</span></div><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>12</mn><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f(x)=(x-4)^2+12&gt;0</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>28</mn><mo>⇔</mo><mi>x</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f(x)=28 \Leftrightarrow x=0</annotation></semantics></math>
 또는
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">x=8</annotation></semantics></math>.</p>
@@ -353,8 +214,7 @@ math{font-size:1.05em}
 최솟값은
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mo>+</mo><mn>4</mn><mo>=</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">8+4=12</annotation></semantics></math>.
 (참)</p>
-<h3 id="정답-③-2">14. 정답 ③</h3>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mo>tan</mo><mfrac displaystyle="true"><mi>a</mi><mi>k</mi></mfrac><mspace width="0.222em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>u</mi><mo>&gt;</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">u=\tan\dfrac ak\ (u&gt;1)</annotation></semantics></math>라
+</div><div class="sol"><div class="h"><span class="n">14</span><span>정답 | ③</span></div><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mo>tan</mo><mfrac displaystyle="true"><mi>a</mi><mi>k</mi></mfrac><mspace width="0.222em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>u</mi><mo>&gt;</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">u=\tan\dfrac ak\ (u&gt;1)</annotation></semantics></math>라
 하면
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">A</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{A}(a,u)</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">B</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>+</mo><mi>k</mi><mi>π</mi><mo>,</mo><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{B}(a+k\pi,u)</annotation></semantics></math>,
@@ -376,21 +236,18 @@ C에서 AB에 내린 수선의 발 H:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">B</mi></mrow><mo accent="true">¯</mo></mover><mo>=</mo><mn>2</mn><mover><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">H</mi></mrow><mo accent="true">¯</mo></mover><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">\overline{\mathrm{AB}}=2\overline{\mathrm{AH}}=4</annotation></semantics></math>.<br />
 넓이
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mfrac displaystyle="true"><mn>1</mn><mn>2</mn></mfrac><mo>⋅</mo><mn>4</mn><mo>⋅</mo><mfrac displaystyle="true"><mn>2</mn><msqrt><mn>3</mn></msqrt></mfrac><mo>=</mo><mfrac displaystyle="true"><mn>4</mn><mn>3</mn></mfrac><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">=\dfrac12\cdot4\cdot\dfrac2{\sqrt3}=\dfrac43\sqrt3</annotation></semantics></math>.</p>
-<h3 id="정답-8">18. 정답 8</h3>
-<p>진수조건
+</div><div class="sol"><div class="h"><span class="n">18</span><span>정답 | 8</span></div><p>진수조건
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>&gt;</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">x&gt;6</annotation></semantics></math>.
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>log</mo><mn>2</mn></msub><mi>x</mi><mo>+</mo><msub><mo>log</mo><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><mn>6</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">\log_2x+\log_2(x-6)=4</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><mn>6</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>16</mn></mrow><annotation encoding="application/x-tex">x(x-6)=16</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><mn>8</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">(x-8)(x+2)=0</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">x=8</annotation></semantics></math>.</p>
-<h3 id="정답-100">19. 정답 100</h3>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F(2)-F(1)=G(2)-G(1)</annotation></semantics></math>에서
+</div><div class="sol"><div class="h"><span class="n">19</span><span>정답 | 100</span></div><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F(2)-F(1)=G(2)-G(1)</annotation></semantics></math>에서
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∫</mo><mn>1</mn><mn>2</mn></msubsup><mrow><mo stretchy="true" form="prefix">(</mo><mn>4</mn><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>a</mi><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi><mo>=</mo><msubsup><mo>∫</mo><mn>1</mn><mn>2</mn></msubsup><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\displaystyle\int_1^2(4x^3+ax)\,dx=\int_1^2(3x^2+4)\,dx</annotation></semantics></math>.<br />
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>15</mn><mo>+</mo><mfrac displaystyle="true"><mn>3</mn><mn>2</mn></mfrac><mi>a</mi><mo>=</mo><mn>7</mn><mo>+</mo><mn>4</mn><mo>=</mo><mn>11</mn></mrow><annotation encoding="application/x-tex">15+\dfrac32a=7+4=11</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mo>−</mo><mfrac displaystyle="true"><mn>8</mn><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">a=-\dfrac83</annotation></semantics></math>.
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>108</mn><mo>−</mo><mn>8</mn><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">f(3)=108-8=100</annotation></semantics></math>.</p>
-<h3 id="정답-118">20. 정답 118</h3>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>2</mn></msub><mo>=</mo><mo>−</mo><msub><mi>a</mi><mn>1</mn></msub><mo>+</mo><mn>16</mn><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a_2=-a_1+16\ge1</annotation></semantics></math>
+</div><div class="sol"><div class="h"><span class="n">20</span><span>정답 | 118</span></div><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>2</mn></msub><mo>=</mo><mo>−</mo><msub><mi>a</mi><mn>1</mn></msub><mo>+</mo><mn>16</mn><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a_2=-a_1+16\ge1</annotation></semantics></math>
 →
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><msub><mi>a</mi><mn>1</mn></msub><mo>≤</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">1\le a_1\le15</annotation></semantics></math>.
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>=</mo><msub><mi>a</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>a</mi><mrow><mn>2</mn><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>⋯</mi></mrow><annotation encoding="application/x-tex">a_1=a_{m+1}=a_{2m+1}=\cdots</annotation></semantics></math>이므로
@@ -422,10 +279,7 @@ C에서 AB에 내린 수선의 발 H:
 →
 (다)<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mn>36</mn></mrow><annotation encoding="application/x-tex">=36</annotation></semantics></math></p>
 <p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>+</mo><mi>q</mi><mo>+</mo><mi>r</mi><mo>=</mo><mn>24</mn><mo>+</mo><mn>58</mn><mo>+</mo><mn>36</mn><mo>=</mo><mn>118</mn></mrow><annotation encoding="application/x-tex">p+q+r=24+58+36=118</annotation></semantics></math>.</p>
-<hr />
-<h2 id="기하-해설">기하 해설</h2>
-<h3 id="정답-③-3">25. 정답 ③</h3>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mover><mi>a</mi><mo accent="true">→</mo></mover><mo>+</mo><mn>8</mn><mover><mi>b</mi><mo accent="true">→</mo></mover><mo>=</mo><mover><mi>a</mi><mo accent="true">→</mo></mover><mo>+</mo><mi>k</mi><mover><mi>b</mi><mo accent="true">→</mo></mover></mrow><annotation encoding="application/x-tex">k\vec a+8\vec b=\vec a+k\vec b</annotation></semantics></math>에서
+</div><div class="sol"><div class="h"><span class="n">25</span><span>정답 | ③</span></div><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mover><mi>a</mi><mo accent="true">→</mo></mover><mo>+</mo><mn>8</mn><mover><mi>b</mi><mo accent="true">→</mo></mover><mo>=</mo><mover><mi>a</mi><mo accent="true">→</mo></mover><mo>+</mo><mi>k</mi><mover><mi>b</mi><mo accent="true">→</mo></mover></mrow><annotation encoding="application/x-tex">k\vec a+8\vec b=\vec a+k\vec b</annotation></semantics></math>에서
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mover><mi>a</mi><mo accent="true">→</mo></mover><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>8</mn><mo stretchy="true" form="postfix">)</mo></mrow><mover><mi>b</mi><mo accent="true">→</mo></mover></mrow><annotation encoding="application/x-tex">(k-1)\vec a=(k-8)\vec b</annotation></semantics></math>.<br />
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k=1</annotation></semantics></math>이면
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mn>0</mn><mo accent="true">→</mo></mover><mo>=</mo><mo>−</mo><mn>7</mn><mover><mi>b</mi><mo accent="true">→</mo></mover></mrow><annotation encoding="application/x-tex">\vec 0=-7\vec b</annotation></semantics></math>가
@@ -443,8 +297,7 @@ C에서 AB에 내린 수선의 발 H:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac displaystyle="true"><mrow><mi>k</mi><mo>−</mo><mn>8</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\dfrac{k-8}{k-1}=2</annotation></semantics></math>에서
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>−</mo><mn>8</mn><mo>=</mo><mn>2</mn><mi>k</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k-8=2k-2</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mo>−</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">k=-6</annotation></semantics></math>.</p>
-<h3 id="정답-④-3">26. 정답 ④</h3>
-<p>쌍곡선을
+</div><div class="sol"><div class="h"><span class="n">26</span><span>정답 | ④</span></div><p>쌍곡선을
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac displaystyle="true"><msup><mi>x</mi><mn>2</mn></msup><msup><mi>a</mi><mn>2</mn></msup></mfrac><mo>−</mo><mfrac displaystyle="true"><msup><mi>y</mi><mn>2</mn></msup><msup><mi>b</mi><mn>2</mn></msup></mfrac><mo>=</mo><mo>−</mo><mn>1</mn><mspace width="0.222em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>&gt;</mo><mn>0</mn><mo>,</mo><mspace width="0.222em"></mspace><mi>b</mi><mo>&gt;</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=-1\ (a&gt;0,\ b&gt;0)</annotation></semantics></math>이라
 하면
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><mn>9</mn></mrow><annotation encoding="application/x-tex">a^2+b^2=9</annotation></semantics></math>
@@ -460,8 +313,7 @@ C에서 AB에 내린 수선의 발 H:
 점근선 중 기울기가 양수인 직선은
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mfrac displaystyle="true"><mi>b</mi><mi>a</mi></mfrac><mi>x</mi><mo>=</mo><mn>2</mn><msqrt><mn>2</mn></msqrt><mspace width="0.167em"></mspace><mi>x</mi></mrow><annotation encoding="application/x-tex">y=\dfrac ba x=2\sqrt2\,x</annotation></semantics></math>이므로
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>2</mn><msqrt><mn>2</mn></msqrt></mrow><annotation encoding="application/x-tex">m=2\sqrt2</annotation></semantics></math>.</p>
-<h3 id="정답-③-4">27. 정답 ③</h3>
-<p>정사각형 ABCD의 두 대각선의 교점을 E라 하면 점 P에서 밑면에 내린
+</div><div class="sol"><div class="h"><span class="n">27</span><span>정답 | ③</span></div><p>정사각형 ABCD의 두 대각선의 교점을 E라 하면 점 P에서 밑면에 내린
 수선의 발은 E이다. 점 M에서 밑면에 내린 수선의 발 F는 선분 EC의
 중점이고, F에서 직선 AB에 내린 수선의 발을 G라 하면 삼수선의 정리에
 의하여
@@ -475,8 +327,7 @@ E, C에서 직선 AB까지의 거리는 각각 2, 4이므로
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mrow><mi mathvariant="normal">F</mi><mi mathvariant="normal">G</mi></mrow><mo accent="true">¯</mo></mover><mo>=</mo><mfrac displaystyle="true"><mrow><mn>2</mn><mo>+</mo><mn>4</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">\overline{\mathrm{FG}}=\dfrac{2+4}2=3</annotation></semantics></math>.<br />
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">G</mi></mrow><mo accent="true">¯</mo></mover><mo>=</mo><msqrt><mrow><msup><mn>4</mn><mn>2</mn></msup><mo>+</mo><msup><mn>3</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">\overline{\mathrm{MG}}=\sqrt{4^2+3^2}=5</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>sin</mo><mi>θ</mi><mo>=</mo><mfrac displaystyle="true"><mover><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">F</mi></mrow><mo accent="true">¯</mo></mover><mover><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">G</mi></mrow><mo accent="true">¯</mo></mover></mfrac><mo>=</mo><mfrac displaystyle="true"><mn>4</mn><mn>5</mn></mfrac></mrow><annotation encoding="application/x-tex">\sin\theta=\dfrac{\overline{\mathrm{MF}}}{\overline{\mathrm{MG}}}=\dfrac45</annotation></semantics></math>.</p>
-<h3 id="정답-③-5">28. 정답 ③</h3>
-<p>정육각형의 중심을 O라 하자. 조건 (가)의 첫 식을 O를 기준으로 전개하면
+</div><div class="sol"><div class="h"><span class="n">28</span><span>정답 | ③</span></div><p>정육각형의 중심을 O라 하자. 조건 (가)의 첫 식을 O를 기준으로 전개하면
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mrow><mi mathvariant="normal">O</mi><mi mathvariant="normal">P</mi></mrow><mo accent="true">→</mo></mover><mo>⋅</mo><mover><mrow><mi mathvariant="normal">B</mi><mi mathvariant="normal">F</mi></mrow><mo accent="true">→</mo></mover><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\overrightarrow{\mathrm{OP}}\cdot\overrightarrow{\mathrm{BF}}=0</annotation></semantics></math>이므로
 점 P는 선분 BF의 수직이등분선, 즉 직선 AD 위의 점이다.
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">P</mi></mrow><mo accent="true">→</mo></mover><mo>=</mo><mi>k</mi><mover><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">D</mi></mrow><mo accent="true">→</mo></mover></mrow><annotation encoding="application/x-tex">\overrightarrow{\mathrm{AP}}=k\overrightarrow{\mathrm{AD}}</annotation></semantics></math>라
@@ -529,8 +380,7 @@ EA의 수직이등분선)
 따라서
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>54</mn></mrow><annotation encoding="application/x-tex">m=54</annotation></semantics></math>.</p>
 <p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>+</mo><mi>m</mi><mo>=</mo><mn>162</mn><mo>+</mo><mn>12</mn><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">M+m=162+12\sqrt3</annotation></semantics></math>.</p>
-<h3 id="정답-25">29. 정답 25</h3>
-<p>A, B가
+</div><div class="sol"><div class="h"><span class="n">29</span><span>정답 | 25</span></div><p>A, B가
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>축에
 대칭이므로 포물선
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mn>2</mn></msub><annotation encoding="application/x-tex">C_2</annotation></semantics></math>의
@@ -578,5 +428,4 @@ CFF<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><mn>4</mn><mi>a</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">5b^2=4ab</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>=</mo><mfrac displaystyle="true"><mn>4</mn><mn>5</mn></mfrac><mi>a</mi><mo>=</mo><mn>2</mn><msqrt><mn>5</mn></msqrt></mrow><annotation encoding="application/x-tex">b=\dfrac45a=2\sqrt5</annotation></semantics></math>.<br />
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>×</mo><mi>b</mi><mo>=</mo><mfrac displaystyle="true"><mrow><mn>5</mn><msqrt><mn>5</mn></msqrt></mrow><mn>2</mn></mfrac><mo>×</mo><mn>2</mn><msqrt><mn>5</mn></msqrt><mo>=</mo><mn>25</mn></mrow><annotation encoding="application/x-tex">a\times b=\dfrac{5\sqrt5}2\times2\sqrt5=25</annotation></semantics></math>.</p>
-</body>
-</html>
+</div></div></div></body></html>

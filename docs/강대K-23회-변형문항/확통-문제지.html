@@ -1,196 +1,48 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>������-������</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-<style>body{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","WenQuanYi Zen Hei",sans-serif;max-width:860px;margin:2em auto;padding:0 1em;line-height:1.7;font-size:15px}
-h1{font-size:1.5em;border-bottom:2px solid #333;padding-bottom:.3em}
-h2{font-size:1.25em;margin-top:2em;border-bottom:1px solid #999}
-h3{font-size:1.05em;margin-top:1.6em}
-blockquote{border:1px solid #666;padding:.4em 1em;margin:.6em 0;background:#fafafa}
-table{border-collapse:collapse;margin:.6em 0}td,th{border:1px solid #888;padding:.2em .7em}
-p{margin:.5em 0}
-@media print{body{max-width:none;font-size:12.5px}h2{page-break-before:auto}}
-
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>확률과 통계 문제지</title><style>
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Serif KR","Noto Sans KR","WenQuanYi Zen Hei","DejaVu Serif",serif;font-size:10.6pt;line-height:1.55;color:#000}
+.page{width:210mm;height:297mm;padding:12mm 12mm 10mm 12mm;page-break-after:always;position:relative;overflow:hidden}
+.page:last-child{page-break-after:auto}
+.hdr{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.2px solid #000;padding-bottom:2mm;margin-bottom:3mm}
+.hdr .l{font-size:10pt}.hdr .l .gyosi{display:inline-block;border:1.2px solid #000;border-radius:14px;padding:0 7px;font-size:10pt;margin-right:5mm}
+.hdr .c{font-size:21pt;font-weight:bold;letter-spacing:4px}
+.hdr .c small{font-size:14pt;letter-spacing:0}
+.hdr .r{font-size:12pt;font-weight:bold;border:1.6px solid #000;padding:0 6px}
+.hdr .pg{font-size:15pt;font-weight:bold}
+.top{font-size:10.5pt;text-align:center;margin-bottom:1mm}
+.cols{display:flex;height:252mm}
+.col{width:50%;padding:0 4mm 0 0}
+.col+.col{border-left:1px solid #000;padding:0 0 0 4mm}
+.secbox{display:inline-block;border:1.3px solid #000;padding:0 8px;font-weight:bold;margin:2mm 0 3mm}
+.prob{margin-bottom:9mm}
+.prob .num{font-weight:bold;margin-right:4px}
+.prob p{margin:0 0 1.2mm;text-align:justify}
+.prob .num+p{display:inline}
+.prob math[display=block]{margin:1.5mm 0}
+.choices{margin-top:3mm;display:flex;flex-wrap:wrap;gap:2mm 6mm}
+.choices .ch{white-space:nowrap}
+blockquote{border:1px solid #000;margin:2.5mm 2mm;padding:1.5mm 3mm;font-size:10.2pt}
+blockquote p{margin:0.5mm 0!important;display:block!important}
+img{display:block;margin:3mm auto;max-width:72mm;max-height:60mm}
+.fig-wide img{max-width:80mm}
+.foot{position:absolute;bottom:6mm;left:0;right:0;text-align:center;font-size:10.5pt}
+.foot span{border:1px solid #000;padding:0 6px}
+.confirm{border:1px solid #000;padding:2mm 3mm;font-size:9.6pt;position:absolute;bottom:14mm;right:12mm;width:87mm}
+.confirm p{margin:0.5mm 0}
 math{font-size:1.05em}
-</style>
-</head>
-<body>
-
-<h1 id="강대모의고사k-23회-변형-문항-확률과-통계-선택자용">강대모의고사K
-23회 변형 문항 — 확률과 통계 선택자용</h1>
-<ul>
-<li>원본: 2027학년도 대학수학능력시험 강대모의고사K 23회(홀수형)</li>
-<li>범위: 공통 8, 9, 10, 11, 12, 13, 14, 18, 19, 20번 + 확률과 통계 25,
-26, 27, 28, 29번</li>
-<li>원문의 문장·조건·구조는 그대로 두고 <strong>숫자만 바꾼</strong>
-문항입니다. 문항 번호는 원문 번호를 그대로 사용했고, 그림은 새 수치에
-맞게 다시 그렸습니다. 공통 10문항은 세 과목 시험지에 동일하게
-들어갑니다.</li>
-</ul>
-<hr />
-<h2 id="공통과목">공통과목</h2>
-<h3 id="지선다형">5지선다형</h3>
-<p><strong>8.</strong> 상수
+/* answer sheet */
+.ans .cols{display:block;height:auto;column-count:2;column-gap:8mm;column-rule:1px solid #000}
+.ans .sol{break-inside:avoid;margin-bottom:5mm}
+.ans .sol .h{display:flex;justify-content:space-between;border-bottom:1.5px solid #000;margin-bottom:1.5mm;font-weight:bold}
+.ans .sol .h .n{font-size:15pt;font-style:italic}
+.ans .sol p{margin:0 0 1mm}
+.ans table{border-collapse:collapse;margin:2mm auto;font-size:10pt}
+.ans td,.ans th{border:1px solid #000;padding:0.5mm 2.2mm;text-align:center}
+.ans .qa{break-inside:avoid;margin-bottom:5mm}
+.ans .qa .t{font-weight:bold;border:1px solid #000;display:inline-block;padding:0 8px;margin-bottom:2mm}
+.ans h2{font-size:12.5pt;border-bottom:1.5px solid #000;margin:2mm 0 3mm}
+</style></head><body><div class="page"><div class="top">2027학년도 대학수학능력시험 대비 — 강대모의고사K 23회 변형 (확률과 통계)</div><div class="hdr"><div class="l"><span class="gyosi">제 2 교시</span></div><div class="c">수학 영역</div><div class="r">변형형</div></div><div class="cols"><div class="col"><div class="secbox">5지선다형</div><br><div class="prob"><span class="num">8.</span><p>상수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>&gt;</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">a\,(a&gt;1)</annotation></semantics></math>에
 대하여 곡선
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msub><mo>log</mo><mi>a</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">y=\log_a(x+3)</annotation></semantics></math>의
@@ -200,50 +52,28 @@ math{font-size:1.05em}
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mrow><mi mathvariant="normal">O</mi><mi mathvariant="normal">A</mi></mrow><mo accent="true">¯</mo></mover><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">\overline{\mathrm{OA}}=5</annotation></semantics></math>일
 때,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>의
-값은? (단, O는 원점이다.) [3점]</p>
-<p>①
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>3</mn><mfrac><mn>1</mn><mn>5</mn></mfrac></msup><annotation encoding="application/x-tex">3^{\frac15}</annotation></semantics></math>
-②
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>3</mn><mfrac><mn>1</mn><mn>4</mn></mfrac></msup><annotation encoding="application/x-tex">3^{\frac14}</annotation></semantics></math>
-③
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>3</mn><mfrac><mn>1</mn><mn>3</mn></mfrac></msup><annotation encoding="application/x-tex">3^{\frac13}</annotation></semantics></math>
-④
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>3</mn><mfrac><mn>1</mn><mn>2</mn></mfrac></msup><annotation encoding="application/x-tex">3^{\frac12}</annotation></semantics></math>
-⑤
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>3</mn><annotation encoding="application/x-tex">3</annotation></semantics></math></p>
-<p><strong>9.</strong> 함수
+값은? (단, O는 원점이다.) <span style="white-space:nowrap">[3점]</span></p>
+<div class="choices"><span class="ch">① <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>3</mn><mfrac><mn>1</mn><mn>5</mn></mfrac></msup><annotation encoding="application/x-tex">3^{\frac15}</annotation></semantics></math></span><span class="ch">② <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>3</mn><mfrac><mn>1</mn><mn>4</mn></mfrac></msup><annotation encoding="application/x-tex">3^{\frac14}</annotation></semantics></math></span><span class="ch">③ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>3</mn><mfrac><mn>1</mn><mn>3</mn></mfrac></msup><annotation encoding="application/x-tex">3^{\frac13}</annotation></semantics></math></span><span class="ch">④ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>3</mn><mfrac><mn>1</mn><mn>2</mn></mfrac></msup><annotation encoding="application/x-tex">3^{\frac12}</annotation></semantics></math></span><span class="ch">⑤ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>3</mn><annotation encoding="application/x-tex">3</annotation></semantics></math></span></div></div><div class="prob"><span class="num">9.</span><p>함수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>n</mi><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>24</mn><mi>x</mi></mrow><annotation encoding="application/x-tex">f(x)=x^3+nx^2-24x</annotation></semantics></math>가
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">1&lt;x&lt;2</annotation></semantics></math>에서
 극값을 갖도록 하는 자연수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>의
-개수는? [4점]</p>
-<p>① 4 ② 5 ③ 6 ④ 7 ⑤ 8</p>
-<p><strong>10.</strong> 공비가 양수인 등비수열
+개수는? <span style="white-space:nowrap">[4점]</span></p>
+<div class="choices"><span class="ch">① 4</span><span class="ch">② 5</span><span class="ch">③ 6</span><span class="ch">④ 7</span><span class="ch">⑤ 8</span></div></div></div><div class="col"><div class="prob"><span class="num">10.</span><p>공비가 양수인 등비수열
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{a_n\}</annotation></semantics></math>이<br />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>27</mn><msub><mi>a</mi><mn>1</mn></msub><mo>+</mo><mn>9</mn><msub><mi>a</mi><mn>2</mn></msub><mo>=</mo><mn>3</mn><msub><mi>a</mi><mn>3</mn></msub><mo>+</mo><msub><mi>a</mi><mn>4</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">27a_1+9a_2=3a_3+a_4=1</annotation></semantics></math><br />
 을 만족시킬 때,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>a</mi><mn>5</mn></msub><annotation encoding="application/x-tex">a_5</annotation></semantics></math>의
-값은? [4점]</p>
-<p>①
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>1</mn><mn>2</mn></mfrac><annotation encoding="application/x-tex">\dfrac12</annotation></semantics></math>
-②
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
-③
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>3</mn><mn>2</mn></mfrac><annotation encoding="application/x-tex">\dfrac32</annotation></semantics></math>
-④
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
-⑤
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>3</mn><annotation encoding="application/x-tex">3</annotation></semantics></math></p>
-<p><strong>11.</strong> 두 점 P와 Q는 시각
+값은? <span style="white-space:nowrap">[4점]</span></p>
+<div class="choices"><span class="ch">① <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>1</mn><mn>2</mn></mfrac><annotation encoding="application/x-tex">\dfrac12</annotation></semantics></math></span><span class="ch">② <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="ch">③ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>3</mn><mn>2</mn></mfrac><annotation encoding="application/x-tex">\dfrac32</annotation></semantics></math></span><span class="ch">④ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="ch">⑤ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>3</mn><annotation encoding="application/x-tex">3</annotation></semantics></math></span></div></div><div class="prob"><span class="num">11.</span><p>두 점 P와 Q는 시각
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t=0</annotation></semantics></math>일
 때 각각 점 A(1)과 점 B(3)에서 출발하여 수직선 위를 움직인다. 두 점 P,
 Q의 시각
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo>≥</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">t\,(t\ge 0)</annotation></semantics></math>에서의
 속도는 각각<br />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>3</mn><msup><mi>t</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>t</mi><mo>+</mo><mn>2</mn><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>v</mi><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>2</mn><mi>t</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">v_1(t)=3t^2-2t+2,\qquad v_2(t)=2t+1</annotation></semantics></math><br />
-이다. 두 점 P, Q의 위치가 같아지는 시각에서 점 Q의 속도는? [4점]</p>
-<p>① 2 ② 3 ③ 4 ④ 5 ⑤ 6</p>
-<p><strong>12.</strong> 그림과 같이
+이다. 두 점 P, Q의 위치가 같아지는 시각에서 점 Q의 속도는? <span style="white-space:nowrap">[4점]</span></p>
+<div class="choices"><span class="ch">① 2</span><span class="ch">② 3</span><span class="ch">③ 4</span><span class="ch">④ 5</span><span class="ch">⑤ 6</span></div></div></div></div><div class="foot"><span>1 / 7</span></div></div><div class="page"><div class="hdr"><div class="pg">2</div><div class="c">수학 영역</div><div class="r">변형형</div></div><div class="cols"><div class="col"><div class="prob"><span class="num">12.</span><p>그림과 같이
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">B</mi></mrow><mo accent="true">¯</mo></mover><mo>=</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">\overline{\mathrm{AB}}=6</annotation></semantics></math>인
 삼각형 ABC에서 선분 AB를
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>:</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">1:2</annotation></semantics></math>로
@@ -253,10 +83,9 @@ Q의 시각
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>:</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">1:4</annotation></semantics></math>일
 때,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">C</mi></mrow><mo accent="true">¯</mo></mover><mo>×</mo><mover><mrow><mi mathvariant="normal">B</mi><mi mathvariant="normal">C</mi></mrow><mo accent="true">¯</mo></mover></mrow><annotation encoding="application/x-tex">\overline{\mathrm{AC}}\times\overline{\mathrm{BC}}</annotation></semantics></math>의
-값은? [4점]</p>
+값은? <span style="white-space:nowrap">[4점]</span></p>
 <p><img src="figs/12.svg" alt="12번 그림" style="max-width:420px;display:block;margin:6px auto"></p>
-<p>① 18 ② 21 ③ 24 ④ 27 ⑤ 30</p>
-<p><strong>13.</strong> 함수
+<div class="choices"><span class="ch">① 18</span><span class="ch">② 21</span><span class="ch">③ 24</span><span class="ch">④ 27</span><span class="ch">⑤ 30</span></div></div></div><div class="col"><div class="prob"><span class="num">13.</span><p>함수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>8</mn><mi>x</mi><mo>+</mo><mn>28</mn></mrow><annotation encoding="application/x-tex">f(x)=x^2-8x+28</annotation></semantics></math>과
 양수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>에
@@ -268,7 +97,7 @@ Q의 시각
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">S(t)</annotation></semantics></math>라
 하자. 양의 실수 전체의 집합에서 정의된 함수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">S(t)</annotation></semantics></math>에
-대하여 <보기>에서 옳은 것만을 있는 대로 고른 것은? [4점]</p>
+대하여 <보기>에서 옳은 것만을 있는 대로 고른 것은? <span style="white-space:nowrap">[4점]</span></p>
 <blockquote>
 <p><strong><보기></strong><br />
 ㄱ.
@@ -289,8 +118,7 @@ Q의 시각
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a+b</annotation></semantics></math>의
 최솟값은 12이다.</p>
 </blockquote>
-<p>① ㄱ ② ㄷ ③ ㄱ, ㄴ ④ ㄱ, ㄷ ⑤ ㄱ, ㄴ, ㄷ</p>
-<p><strong>14.</strong> 상수
+<div class="choices"><span class="ch">① ㄱ</span><span class="ch">② ㄷ</span><span class="ch">③ ㄱ, ㄴ</span><span class="ch">④ ㄱ, ㄷ</span><span class="ch">⑤ ㄱ, ㄴ, ㄷ</span></div></div></div></div><div class="foot"><span>2 / 7</span></div></div><div class="page"><div class="hdr"><div class="pg">3</div><div class="c">수학 영역</div><div class="r">변형형</div></div><div class="cols"><div class="col"><div class="prob"><span class="num">14.</span><p>상수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>&gt;</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">k\,(k&gt;0)</annotation></semantics></math>에
 대하여 집합
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">{</mo><mi>x</mi><mspace width="0.167em"></mspace><mo stretchy="true" form="infix">|</mo><mspace width="0.167em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mfrac displaystyle="true"><mrow><mn>3</mn><mi>k</mi><mi>π</mi></mrow><mn>2</mn></mfrac><mo>,</mo><mspace width="0.222em"></mspace><mi>x</mi><mo>≠</mo><mfrac displaystyle="true"><mrow><mi>k</mi><mi>π</mi></mrow><mn>2</mn></mfrac><mo stretchy="true" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\left\{x \,\middle|\, 0\le x&lt;\dfrac{3k\pi}{2},\ x\ne\dfrac{k\pi}{2}\right\}</annotation></semantics></math>에서
@@ -308,25 +136,14 @@ B, C에 대하여 직선 AB는
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>축과
 한 점에서만 만날 때, 삼각형 ABC의 넓이는? (단,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>는
-상수이다.) [4점]</p>
+상수이다.) <span style="white-space:nowrap">[4점]</span></p>
 <p><img src="figs/14.svg" alt="14번 그림" style="max-width:420px;display:block;margin:6px auto"></p>
-<p>①
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac displaystyle="true"><mn>2</mn><mn>3</mn></mfrac><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">\dfrac23\sqrt3</annotation></semantics></math>
-②
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><mn>3</mn></msqrt><annotation encoding="application/x-tex">\sqrt3</annotation></semantics></math>
-③
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac displaystyle="true"><mn>4</mn><mn>3</mn></mfrac><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">\dfrac43\sqrt3</annotation></semantics></math>
-④
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac displaystyle="true"><mn>5</mn><mn>3</mn></mfrac><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">\dfrac53\sqrt3</annotation></semantics></math>
-⑤
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">2\sqrt3</annotation></semantics></math></p>
-<h3 id="단답형">단답형</h3>
-<p><strong>18.</strong> 방정식
+<div class="choices"><span class="ch">① <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac displaystyle="true"><mn>2</mn><mn>3</mn></mfrac><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">\dfrac23\sqrt3</annotation></semantics></math></span><span class="ch">② <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><mn>3</mn></msqrt><annotation encoding="application/x-tex">\sqrt3</annotation></semantics></math></span><span class="ch">③ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac displaystyle="true"><mn>4</mn><mn>3</mn></mfrac><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">\dfrac43\sqrt3</annotation></semantics></math></span><span class="ch">④ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac displaystyle="true"><mn>5</mn><mn>3</mn></mfrac><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">\dfrac53\sqrt3</annotation></semantics></math></span><span class="ch">⑤ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">2\sqrt3</annotation></semantics></math></span></div></div></div><div class="col"><div class="secbox">단답형</div><br><div class="prob"><span class="num">18.</span><p>방정식
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>log</mo><mn>2</mn></msub><mi>x</mi><mo>+</mo><msub><mo>log</mo><mn>8</mn></msub><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><mn>6</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>3</mn></msup><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">\log_2 x+\log_8 (x-6)^3=4</annotation></semantics></math>를
 만족시키는 실수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>의
-값을 구하시오. [3점]</p>
-<p><strong>19.</strong> 상수
+값을 구하시오. <span style="white-space:nowrap">[3점]</span></p>
+</div><div class="prob"><span class="num">19.</span><p>상수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>에
 대하여 함수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>4</mn><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>a</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">f(x)=4x^3+ax</annotation></semantics></math>의
@@ -340,8 +157,8 @@ B, C에 대하여 직선 AB는
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mi>F</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F(1)=G(1),\qquad F(2)=G(2)</annotation></semantics></math><br />
 일 때,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(3)</annotation></semantics></math>의
-값을 구하시오. [3점]</p>
-<p><strong>20.</strong> 모든 항이 자연수인 수열
+값을 구하시오. <span style="white-space:nowrap">[3점]</span></p>
+</div></div></div><div class="foot"><span>3 / 7</span></div></div><div class="page"><div class="hdr"><div class="pg">4</div><div class="c">수학 영역</div><div class="r">변형형</div></div><div class="cols"><div class="col"><div class="prob"><span class="num">20.</span><p>모든 항이 자연수인 수열
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{a_n\}</annotation></semantics></math>이
 모든 자연수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>에
@@ -402,33 +219,17 @@ B, C에 대하여 직선 AB는
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>,</mo><mspace width="0.222em"></mspace><mi>q</mi><mo>,</mo><mspace width="0.222em"></mspace><mi>r</mi></mrow><annotation encoding="application/x-tex">p,\ q,\ r</annotation></semantics></math>이라
 할 때,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>+</mo><mi>q</mi><mo>+</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">p+q+r</annotation></semantics></math>의
-값을 구하시오. [4점]</p>
-<hr />
-<h2 id="선택과목확률과-통계">선택과목(확률과 통계)</h2>
-<h3 id="지선다형-1">5지선다형</h3>
-<p><strong>25.</strong> 주머니 A에는 흰 공 2개와 검은 공 3개가 들어
-있고, 주머니 B에는 흰 공 2개와 검은 공 2개가 들어 있다. 주머니 A에서
-임의로 한 개의 공을 꺼내어 주머니 B에 넣은 후 주머니 B에서 임의로 한
-개의 공을 꺼낼 때, 이 공이 검은 공일 확률은? [3점]</p>
+값을 구하시오. <span style="white-space:nowrap">[4점]</span></p>
+</div></div><div class="col"></div></div><div class="confirm"><p>※ 확인 사항</p><p>○ 답안지의 해당란에 필요한 내용을 정확히 기입(표기)했는지 확인하시오.</p><p>○ 이어서, 「<b>선택과목(확률과 통계)</b>」 문제가 제시되니, 자신이 선택한 과목인지 확인하시오.</p></div><div class="foot"><span>4 / 7</span></div></div><div class="page"><div class="top">2027학년도 대학수학능력시험 대비 — 강대모의고사K 23회 변형 (확률과 통계)</div><div class="hdr"><div class="l"><span class="gyosi">제 2 교시</span></div><div class="c">수학 영역<small>(확률과 통계)</small></div><div class="r">변형형</div></div><div class="cols"><div class="col"><div class="secbox">5지선다형</div><br><div class="prob"><span class="num">25.</span><p>주머니 A에는 흰 공 2개와 검은 공 3개가 들어 있고, 주머니 B에는 흰 공
+2개와 검은 공 2개가 들어 있다. 주머니 A에서 임의로 한 개의 공을 꺼내어
+주머니 B에 넣은 후 주머니 B에서 임의로 한 개의 공을 꺼낼 때, 이 공이
+검은 공일 확률은? <span style="white-space:nowrap">[3점]</span></p>
 <p><img src="figs/h25.svg" alt="25번 그림" style="max-width:420px;display:block;margin:6px auto"></p>
-<p>①
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>11</mn><mn>25</mn></mfrac><annotation encoding="application/x-tex">\dfrac{11}{25}</annotation></semantics></math>
-②
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>12</mn><mn>25</mn></mfrac><annotation encoding="application/x-tex">\dfrac{12}{25}</annotation></semantics></math>
-③
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>13</mn><mn>25</mn></mfrac><annotation encoding="application/x-tex">\dfrac{13}{25}</annotation></semantics></math>
-④
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>14</mn><mn>25</mn></mfrac><annotation encoding="application/x-tex">\dfrac{14}{25}</annotation></semantics></math>
-⑤
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>3</mn><mn>5</mn></mfrac><annotation encoding="application/x-tex">\dfrac35</annotation></semantics></math></p>
-<p><strong>26.</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><mfrac displaystyle="true"><mn>1</mn><msup><mi>x</mi><mi>n</mi></msup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>30</mn></msup><annotation encoding="application/x-tex">\left(x-\dfrac{1}{x^n}\right)^{30}</annotation></semantics></math>의
+<div class="choices"><span class="ch">① <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>11</mn><mn>25</mn></mfrac><annotation encoding="application/x-tex">\dfrac{11}{25}</annotation></semantics></math></span><span class="ch">② <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>12</mn><mn>25</mn></mfrac><annotation encoding="application/x-tex">\dfrac{12}{25}</annotation></semantics></math></span><span class="ch">③ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>13</mn><mn>25</mn></mfrac><annotation encoding="application/x-tex">\dfrac{13}{25}</annotation></semantics></math></span><span class="ch">④ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>14</mn><mn>25</mn></mfrac><annotation encoding="application/x-tex">\dfrac{14}{25}</annotation></semantics></math></span><span class="ch">⑤ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>3</mn><mn>5</mn></mfrac><annotation encoding="application/x-tex">\dfrac35</annotation></semantics></math></span></div></div></div><div class="col"><div class="prob"><span class="num">26.</span><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><mfrac displaystyle="true"><mn>1</mn><msup><mi>x</mi><mi>n</mi></msup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>30</mn></msup><annotation encoding="application/x-tex">\left(x-\dfrac{1}{x^n}\right)^{30}</annotation></semantics></math>의
 전개식에서 음수인 상수항이 존재하도록 하는 자연수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>의
-개수는? [3점]</p>
-<p>① 1 ② 2 ③ 3 ④ 4 ⑤ 5</p>
-<p><strong>27.</strong> 어느 농장에서 수확하는 애호박 1개의 무게는
-평균이
+개수는? <span style="white-space:nowrap">[3점]</span></p>
+<div class="choices"><span class="ch">① 1</span><span class="ch">② 2</span><span class="ch">③ 3</span><span class="ch">④ 4</span><span class="ch">⑤ 5</span></div></div></div></div><div class="foot"><span>5 / 7</span></div></div><div class="page"><div class="hdr"><div class="pg">6</div><div class="c">수학 영역<small>(확률과 통계)</small></div><div class="r">변형형</div></div><div class="cols"><div class="col"><div class="prob"><span class="num">27.</span><p>어느 농장에서 수확하는 애호박 1개의 무게는 평균이
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>,
 표준편차가 30인 정규분포를 따른다고 한다. 이 농장에서 수확하는 애호박
 중에서
@@ -449,11 +250,9 @@ B, C에 대하여 직선 AB는
 표준정규분포를 따르는 확률변수일 때,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>Z</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>≤</mo><mn>1.96</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>0.95</mn></mrow><annotation encoding="application/x-tex">\mathrm{P}(|Z|\le1.96)=0.95</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>Z</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>≤</mo><mn>2.58</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>0.99</mn></mrow><annotation encoding="application/x-tex">\mathrm{P}(|Z|\le2.58)=0.99</annotation></semantics></math>로
-계산한다.) [3점]</p>
-<p>① 238.5 ② 239 ③ 239.5 ④ 240 ⑤ 240.5</p>
-<p><strong>28.</strong> 앞면에는 숫자 0, 뒷면에는 숫자 1이 적혀 있는
-3장의 카드가 있다. 이 3장의 카드가 그림과 같이 모두 앞면이 보이도록 놓여
-있다.</p>
+계산한다.) <span style="white-space:nowrap">[3점]</span></p>
+<div class="choices"><span class="ch">① 238.5</span><span class="ch">② 239</span><span class="ch">③ 239.5</span><span class="ch">④ 240</span><span class="ch">⑤ 240.5</span></div></div></div><div class="col"><div class="prob"><span class="num">28.</span><p>앞면에는 숫자 0, 뒷면에는 숫자 1이 적혀 있는 3장의 카드가 있다. 이
+3장의 카드가 그림과 같이 모두 앞면이 보이도록 놓여 있다.</p>
 <p><img src="figs/h28.svg" alt="28번 그림" style="max-width:420px;display:block;margin:6px auto"></p>
 <p>이 3장의 카드와 한 개의 동전을 사용하여 다음 시행을 한다.</p>
 <blockquote>
@@ -466,23 +265,12 @@ B, C에 대하여 직선 AB는
 제자리에 놓는다.</p>
 </blockquote>
 <p>이 시행을 5번 반복한 후 3장의 카드에 보이는 수가 모두 0일 때, 2번째
-시행 후 3장의 카드에 보이는 수가 모두 0일 확률은? [4점]</p>
-<p>①
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>7</mn><mn>19</mn></mfrac><annotation encoding="application/x-tex">\dfrac{7}{19}</annotation></semantics></math>
-②
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>8</mn><mn>19</mn></mfrac><annotation encoding="application/x-tex">\dfrac{8}{19}</annotation></semantics></math>
-③
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>9</mn><mn>19</mn></mfrac><annotation encoding="application/x-tex">\dfrac{9}{19}</annotation></semantics></math>
-④
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>10</mn><mn>19</mn></mfrac><annotation encoding="application/x-tex">\dfrac{10}{19}</annotation></semantics></math>
-⑤
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>11</mn><mn>19</mn></mfrac><annotation encoding="application/x-tex">\dfrac{11}{19}</annotation></semantics></math></p>
-<h3 id="단답형-1">단답형</h3>
-<p><strong>29.</strong> 다음 조건을 만족시키는 자연수
+시행 후 3장의 카드에 보이는 수가 모두 0일 확률은? <span style="white-space:nowrap">[4점]</span></p>
+<div class="choices"><span class="ch">① <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>7</mn><mn>19</mn></mfrac><annotation encoding="application/x-tex">\dfrac{7}{19}</annotation></semantics></math></span><span class="ch">② <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>8</mn><mn>19</mn></mfrac><annotation encoding="application/x-tex">\dfrac{8}{19}</annotation></semantics></math></span><span class="ch">③ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>9</mn><mn>19</mn></mfrac><annotation encoding="application/x-tex">\dfrac{9}{19}</annotation></semantics></math></span><span class="ch">④ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>10</mn><mn>19</mn></mfrac><annotation encoding="application/x-tex">\dfrac{10}{19}</annotation></semantics></math></span><span class="ch">⑤ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac displaystyle="true"><mn>11</mn><mn>19</mn></mfrac><annotation encoding="application/x-tex">\dfrac{11}{19}</annotation></semantics></math></span></div></div></div></div><div class="foot"><span>6 / 7</span></div></div><div class="page"><div class="hdr"><div class="pg">7</div><div class="c">수학 영역<small>(확률과 통계)</small></div><div class="r">변형형</div></div><div class="cols"><div class="col"><div class="secbox">단답형</div><br><div class="prob"><span class="num">29.</span><p>다음 조건을 만족시키는 자연수
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><mspace width="0.222em"></mspace><msub><mi>a</mi><mn>2</mn></msub><mo>,</mo><mspace width="0.222em"></mspace><msub><mi>a</mi><mn>3</mn></msub><mo>,</mo><mspace width="0.222em"></mspace><msub><mi>a</mi><mn>4</mn></msub><mo>,</mo><mspace width="0.222em"></mspace><msub><mi>a</mi><mn>5</mn></msub></mrow><annotation encoding="application/x-tex">a_1,\ a_2,\ a_3,\ a_4,\ a_5</annotation></semantics></math>의
 모든 순서쌍
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><mspace width="0.167em"></mspace><msub><mi>a</mi><mn>2</mn></msub><mo>,</mo><mspace width="0.167em"></mspace><msub><mi>a</mi><mn>3</mn></msub><mo>,</mo><mspace width="0.167em"></mspace><msub><mi>a</mi><mn>4</mn></msub><mo>,</mo><mspace width="0.167em"></mspace><msub><mi>a</mi><mn>5</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(a_1,\,a_2,\,a_3,\,a_4,\,a_5)</annotation></semantics></math>의
-개수를 구하시오. [4점]</p>
+개수를 구하시오. <span style="white-space:nowrap">[4점]</span></p>
 <blockquote>
 <p>(가)
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>≤</mo><msub><mi>a</mi><mn>1</mn></msub><mo>≤</mo><msub><mi>a</mi><mn>2</mn></msub><mo>≤</mo><msub><mi>a</mi><mn>3</mn></msub><mo>≤</mo><msub><mi>a</mi><mn>4</mn></msub><mo>≤</mo><msub><mi>a</mi><mn>5</mn></msub><mo>≤</mo><mn>9</mn></mrow><annotation encoding="application/x-tex">2\le a_1\le a_2\le a_3\le a_4\le a_5\le 9</annotation></semantics></math><br />
@@ -492,5 +280,4 @@ B, C에 대하여 직선 AB는
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>≤</mo><mi>n</mi><mo>≤</mo><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">n\,(1\le n\le4)</annotation></semantics></math>가
 존재한다.</p>
 </blockquote>
-</body>
-</html>
+</div></div><div class="col"></div></div><div class="confirm"><p>※ 확인 사항</p><p>○ 답안지의 해당란에 필요한 내용을 정확히 기입(표기)했는지 확인하시오.</p></div><div class="foot"><span>7 / 7</span></div></div></body></html>
