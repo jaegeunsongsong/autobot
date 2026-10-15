@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="237.217021pt" height="151.344pt" viewBox="0 0 237.217021 151.344" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-15T02:41:31.717759</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 151.344 
+L 237.217021 151.344 
+L 237.217021 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="line2d_1">
+    <path d="M 209.081872 126.275745 
+L 25.068255 126.275745 
+" clip-path="url(#p5b15da72c4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 25.068255 126.275745 
+L 209.081872 20.035433 
+" clip-path="url(#p5b15da72c4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 209.081872 20.035433 
+L 209.081872 126.275745 
+" clip-path="url(#p5b15da72c4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 147.744 126.275745 
+L 209.081872 20.035433 
+" clip-path="url(#p5b15da72c4)" style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'WenQuanYi Zen Hei'; text-anchor: start" x="213.682213" y="129.342638" transform="rotate(-0 213.682213 129.342638)">A</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'WenQuanYi Zen Hei'; text-anchor: start" x="12.800681" y="129.342638" transform="rotate(-0 12.800681 129.342638)">B</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'WenQuanYi Zen Hei'; text-anchor: start" x="213.682213" y="20.035433" transform="rotate(-0 213.682213 20.035433)">C</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'WenQuanYi Zen Hei'; text-anchor: start" x="144.677106" y="140.076766" transform="rotate(-0 144.677106 140.076766)">D</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p5b15da72c4">
+   <rect x="3.6" y="3.6" width="230.017021" height="144.144"/>
+  </clipPath>
+ </defs>
+</svg>
