@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>통계독서탐구 인쇄용</title>
+<meta name="description" content="2학년 확률과 통계 수행평가 통계독서탐구: 학생 안내문, 활동지, 작성 예시, 교사용 채점표를 A4로 인쇄하는 페이지">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --ink: #1b211d;
+    --muted: #6b6759;
+    --rule: #b9b4a6;
+    --rule-soft: #dcd8cc;
+    --fill: #f3f1ea;
+    --accent: #2f5d50;
+    --accent-soft: #e1ebe5;
+    --sans: "Noto Sans KR", "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #e6e4dc; color: var(--ink); font-family: var(--sans); font-size: 10.5pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .toolbar { position: sticky; top: 0; z-index: 2; background: #fff; border-bottom: 1px solid var(--rule-soft); padding: 8px 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 10pt; }
+  .toolbar button { font: inherit; padding: 6px 14px; border: 1px solid var(--accent); background: var(--accent); color: #fff; border-radius: 4px; cursor: pointer; }
+  .toolbar span { color: var(--muted); }
+  .page { background: #fff; width: 210mm; min-height: 297mm; margin: 10mm auto; padding: 11mm 15mm 10mm; box-shadow: 0 1px 6px rgba(0,0,0,.18); position: relative; }
+  .page::after { content: attr(data-foot); position: absolute; left: 15mm; right: 15mm; bottom: 6mm; font-size: 8pt; color: var(--muted); display: flex; justify-content: space-between; }
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; }
+    .toolbar { display: none; }
+    .page { width: 210mm; min-height: 297mm; margin: 0; box-shadow: none; page-break-after: always; break-after: page; }
+    .page:last-child { page-break-after: auto; break-after: auto; }
+  }
+
+  h1 { font-size: 20pt; margin: 2mm 0 1mm; letter-spacing: -0.02em; line-height: 1.25; }
+  h2 { font-size: 12pt; margin: 3.5mm 0 1.5mm; padding-left: 2.5mm; border-left: 3px solid var(--accent); line-height: 1.3; }
+  h3 { font-size: 10.5pt; margin: 3mm 0 1mm; }
+  p { margin: 0 0 1.5mm; }
+  .kicker { font-size: 9pt; color: var(--muted); letter-spacing: 0.04em; }
+  .meta { font-size: 9.5pt; color: var(--muted); margin-bottom: 2mm; }
+  .hdr { border-bottom: 2px solid var(--ink); padding-bottom: 2mm; margin-bottom: 1mm; }
+  .note { font-size: 9.5pt; color: var(--muted); }
+  .small { font-size: 9pt; }
+  ol.steps { margin: 0 0 1mm; padding-left: 5.5mm; }
+  ol.steps li { margin-bottom: 1.2mm; }
+  ol.steps li b { font-weight: 500; }
+  ul.tight { margin: 0 0 1mm; padding-left: 4.5mm; }
+  ul.tight li { margin-bottom: 0.8mm; }
+
+  table.grid { width: 100%; border-collapse: collapse; margin: 1mm 0 2mm; font-size: 9.5pt; }
+  table.grid th, table.grid td { border: 1px solid var(--rule); padding: 1.3mm 2mm; vertical-align: top; text-align: left; }
+  table.grid th { background: var(--fill); font-weight: 500; white-space: nowrap; }
+  table.grid td.c, table.grid th.c { text-align: center; }
+  table.grid td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  .score { float: right; font-size: 9.5pt; color: var(--muted); font-weight: 400; }
+  .box { border: 1px solid var(--ink); padding: 2mm 2.5mm; margin: 1mm 0 2mm; }
+  .box .label { font-size: 9.5pt; margin-bottom: 1mm; }
+  .box .label b { font-weight: 500; }
+  .line { border-bottom: 1px solid var(--rule); height: 7mm; }
+  .line.first { margin-top: 0.5mm; }
+  .blank { display: inline-block; border-bottom: 1px solid var(--ink); min-width: 28mm; height: 5mm; vertical-align: bottom; margin: 0 1mm; }
+  .blank.w { min-width: 52mm; } .blank.xw { min-width: 90mm; } .blank.s { min-width: 14mm; }
+  .chk { display: inline-block; width: 3.4mm; height: 3.4mm; border: 1px solid var(--ink); vertical-align: -0.5mm; margin-right: 1.2mm; border-radius: 0.5mm; }
+  .chkline { margin: 0.8mm 0; }
+  .form-table { width: 100%; border-collapse: collapse; margin-top: 1mm; }
+  .form-table td { border: 1px solid var(--rule); height: 7.5mm; padding: 0 1.5mm; font-size: 9pt; color: var(--muted); }
+  .form-table tr:first-child td { background: var(--fill); }
+  .canvas { border: 1px dashed var(--rule); height: 52mm; margin-top: 1mm; position: relative; }
+  .canvas .hint { position: absolute; right: 2mm; bottom: 1mm; font-size: 8.5pt; color: var(--muted); }
+  .teacher { border: 1px solid var(--ink); background: var(--fill); padding: 1.5mm 2.5mm; font-size: 9pt; margin-top: 2mm; }
+  .teacher b { font-weight: 500; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; align-items: start; }
+  .ex { font-size: 10pt; }
+  .ex .box { border-color: var(--rule); }
+  .ex .box p { margin: 0 0 0.8mm; }
+  .tag { display: inline-block; background: var(--accent-soft); color: var(--accent); font-size: 8.5pt; padding: 0 1.5mm; border-radius: 2px; margin-right: 1mm; }
+
+  /* chart */
+  .chart { font-family: var(--sans); }
+  .chart .grid-line { stroke: #e1e0d9; stroke-width: 1; }
+  .chart .baseline { stroke: #c3c2b7; stroke-width: 1; }
+  .chart .tick { fill: #52514e; font-size: 8.5px; }
+  .chart .series { fill: none; stroke: #2a78d6; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .chart .dot { fill: #2a78d6; stroke: #ffffff; stroke-width: 2; }
+  .chart .vlabel { fill: #1b211d; font-size: 9px; font-weight: 500; }
+
+  /* roster */
+  table.roster { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 1.5mm; }
+  table.roster th, table.roster td { border: 1px solid var(--rule); padding: 0 0.8mm; text-align: center; height: 7mm; }
+  table.roster th { background: var(--fill); font-weight: 500; height: 6mm; line-height: 1.2; }
+  table.roster th.grp { background: var(--accent-soft); }
+  table.roster td.name { width: 19mm; }
+  table.roster td.memo { width: 17mm; }
+  table.roster .sum { background: #fafaf7; }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <button type="button" onclick="window.print()">A4로 인쇄</button>
+  <span>1~2쪽 학생 안내문 · 3~4쪽 활동지(앞뒤) · 5쪽 작성 예시 · 6쪽 교사용 채점표. 인쇄 창에서 여백 '없음', 배경 그래픽 '켜기'를 고르면 화면과 같게 나옵니다.</span>
+</div>
+
+<!-- ===================== 1. 안내문 (1/2) ===================== -->
+<section class="page" data-foot="통계독서탐구 안내 1/2">
+  <div class="hdr">
+    <div class="kicker">2026학년도 2학기 · 2학년 확률과 통계 · 수행평가</div>
+    <h1>통계독서탐구 안내</h1>
+    <div class="meta">11월 · 100점(반영 30%) · 개인 과제 · 선생님이 평가 · 활동지(손글씨) + 2분 발표</div>
+  </div>
+
+  <h2>무엇을 하나요</h2>
+  <p>통계 자료를 직접 만들어 내 주장의 근거로 해석하고, 2분 동안 발표합니다. 책은 주장을 정하거나 통계를 읽는 눈을 얻기 위한 참고 자료입니다. 한 권을 다 읽지 않아도 됩니다.</p>
+
+  <h2>전체 흐름</h2>
+  <table class="grid">
+    <tr><th style="width:34mm">단계</th><th style="width:40mm">날짜</th><th>할 일</th></tr>
+    <tr><td>1 안내·주제 정하기</td><td>11월 ___일 (수업 중)</td><td>안내문과 활동지를 받고, 주장 한 문장과 책 한 권을 정합니다</td></tr>
+    <tr><td>2 활동지·PPT 제출</td><td>11월 ___일까지</td><td>활동지(손글씨)와 PPT 4장을 냅니다</td></tr>
+    <tr><td>3 발표</td><td>11월 ___일 ~ ___일</td><td>1인 2분. 번호순</td></tr>
+  </table>
+
+  <h2>순서대로 하면 끝납니다</h2>
+  <ol class="steps">
+    <li><b>주장을 한 문장으로 정합니다.</b> 통계로 확인할 수 있는 것이어야 합니다. 예: "출생아 수가 2024년부터 다시 늘고 있으니 결혼을 돕는 정책이 먼저다." "고등학생의 아침 결식이 늘고 있으니 학교에서 아침을 주자." "광주의 학생 수가 줄어도 학교를 없애기보다 학급 인원을 줄이는 쪽이 낫다."</li>
+    <li><b>책을 한 권 고릅니다.</b> 통계·데이터를 다룬 책이면 됩니다(2쪽 목록). 내 주장과 이어지는 장 하나만 읽어도 됩니다.</li>
+    <li><b>자료를 찾습니다.</b> KOSIS(kosis.kr)에서 검색해 표를 열고, '통계설명자료'에서 기관 이름, 조사 이름, 조사 방식(모두 조사 / 일부만 뽑아 조사)을 확인합니다. 표 화면을 캡처해 둡니다. PPT에 넣습니다.</li>
+    <li><b>표를 다시 만들고 그래프를 그립니다.</b> 필요한 행·열만 3~8개 골라 옮깁니다. 그래프는 손으로 그려도 되고 엑셀이나 구글 시트도 됩니다. 세로축은 0부터, 제목과 단위를 씁니다. 비율(%) 자료는 확률분포표로 만들어도 됩니다.</li>
+    <li><b>해석을 씁니다.</b> 숫자로 말하기, 왜 그런지 내 의견, 의견의 근거(다른 수치, 책, 기사와 출처) 순서입니다.</li>
+    <li><b>결론을 세 문장으로 정리하고 PPT 4장에 옮깁니다.</b> 2분 연습을 합니다.</li>
+  </ol>
+
+  <h2>점수는 이렇게 납니다</h2>
+  <table class="grid">
+    <tr><th style="width:30mm">평가 요소</th><th class="c" style="width:12mm">배점</th><th>보는 것</th></tr>
+    <tr><td>1 참고 도서</td><td class="num">20</td><td>도서명과 저자, 책의 어떤 내용이 내 통계(교과)와 이어지는지. 셋 다 있으면 20, 연계 내용이 부족하면 15, 도서명·저자만 있거나 없으면 5</td></tr>
+    <tr><td>2 통계자료 만들기</td><td class="num">30</td><td>① 기관 이름과 조사 이름 ② 모두 조사했는지 일부만 뽑아 조사했는지 ③ 필요한 부분만 골라 다시 만든 표 ④ 그래프 또는 확률분포표. 4개 모두 30, 3개 25, 1~2개 15, 0개 5</td></tr>
+    <tr><td>3 통계자료 해석</td><td class="num">30</td><td>① 늘어난 것 또는 줄어든 것을 숫자로 ② 그렇게 된 이유에 대한 내 의견 ③ 내 의견의 근거. 3개 모두 30, 2개 25, 1개 20, 0개 5</td></tr>
+    <tr><td>4 결론 발표</td><td class="num">20</td><td>발표에서 자료의 제작·해석이 믿을 만하고 결론이 자세하면 20, 맞게 했지만 결론이 간단하면 15, 제작·해석이 부족한 채 결론만 말하면 10, 발표를 안 하면 5</td></tr>
+  </table>
+  <p class="note">PPT 자체는 점수가 없습니다. 디자인에 시간을 쓰지 마세요. 활동지에 쓴 내용을 그대로 옮기면 됩니다. 활동지와 발표를 둘 다 안 하면 20점으로 미도달입니다. 활동지만 내면 발표 점수는 5점입니다.</p>
+</section>
+
+<!-- ===================== 2. 안내문 (2/2) ===================== -->
+<section class="page" data-foot="통계독서탐구 안내 2/2">
+  <h2 style="margin-top:0">모두 조사(전수조사)와 일부만 뽑아 조사(표본조사) 구분하기</h2>
+  <ul class="tight">
+    <li><b>모두 조사</b>: 이름에 '총조사'가 있거나(인구주택총조사), 신고·등록 자료를 전부 모은 것(출생·사망·혼인 통계, 교육기본통계, 자동차 등록 현황).</li>
+    <li><b>일부만 뽑아 조사</b>: 설명에 '표본', '○○명(가구)을 조사'라고 적힌 것(사회조사, 청소년건강행태조사, 경제활동인구조사, 스마트폰 과의존 실태조사, 그리고 모든 여론조사).</li>
+    <li>KOSIS에서 표를 연 뒤 '통계설명자료'의 '조사 방법', '조사 대상', '표본 규모'를 보면 나옵니다. 찾은 문구를 활동지 2-②에 옮겨 적습니다.</li>
+  </ul>
+
+  <h2>자료를 찾기 좋은 곳</h2>
+  <table class="grid">
+    <tr><th style="width:36mm">곳</th><th style="width:34mm">주소</th><th>무엇이 있나</th></tr>
+    <tr><td>KOSIS 국가통계포털</td><td>kosis.kr</td><td>거의 모든 국가 통계. 검색창에 '출생아 수', '청소년 스마트폰'처럼 넣습니다</td></tr>
+    <tr><td>e-나라지표</td><td>index.go.kr</td><td>주요 지표의 연도별 표가 바로 나옵니다. 처음이면 여기부터</td></tr>
+    <tr><td>교육통계서비스</td><td>kess.kedi.re.kr</td><td>학생 수, 학급당 학생 수, 학교 수</td></tr>
+    <tr><td>학교알리미</td><td>schoolinfo.go.kr</td><td>학교별 학생 수, 급식, 도서관</td></tr>
+    <tr><td>청소년건강행태조사</td><td>yhs.kdca.go.kr</td><td>중·고등학생의 아침 식사, 수면, 신체활동, 스트레스</td></tr>
+  </table>
+  <p class="note">기관 이름이 '통계청'으로 나오면 지금의 국가데이터처입니다. 어느 쪽으로 써도 됩니다.</p>
+
+  <h2>확률분포표로 만들 때</h2>
+  <p>비율(%) 자료는 100으로 나누면 확률이 됩니다. 확률의 합이 1이 되는지 확인합니다. 형식 예시입니다(숫자는 가상).</p>
+  <table class="grid" style="width:auto">
+    <tr><th>X (하루 스마트폰 사용 시간 구간)</th><td class="num">1: 1시간 미만</td><td class="num">2: 1~2시간</td><td class="num">3: 2~3시간</td><td class="num">4: 3시간 이상</td><td class="num">합계</td></tr>
+    <tr><th>P(X = x)</th><td class="num">0.12</td><td class="num">0.31</td><td class="num">0.33</td><td class="num">0.24</td><td class="num">1</td></tr>
+  </table>
+
+  <h2>책 고르기</h2>
+  <p>학교 도서관에서 통계·데이터·확률을 다룬 책을 찾으면 됩니다. 추천 목록입니다.</p>
+  <div class="two small" style="gap:2mm 6mm">
+    <ul class="tight">
+      <li>《새빨간 거짓말, 통계》 대럴 허프</li>
+      <li>《벌거벗은 통계학》 찰스 윌런</li>
+      <li>《팩트풀니스》 한스 로슬링</li>
+      <li>《틀리지 않는 법》 조던 엘렌버그</li>
+      <li>《숫자는 어떻게 진실을 말하는가》 바츨라프 스밀</li>
+    </ul>
+    <ul class="tight">
+      <li>《통계의 미학》 최제호</li>
+      <li>《세상에서 가장 쉬운 통계학 입문》 고지마 히로유키</li>
+      <li>《통계학 도감》 구리하라 신이치</li>
+      <li>《대량살상 수학무기》 캐시 오닐</li>
+    </ul>
+  </div>
+  <p class="note">다른 주제의 책도 됩니다. 다만 그 책의 어떤 내용이 내 통계와 이어지는지를 적어야 20점입니다.</p>
+
+  <h2>발표</h2>
+  <ul class="tight">
+    <li>PPT 4장입니다. ① 주장과 책 ② 자료 출처(캡처)와 표 ③ 그래프와 해석 ④ 결론. 틀(발표틀.pptx)을 받아 빈칸만 채웁니다.</li>
+    <li>2분입니다. 활동지에 쓴 순서대로 말하면 됩니다. 발표가 끝나면 선생님이 질문을 하나 할 수 있습니다.</li>
+    <li>파일은 11월 ___일까지 ______________에 올립니다.</li>
+  </ul>
+
+  <h2>인공지능(AI) 사용 규정</h2>
+  <p>AI는 자료 검색과 전문 학술 자료의 요약에만 쓸 수 있습니다. 해석, 의견, 근거, 결론을 AI가 쓴 대로 옮기면 그 평가 요소는 최하점입니다. 활동지는 손으로 씁니다. 내 숫자를 내가 설명할 수 있으면 됩니다.</p>
+</section>
+
+<!-- ===================== 3. 활동지 (앞) ===================== -->
+<section class="page" data-foot="통계독서탐구 활동지 (앞)">
+  <div class="hdr">
+    <div class="kicker">2026학년도 2학기 · 2학년 확률과 통계 · 수행평가</div>
+    <h1 style="display:flex;justify-content:space-between;align-items:baseline">통계독서탐구 활동지 <span style="font-size:11pt;font-weight:400">2학년 ( &nbsp; )반 ( &nbsp; &nbsp;)번 &nbsp;이름 <span class="blank w"></span></span></h1>
+  </div>
+
+  <div class="box" style="background:var(--fill)">
+    <div class="label"><b>나의 주장</b> (한 문장. 통계로 확인할 수 있는 것)</div>
+    <div>나는 <span class="blank xw" style="min-width:118mm"></span> 라고 생각한다.</div>
+  </div>
+
+  <h2>1. 참고 도서 <span class="score">20점</span></h2>
+  <div class="box">
+    <div class="label">도서명 <span class="blank" style="min-width:46mm"></span> 저자 <span class="blank" style="min-width:24mm"></span> <span style="white-space:nowrap">읽은 부분 <span class="blank" style="min-width:11mm"></span>쪽 ~ <span class="blank" style="min-width:11mm"></span>쪽 (또는 <span class="blank" style="min-width:9mm"></span>장)</span></div>
+    <div class="label" style="margin-top:1.5mm"><b>이 책의 내용 중 내 통계(주장)와 이어지는 것</b> (3줄 이상. 책의 어떤 부분이, 내 자료나 주장의 어디와 이어지는지)</div>
+    <div class="line first"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+  </div>
+
+  <h2>2. 통계자료 만들기 <span class="score">30점 · ①~④ 충족 개수로 채점</span></h2>
+  <div class="box">
+    <div class="label"><b>① 출처</b> &nbsp;자료를 만든 기관 <span class="blank" style="min-width:54mm"></span> &nbsp;조사(통계) 이름 <span style="white-space:nowrap">「<span class="blank" style="min-width:46mm"></span>」</span></div>
+    <div class="label">표 이름 또는 주소 <span class="blank" style="min-width:130mm"></span></div>
+  </div>
+  <div class="box">
+    <div class="label"><b>② 조사 방식</b> &nbsp;<span class="chk"></span>모두 조사함(전수조사) &nbsp;&nbsp;<span class="chk"></span>일부만 뽑아 조사함(표본조사)</div>
+    <div class="label">그렇게 판단한 근거 (통계설명자료의 문구, 표본 수 등)</div>
+    <div class="line first"></div><div class="line"></div>
+  </div>
+  <div class="box">
+    <div class="label"><b>③ 내가 다시 만든 표</b> (원자료에서 필요한 행·열만 3~8개) &nbsp;표 제목 <span class="blank w"></span> 단위 <span class="blank s"></span></div>
+    <table class="form-table">
+      <tr><td style="width:30%">구분(연도, 항목 등)</td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== 4. 활동지 (뒤) ===================== -->
+<section class="page" data-foot="통계독서탐구 활동지 (뒤)">
+  <div class="box" style="margin-top:0">
+    <div class="label"><b>④ 그래프 또는 확률분포표</b> (세로축 0부터, 제목과 단위를 씀. 손으로 그려도 되고 출력물을 붙여도 됨)</div>
+    <div class="canvas"><div class="hint">확률분포표로 만들면: 첫 줄 X의 값, 둘째 줄 P(X = x), 마지막 칸 합계 1</div></div>
+  </div>
+
+  <h2>3. 통계자료 해석 <span class="score">30점 · ①~③ 충족 개수로 채점</span></h2>
+  <div class="box">
+    <div class="label"><b>① 숫자로 말하기</b> (두 문장 이상. 아래 틀에 숫자를 넣음)</div>
+    <div><span class="blank s"></span>년 <span class="blank"></span>에서 <span class="blank s"></span>년 <span class="blank"></span>으로 <span class="blank"></span>만큼 ( 늘었다 / 줄었다 ). 비율로는 약 <span class="blank s"></span>%다.</div>
+    <div class="line"></div>
+  </div>
+  <div class="box">
+    <div class="label"><b>② 왜 그렇게 되었을까, 내 의견</b></div>
+    <div class="line first"></div><div class="line"></div><div class="line"></div>
+  </div>
+  <div class="box">
+    <div class="label"><b>③ 내 의견의 근거</b> (다른 통계 수치, 책 내용, 기사 등. 출처를 함께 씀)</div>
+    <div class="line first"></div><div class="line"></div><div class="line"></div>
+  </div>
+
+  <h2>4. 결론 <span class="score">20점 · 발표로 채점. 이 칸은 발표에서 말할 세 문장</span></h2>
+  <div class="box">
+    <div class="label">통계가 보여 준 것</div><div class="line"></div>
+    <div class="label" style="margin-top:1.5mm">그래서 나의 주장</div><div class="line"></div>
+    <div class="label" style="margin-top:1.5mm">제안 (또는 남는 궁금증)</div><div class="line"></div>
+    <div class="chkline" style="margin-top:2mm">발표 준비 확인 &nbsp;<span class="chk"></span>PPT 4장 &nbsp;&nbsp;<span class="chk"></span>원자료 화면 캡처 넣음 &nbsp;&nbsp;<span class="chk"></span>2분 연습</div>
+  </div>
+
+  <div class="box small">
+    AI 사용 확인: AI는 자료 검색과 전문 자료 요약에만 썼고, 이 활동지와 발표 내용은 제가 직접 썼습니다. (AI를 쓴 곳: <span class="blank w"></span>) &nbsp;서명 <span class="blank"></span>
+  </div>
+
+  <div class="teacher">
+    <b>교사 확인</b> &nbsp;
+    1 도서 [ 20 · 15 · 5 ] &nbsp;→ ____ &nbsp;|&nbsp;
+    2 자료 <span class="chk"></span>① <span class="chk"></span>② <span class="chk"></span>③ <span class="chk"></span>④ [ 4개 30 · 3개 25 · 1~2개 15 · 0개 5 ] → ____ &nbsp;|&nbsp;
+    3 해석 <span class="chk"></span>① <span class="chk"></span>② <span class="chk"></span>③ [ 3개 30 · 2개 25 · 1개 20 · 0개 5 ] → ____ &nbsp;|&nbsp;
+    4 발표 [ 20 · 15 · 10 · 5 ] → ____ &nbsp;|&nbsp; <b>합계 ____</b>
+  </div>
+</section>
+
+<!-- ===================== 5. 작성 예시 ===================== -->
+<section class="page ex" data-foot="통계독서탐구 작성 예시">
+  <div class="hdr">
+    <div class="kicker">2026학년도 2학기 · 2학년 확률과 통계 · 수행평가</div>
+    <h1>활동지 작성 예시</h1>
+    <div class="meta">숫자는 국가데이터처(옛 통계청) 발표를 만 명 단위로 반올림한 것입니다. 학생은 KOSIS에서 직접 확인해야 합니다.</div>
+  </div>
+
+  <div class="box" style="background:var(--fill)"><b>나의 주장</b> &nbsp;출생아 수는 2024년부터 다시 늘고 있다. 출생을 늘리려면 아이를 낳은 뒤의 지원보다 결혼을 쉽게 하는 지원이 먼저다.</div>
+
+  <h2>1. 참고 도서</h2>
+  <div class="box">
+    <p>《새빨간 거짓말, 통계》 대럴 허프. 1장과 그래프 부분을 읽음.</p>
+    <p><span class="tag">연계</span>책 1장은 표본이 한쪽으로 치우치면 결과가 틀린다고 말한다. 내 자료는 출생신고 전체를 집계한 것이라 표본의 치우침 문제가 없다는 점을 확인했다. 그래프로 속이는 방법을 다룬 부분을 읽고 세로축을 0부터 시작하게 그렸다. 교과의 모집단과 표본 단원과 이어진다.</p>
+  </div>
+
+  <h2>2. 통계자료 만들기</h2>
+  <div class="box">
+    <p><span class="tag">①</span>국가데이터처(옛 통계청), 「인구동향조사」 출생 통계. KOSIS에서 '출생아 수' 검색.</p>
+    <p><span class="tag">②</span>모두 조사(전수). 통계설명자료에 출생신고서를 집계한다고 되어 있어, 신고된 출생 전체를 모은 자료다.</p>
+    <div class="two" style="margin-top:1.5mm">
+      <div>
+        <p><span class="tag">③</span>연도별 출생아 수 (단위: 만 명)</p>
+        <table class="grid" style="margin:0">
+          <tr><th class="c">연도</th><th class="c">출생아 수</th></tr>
+          <tr><td class="num">2020</td><td class="num">27.2</td></tr>
+          <tr><td class="num">2021</td><td class="num">26.1</td></tr>
+          <tr><td class="num">2022</td><td class="num">24.9</td></tr>
+          <tr><td class="num">2023</td><td class="num">23.0</td></tr>
+          <tr><td class="num">2024</td><td class="num">23.8</td></tr>
+          <tr><td class="num">2025</td><td class="num">25.4</td></tr>
+        </table>
+      </div>
+      <div>
+        <p><span class="tag">④</span>연도별 출생아 수 (단위: 만 명)</p>
+        <svg class="chart" viewBox="0 0 360 200" width="100%" role="img" aria-label="2020년 27.2만 명에서 2023년 23.0만 명까지 줄다가 2025년 25.4만 명으로 늘어난 꺾은선 그래프">
+          <line class="grid-line" x1="42" y1="15" x2="340" y2="15"/>
+          <line class="grid-line" x1="42" y1="65" x2="340" y2="65"/>
+          <line class="grid-line" x1="42" y1="115" x2="340" y2="115"/>
+          <line class="baseline" x1="42" y1="165" x2="340" y2="165"/>
+          <text class="tick" x="36" y="18" text-anchor="end">30</text>
+          <text class="tick" x="36" y="68" text-anchor="end">20</text>
+          <text class="tick" x="36" y="118" text-anchor="end">10</text>
+          <text class="tick" x="36" y="168" text-anchor="end">0</text>
+          <polyline class="series" points="54,29 110,34.5 166,40.5 222,50 278,46 334,38"/>
+          <circle class="dot" cx="54" cy="29" r="4"/><circle class="dot" cx="110" cy="34.5" r="4"/><circle class="dot" cx="166" cy="40.5" r="4"/><circle class="dot" cx="222" cy="50" r="4"/><circle class="dot" cx="278" cy="46" r="4"/><circle class="dot" cx="334" cy="38" r="4"/>
+          <text class="vlabel" x="54" y="21" text-anchor="middle">27.2</text>
+          <text class="vlabel" x="222" y="64" text-anchor="middle">23.0</text>
+          <text class="vlabel" x="334" y="30" text-anchor="middle">25.4</text>
+          <text class="tick" x="54" y="181" text-anchor="middle">2020</text>
+          <text class="tick" x="110" y="181" text-anchor="middle">2021</text>
+          <text class="tick" x="166" y="181" text-anchor="middle">2022</text>
+          <text class="tick" x="222" y="181" text-anchor="middle">2023</text>
+          <text class="tick" x="278" y="181" text-anchor="middle">2024</text>
+          <text class="tick" x="334" y="181" text-anchor="middle">2025</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <h2>3. 통계자료 해석</h2>
+  <div class="box">
+    <p><span class="tag">①</span>2020년 27.2만 명에서 2023년 23.0만 명으로 4.2만 명(약 15%) 줄었다. 2023년 23.0만 명에서 2025년 25.4만 명으로 2.4만 명(약 10%) 늘었다. 2년 연속 증가다.</p>
+    <p><span class="tag">②</span>결혼이 줄었다가 늘어난 것이 1~2년 뒤 출생에 나타났다고 본다. 코로나19 때 미뤘던 결혼이 2023~2024년에 몰렸다.</p>
+    <p><span class="tag">③</span>같은 기관의 「혼인·이혼 통계」에서 혼인 건수는 2020년 21.4만 건, 2022년 19.2만 건(가장 적음), 2024년 22.2만 건(전년보다 14.8% 증가)이다. 출생아 수는 그 1년 뒤인 2024년과 2025년에 늘었다.</p>
+  </div>
+
+  <h2>4. 결론 (발표에서 말할 세 문장)</h2>
+  <div class="box">
+    <p><span class="tag">보여 준 것</span>출생아 수는 혼인 건수를 1~2년 뒤따라 움직인다.</p>
+    <p><span class="tag">나의 주장</span>결혼 자체를 쉽게 하는 지원(신혼부부 주거 등)이 출산 뒤 지원보다 앞서야 한다.</p>
+    <p><span class="tag">남는 궁금증</span>2025년 혼인 건수도 늘었는지 확인하면 2026년 출생아 수를 예측할 수 있다.</p>
+  </div>
+  <p class="note">이 예시대로 쓰면 1번 20점, 2번 ①~④ 모두 충족 30점, 3번 ①~③ 모두 충족 30점입니다. 발표에서 출처·표·그래프·해석을 다 보여 주고 결론 세 문장을 말하면 4번 20점입니다.</p>
+</section>
+
+<!-- ===================== 6. 교사용 채점표 ===================== -->
+<section class="page" data-foot="통계독서탐구 교사용 채점표">
+  <div class="hdr">
+    <div class="kicker">2026학년도 2학기 · 2학년 확률과 통계 · 수행평가 〈통계독서탐구〉</div>
+    <h1 style="display:flex;justify-content:space-between;align-items:baseline">교사용 채점표 <span style="font-size:11pt;font-weight:400">2학년 ( &nbsp; )반 &nbsp;발표일 11월 ___일, ___일</span></h1>
+  </div>
+  <p class="small" style="margin:1.5mm 0">활동지로 1~3번을 먼저 채점하고, 발표 날에는 4번만 적는다. 4번은 출처가 나왔나(○×), 숫자로 해석했나(○×), 결론이 자세한가(상·중·하)를 메모한 뒤 점수를 적는다. 2 자료: 4개 30 · 3개 25 · 1~2개 15 · 0개 5. &nbsp;3 해석: 3개 30 · 2개 25 · 1개 20 · 0개 5. &nbsp;4 발표: 모두 갖추고 결론 자세함 20 · 맞게 했으나 결론 간단 15 · 제작·해석 부족 10 · 미발표 5. &nbsp;분할 점수 A 95 · B 85 · C 70 · D 60 · E 25.</p>
+  <table class="roster">
+    <tr>
+      <th rowspan="2" style="width:8mm">번호</th><th rowspan="2" style="width:19mm">이름</th>
+      <th rowspan="2" class="grp" style="width:11mm">1 도서<br>20·15·5</th>
+      <th colspan="5" class="grp">2 통계자료 만들기 (30)</th>
+      <th colspan="4" class="grp">3 해석 (30)</th>
+      <th colspan="4" class="grp">4 결론 발표 (20)</th>
+      <th rowspan="2" style="width:11mm">합계</th><th rowspan="2" style="width:17mm">비고<br><span style="font-weight:400">(AI·미제출)</span></th>
+    </tr>
+    <tr>
+      <th>①</th><th>②</th><th>③</th><th>④</th><th>점수</th>
+      <th>①</th><th>②</th><th>③</th><th>점수</th>
+      <th>출처</th><th>숫자</th><th>결론</th><th>점수</th>
+    </tr>
+    <tr><td>1</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>2</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>3</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>4</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>5</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>6</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>7</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>8</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>9</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>10</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>11</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>12</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>13</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>14</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>15</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>16</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>17</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>18</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>19</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>20</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>21</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>22</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>23</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>24</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>25</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>26</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>27</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>28</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>29</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+    <tr><td>30</td><td class="name"></td><td></td><td></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td></td><td></td><td></td><td class="sum"></td><td class="sum"></td><td class="memo"></td></tr>
+  </table>
+</section>
+</body>
+</html>
