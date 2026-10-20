@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>통계 자료 사이트 모음</title>
+<meta name="description" content="2학년 확률과 통계 수행평가 통계독서탐구: 통계 자료를 얻을 수 있는 사이트 16곳과 얻는 길">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --ink: #1b211d; --muted: #6b6759; --rule: #b9b4a6; --rule-soft: #dcd8cc; --fill: #f3f1ea;
+    --accent: #2f5d50; --accent-soft: #e1ebe5; --ans: #1c5cab; --ans-soft: #eaf2fc;
+    --sans: "Noto Sans KR", "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #e6e4dc; color: var(--ink); font-family: var(--sans); font-size: 10.5pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .toolbar { position: sticky; top: 0; z-index: 2; background: #fff; border-bottom: 1px solid var(--rule-soft); padding: 8px 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 10pt; }
+  .toolbar button { font: inherit; padding: 6px 14px; border: 1px solid var(--accent); background: var(--accent); color: #fff; border-radius: 4px; cursor: pointer; }
+  .toolbar span { color: var(--muted); }
+  .page { background: #fff; width: 210mm; min-height: 297mm; margin: 10mm auto; padding: 11mm 15mm 10mm; box-shadow: 0 1px 6px rgba(0,0,0,.18); position: relative; }
+  .page::after { content: attr(data-foot); position: absolute; left: 15mm; right: 15mm; bottom: 5mm; font-size: 8pt; color: var(--muted); }
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; }
+    .toolbar { display: none; }
+    .page { width: 210mm; min-height: 297mm; margin: 0; box-shadow: none; page-break-after: always; break-after: page; }
+    .page:last-child { page-break-after: auto; break-after: auto; }
+  }
+
+  h1 { font-size: 19pt; margin: 1.5mm 0 1mm; letter-spacing: -0.02em; line-height: 1.25; }
+  h2 { font-size: 12pt; margin: 3.5mm 0 1.5mm; display: flex; align-items: center; gap: 2mm; line-height: 1.3; }
+  h2.plain { padding-left: 2.5mm; border-left: 3px solid var(--accent); }
+  h3 { font-size: 10.5pt; margin: 2.5mm 0 1mm; }
+  p { margin: 0 0 1.5mm; }
+  .kicker { font-size: 9pt; color: var(--muted); letter-spacing: 0.04em; }
+  .meta { font-size: 9.5pt; color: var(--muted); margin-bottom: 1.5mm; }
+  .hdr { border-bottom: 2px solid var(--ink); padding-bottom: 1.5mm; margin-bottom: 1mm; display: flex; justify-content: space-between; align-items: flex-end; gap: 4mm; }
+  .hdr .right { font-size: 9.5pt; color: var(--muted); text-align: right; white-space: nowrap; padding-bottom: 1.5mm; }
+  .note { font-size: 9.5pt; color: var(--muted); }
+  .small { font-size: 9pt; }
+  .lead { font-size: 11.5pt; font-weight: 500; margin: 1.5mm 0 1mm; }
+  ul.tight { margin: 0 0 1mm; padding-left: 4.5mm; }
+  ul.tight li { margin-bottom: 0.8mm; }
+  .chip { display: inline-flex; align-items: center; justify-content: center; width: 5.6mm; height: 5.6mm; border-radius: 50%; background: var(--accent); color: #fff; font-size: 9.5pt; font-weight: 700; flex: none; line-height: 1; }
+  .chip.sm { width: 4.6mm; height: 4.6mm; font-size: 8pt; vertical-align: -0.9mm; }
+  .score { margin-left: auto; font-size: 9.5pt; color: var(--muted); font-weight: 400; }
+  .ok { display: inline-block; border: 1px solid var(--accent); color: var(--accent); border-radius: 2px; font-size: 8pt; padding: 0 1.2mm; line-height: 1.5; vertical-align: 0.3mm; margin-right: 1mm; }
+  .ans { color: var(--ans); font-weight: 500; }
+  .memo { font-size: 8.8pt; color: var(--accent); background: var(--accent-soft); padding: 1mm 2mm; margin-top: 1.2mm; border-radius: 2px; }
+  .memo b { font-weight: 700; }
+
+  table.grid { width: 100%; border-collapse: collapse; margin: 1mm 0 2mm; font-size: 9.5pt; }
+  table.grid th, table.grid td { border: 1px solid var(--rule); padding: 1.2mm 2mm; vertical-align: top; text-align: left; }
+  table.grid th { background: var(--fill); font-weight: 500; white-space: nowrap; }
+  table.grid td.c, table.grid th.c { text-align: center; }
+  table.grid td.num, table.grid th.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  table.grid.ansg td.num { color: var(--ans); font-weight: 500; }
+
+  .box { border: 1px solid var(--ink); padding: 2mm 2.5mm; margin: 1mm 0 2mm; }
+  .box .label { font-size: 9.5pt; margin-bottom: 1mm; }
+  .box .label b { font-weight: 500; }
+  .box.soft { border-color: var(--rule); }
+  .box.fillbg { background: var(--fill); }
+  .line { border-bottom: 1px solid var(--rule); height: 7mm; }
+  .line.first { margin-top: 0.5mm; }
+  .blank { display: inline-block; border-bottom: 1px solid var(--ink); min-width: 28mm; height: 5mm; vertical-align: bottom; margin: 0 1mm; }
+  .chk { display: inline-block; width: 3.4mm; height: 3.4mm; border: 1px solid var(--ink); vertical-align: -0.5mm; margin-right: 1.2mm; border-radius: 0.5mm; }
+  .chk.on { background: var(--ans); border-color: var(--ans); }
+  .form-table { width: 100%; border-collapse: collapse; margin-top: 1mm; }
+  .form-table td { border: 1px solid var(--rule); height: 7.5mm; padding: 0 1.5mm; font-size: 9pt; color: var(--muted); }
+  .form-table tr:first-child td { background: var(--fill); }
+  .canvas { border: 1px dashed var(--rule); height: 52mm; margin-top: 1mm; position: relative; }
+  .canvas .hint { position: absolute; right: 2mm; bottom: 1mm; font-size: 8.5pt; color: var(--muted); }
+  .teacher { border: 1px solid var(--ink); background: var(--fill); padding: 1.5mm 2.5mm; font-size: 9pt; margin-top: 2mm; }
+  .teacher b { font-weight: 500; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; align-items: start; }
+  .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; align-items: stretch; }
+
+  /* spine & flow */
+  table.spine { width: 100%; border-collapse: collapse; font-size: 9.3pt; margin: 1mm 0 1.5mm; }
+  table.spine th, table.spine td { border: 1px solid var(--rule); padding: 1.3mm 2mm; vertical-align: top; }
+  table.spine th { background: var(--fill); font-weight: 500; text-align: left; }
+  table.spine th.hd { background: var(--accent-soft); color: var(--accent); text-align: center; }
+  table.spine td.first { white-space: nowrap; font-weight: 500; }
+  .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 2mm; align-items: stretch; margin: 1mm 0 2mm; }
+  .flow .step { border: 1px solid var(--accent); border-radius: 2px; padding: 2mm 2.5mm; font-size: 9.5pt; }
+  .flow .step .t { font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 1.5mm; margin-bottom: 0.8mm; }
+  .flow .step .d { color: var(--muted); font-size: 9pt; margin-bottom: 0.8mm; }
+  .flow .arrow { align-self: center; color: var(--accent); font-size: 14pt; }
+  .steps { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+  .steps td { border-bottom: 1px solid var(--rule-soft); padding: 1.6mm 1.5mm; vertical-align: top; }
+  .steps td.n { width: 8mm; padding-left: 0; }
+  .steps td.w { width: 34mm; color: var(--accent); font-weight: 500; }
+  .steps b { font-weight: 700; }
+  .timebar { display: grid; grid-template-columns: 1fr 2fr 2fr 1fr; gap: 1mm; margin: 1mm 0 1.5mm; font-size: 9pt; }
+  .timebar div { background: var(--accent-soft); color: var(--accent); padding: 1mm 1.5mm; border-radius: 2px; text-align: center; }
+  .timebar div b { display: block; font-size: 10pt; }
+
+  /* charts */
+  .chart { font-family: var(--sans); display: block; }
+  .chart .grid-line { stroke: #e1e0d9; stroke-width: 1; }
+  .chart .baseline { stroke: #c3c2b7; stroke-width: 1; }
+  .chart .tick { fill: #52514e; font-size: 8.5px; }
+  .chart .series { fill: none; stroke: #2a78d6; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .chart .dot { fill: #2a78d6; stroke: #ffffff; stroke-width: 2; }
+  .chart .bar { fill: #2a78d6; }
+  .chart .vlabel { fill: #1b211d; font-size: 9px; font-weight: 500; }
+  .chart .ctitle { fill: #1b211d; font-size: 9.5px; font-weight: 500; }
+
+  .compact { font-size: 9.8pt; }
+  .compact .hdr { padding-bottom: 1mm; }
+  .compact h1 { font-size: 17pt; }
+  .compact h2 { margin: 2.5mm 0 1.2mm; }
+  .compact .box { margin: 1mm 0 1.5mm; padding: 1.6mm 2.5mm; }
+  .compact .memo { font-size: 8.5pt; }
+  .compact p { margin: 0 0 1mm; }
+
+  /* slide wireframes */
+  .wire { border: 1px solid var(--rule); border-radius: 1.5mm; padding: 2mm 2.5mm; font-size: 8.8pt; min-height: 40mm; background: #fff; }
+  .wire .wt { font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 1.5mm; margin-bottom: 1mm; }
+  .wire .wb { background: var(--fill); border-radius: 1mm; padding: 1mm 1.5mm; margin-bottom: 1mm; }
+  .wire .wb.dash { background: #fff; border: 1px dashed var(--rule); color: var(--muted); text-align: center; }
+  .script td { vertical-align: top; padding: 1.3mm 1.5mm; border-bottom: 1px solid var(--rule-soft); font-size: 9.5pt; }
+  .script td.t { width: 22mm; color: var(--accent); font-weight: 700; white-space: nowrap; }
+
+  /* roster */
+  table.roster { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 1.5mm; }
+  table.roster th, table.roster td { border: 1px solid var(--rule); padding: 0 0.8mm; text-align: center; height: 7mm; }
+  table.roster th { background: var(--fill); font-weight: 500; height: 6mm; line-height: 1.2; }
+  table.roster th.grp { background: var(--accent-soft); }
+  table.roster td.name { width: 19mm; }
+  table.roster td.memo-c { width: 17mm; }
+  table.roster .sum { background: #fafaf7; }
+</style>
+</head>
+<body>
+<div class="toolbar"><button type="button" onclick="window.print()">A4로 인쇄</button><span>1쪽. 학생에게 안내문과 함께 줍니다. 인쇄용.html 2쪽의 표를 넓힌 것입니다.</span></div>
+<section class="page" data-foot="통계독서탐구 · 통계 자료를 얻을 수 있는 사이트 모음 (2026. 10. 기준)">
+  <div class="hdr">
+    <div><div class="kicker">2026학년도 2학기 · 2학년 확률과 통계 · 수행평가 〈통계독서탐구〉</div><h1>통계 자료를 얻을 수 있는 사이트 모음</h1></div>
+    <div class="right">주소는 2026년 10월 기준<br>기관 이름이 '통계청'이면 지금의 국가데이터처</div>
+  </div>
+  <p style="margin:1.5mm 0">어느 사이트든 세 가지를 적어 둡니다. <b>기관 이름, 조사(통계) 이름, 주소와 경로</b>. 표를 찾으면 화면을 캡처하고, 통계설명자료에서 모두 조사(전수)인지 일부만 뽑아 조사(표본)인지 확인합니다.</p>
+  <table class="grid" style="font-size:9pt">
+    <tr><th style="width:34mm">사이트</th><th style="width:30mm">주소</th><th>무엇이 있나</th><th style="width:58mm">얻는 길 (핵심)</th></tr>
+    <tr><td>KOSIS 국가통계포털</td><td style="white-space:nowrap">kosis.kr</td><td>거의 모든 국가승인통계(인구·보건·교육·교통·경제). 표마다 통계설명자료(조사 방법, 전수/표본)가 붙어 있다</td><td>검색창에 주제어 → 표 열기 → 조회 조건(연도·항목) → 다운로드 · '통계설명자료'에서 기관·조사 이름·조사 방법</td></tr><tr><td>e-나라지표</td><td style="white-space:nowrap">index.go.kr</td><td>주요 지표의 연도별 표와 그래프(출생아 수, 자동차 등록, 실업률 등). 처음이면 여기부터</td><td>검색 → 지표 열기 → '통계표'와 '지표 설명'(작성 기관·조사 이름)</td></tr><tr><td>통계지리정보서비스 SGIS</td><td style="white-space:nowrap">sgis.kostat.go.kr</td><td>시군구·동 단위 인구·가구·사업체를 지도로</td><td>대화형 통계지도 → 지역 선택 → 표로 보기</td></tr><tr><td>마이크로데이터 통합서비스 MDIS</td><td style="white-space:nowrap">mdis.kostat.go.kr</td><td>조사의 원시자료(응답 한 명 단위). 0~7일 같은 세부 분포는 여기에만 있다. 회원가입·신청 필요</td><td>자료 검색 → 조사 선택 → 다운로드 신청</td></tr><tr><td>공공데이터포털</td><td style="white-space:nowrap">data.go.kr</td><td>공공기관이 올린 파일 데이터(엑셀·CSV)</td><td>검색 → 파일데이터 → 다운로드</td></tr><tr><td>교육통계서비스 KESS</td><td style="white-space:nowrap">kess.kedi.re.kr</td><td>학생 수, 학급당 학생 수, 다문화 학생 수, 학교 수(전수)</td><td>교육통계연보 → 표 선택 → 엑셀</td></tr><tr><td>학교알리미</td><td style="white-space:nowrap">schoolinfo.go.kr</td><td>학교별 학생 수, 급식, 도서관, 동아리(전수)</td><td>학교 검색 → 공시 정보</td></tr><tr><td>청소년건강행태조사</td><td style="white-space:nowrap">kdca.go.kr/yhs</td><td>중1~고3의 아침식사, 수면, 신체활동, 스트레스, 흡연·음주(표본, 800개교 약 6만 명)</td><td>통계 → 지표별 통계 → 연도·성별·학교급 → 엑셀</td></tr><tr><td>국민건강영양조사</td><td style="white-space:nowrap">knhanes.kdca.go.kr</td><td>전 국민 건강·영양(비만율, 흡연율, 영양소 섭취)(표본)</td><td>통계집·원시자료 → 지표 선택</td></tr><tr><td>국토교통 통계누리</td><td style="white-space:nowrap">stat.molit.go.kr</td><td>자동차 등록(연료별·지역별), 주택, 교통(전수 보고통계)</td><td>통계 검색 → 표 → 월별·연도별</td></tr><tr><td>한국은행 경제통계시스템 ECOS</td><td style="white-space:nowrap">ecos.bok.or.kr</td><td>물가, 금리, 환율, GDP</td><td>통계 검색 → 기간 선택 → 다운로드</td></tr><tr><td>기상자료개방포털</td><td style="white-space:nowrap">data.kma.go.kr</td><td>지역별 기온·강수량 등 기후 관측값</td><td>기후통계분석 → 지점·기간 선택 → 다운로드</td></tr><tr><td>문화셈터</td><td style="white-space:nowrap">stat.mcst.go.kr</td><td>독서율, 여가·문화예술·체육 참여율(표본)</td><td>통계 → 조사명 선택 → 표</td></tr><tr><td>고용노동통계</td><td style="white-space:nowrap">laborstat.moel.go.kr</td><td>임금, 근로시간, 고용</td><td>통계표 검색 → 조회</td></tr><tr><td>스마트쉼센터</td><td style="white-space:nowrap">iapc.or.kr</td><td>스마트폰 과의존 실태조사 결과 보고서(표본, 전국 1만 가구)</td><td>자료실 → 실태조사 → 보고서 PDF</td></tr><tr><td>한국갤럽</td><td style="white-space:nowrap">gallup.co.kr</td><td>여론조사(표본조사의 전형: 전국 1,000명 전화조사)</td><td>갤럽리포트 → 조사 선택 → 표본 크기·조사 방법 확인</td></tr>
+  </table>
+  <p class="note">주소 앞에 https://를 붙여 들어갑니다. 전수/표본을 모르겠으면 KOSIS 표 위의 '통계설명자료' → '조사 방법'을 봅니다. 원시자료(MDIS)는 심화 탐구용이며, 보고서에는 공개된 표만으로 충분합니다.</p>
+</section>
+</body>
+</html>

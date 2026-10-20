@@ -128,8 +128,8 @@
 
   /* roster */
   table.roster { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 1.5mm; }
-  table.roster th, table.roster td { border: 1px solid var(--rule); padding: 0 0.8mm; text-align: center; height: 7mm; }
-  table.roster th { background: var(--fill); font-weight: 500; height: 6mm; line-height: 1.2; }
+  table.roster th, table.roster td { border: 1px solid var(--rule); padding: 0 0.8mm; text-align: center; height: 5.8mm; }
+  table.roster th { background: var(--fill); font-weight: 500; height: 5mm; line-height: 1.2; }
   table.roster th.grp { background: var(--accent-soft); }
   table.roster td.name { width: 19mm; }
   table.roster td.memo-c { width: 17mm; }
@@ -148,19 +148,19 @@
   table.rtab th { font-weight: 500; }
   table.rtab td { color: var(--ink); padding: 0.7mm 1.8mm; }
   table.rtab td:first-child, table.rtab th { white-space: nowrap; }
-  .form-table td { height: var(--rowh, 7.5mm); }
-  .form .line { height: 6.5mm; }
-  .form h2 { margin: 2.8mm 0 1.2mm; }
   .figbox { border: 1px dashed var(--rule); height: 16mm; display: flex; align-items: center; justify-content: center; margin: 1mm 0 1.5mm; }
   .figbox .capture { font-size: 9pt; color: var(--muted); }
   .figsvg { padding: 0 1mm; }
   .figsvg svg { width: 92%; margin: 0 auto; }
   ol.refs { margin: 0 0 1.5mm; padding-left: 5mm; font-size: 9.5pt; }
-  ol.refs li { margin-bottom: 0.5mm; }
+  ol.refs li { margin-bottom: 0.5mm; word-break: break-all; }
+  .form-table td { height: var(--rowh, 7.5mm); }
+  .form .line { height: 6.5mm; }
+  .form h2 { margin: 2.8mm 0 1.2mm; }
 </style>
 </head>
 <body>
-<div class="toolbar"><button type="button" onclick="window.print()">A4로 인쇄</button><span>2쪽. 활동지 대신 보고서로 제출받을 때 학생에게 주는 빈 양식. 절 번호가 평가 요소와 그대로 이어집니다.</span></div>
+<div class="toolbar"><button type="button" onclick="window.print()">A4로 인쇄</button><span>2쪽. 활동지 대신 보고서로 제출받을 때 학생에게 주는 빈 양식. 해석·결론·참고 자료는 자유 양식 4줄입니다.</span></div>
 
 <section class="page form" data-foot="통계독서탐구 보고서 양식 (1/2) · 작성 예시는 보고서-예시.html">
   <div class="hdr">
@@ -173,12 +173,12 @@
   </div>
   <h2><span class="chip">1</span> 주제를 정한 이유와 나의 주장 <span class="score">왜 이 주제인가(진로와 이어지면 좋다) + 주장 한 문장</span></h2>
   <div class="box"><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div></div>
-  <h2><span class="chip">2</span> 참고 도서 <span class="score">20점 · 도서명·저자·읽은 부분 + 책의 어떤 내용이 내 자료의 어디와 이어지는지 3문장 이상</span></h2>
+  <h2><span class="chip">2</span> 참고 도서 <span class="score">도서명·저자·읽은 부분 + 이 책을 어떻게 썼는지 핵심 3문장 이상</span></h2>
   <div class="box"><div class="label">도서명 <span class="blank" style="min-width:46mm"></span> 저자 <span class="blank" style="min-width:24mm"></span> 읽은 부분 <span class="blank" style="min-width:40mm"></span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div></div>
-  <h2><span class="chip">3</span> 통계 자료 만들기 <span class="score">30점 · 3.1~3.4 충족 개수로 채점</span></h2>
+  <h2><span class="chip">3</span> 통계 자료 만들기 <span class="score">출처(링크) · 조사 방식 · 가공 전·후 표 · 그래프</span></h2>
   <div class="box">
-    <div class="label"><b>3.1 자료 출처와 조사 대상</b> &nbsp;기관 <span class="blank" style="min-width:40mm"></span> 조사(통계) 이름 「<span class="blank" style="min-width:40mm"></span>」</div>
-    <div class="label">조사 대상·규모(누구를, 몇 명을) <span class="blank" style="min-width:60mm"></span> 찾은 곳(누리집·경로) <span class="blank" style="min-width:40mm"></span></div>
+    <div class="label"><b>3.1 자료 출처와 얻는 길</b> &nbsp;기관 <span class="blank" style="min-width:40mm"></span> 조사(통계) 이름 「<span class="blank" style="min-width:40mm"></span>」</div>
+    <div class="label">조사 대상·규모(누구를, 몇 명을) <span class="blank" style="min-width:45mm"></span> 누리집 주소 → 메뉴 → 표 이름 <span class="blank" style="min-width:50mm"></span></div>
     <div class="canvas" style="height:18mm"><div class="hint">그림 1. 원자료 화면 캡처를 붙이는 곳</div></div>
   </div>
   <div class="box">
@@ -191,25 +191,16 @@
 </section>
 <section class="page form" data-foot="통계독서탐구 보고서 양식 (2/2)">
   <div class="box" style="margin-top:0">
-    <div class="label"><b>3.4 그래프와 확률분포표</b> &nbsp;세로축 0부터, 제목과 단위. 그림 번호와 설명. 비율 자료는 확률분포표로도(합계 1)</div>
-    <div class="canvas" style="height:40mm"><div class="hint">그림 2. 그래프 (손으로 그리거나 출력해 붙임)</div></div>
-    <div class="label" style="margin-top:1.5mm">표 3. 확률분포표 &nbsp; X의 뜻: <span class="blank" style="min-width:70mm"></span></div>
-    <table class="form-table" style="margin-top:0.5mm"><tr><td style="width:18%">X</td><td></td><td></td><td></td><td></td><td>합계</td></tr><tr><td>P(X = x)</td><td></td><td></td><td></td><td></td><td>1</td></tr></table>
+    <div class="label"><b>3.4 그래프</b> &nbsp;표 2를 그래프로. 세로축 0부터, 제목과 단위, 그림 번호와 설명. 손으로 그리거나 출력해 붙임</div>
+    <div class="canvas" style="height:56mm"><div class="hint">그림 2. 그래프 제목과 단위를 씁니다</div></div>
   </div>
-  <h2><span class="chip">4</span> 통계 자료의 해석 <span class="score">30점 · 4.1~4.3 충족 개수로 채점</span></h2>
-  <div class="box"><div class="label"><b>4.1 숫자로 보면</b> &nbsp;<span class="blank" style="min-width:12mm"></span>년 <span class="blank" style="min-width:20mm"></span>에서 <span class="blank" style="min-width:12mm"></span>년 <span class="blank" style="min-width:20mm"></span>으로 <span class="blank" style="min-width:20mm"></span>만큼 ( 늘었다 / 줄었다 ). 비율로는 약 <span class="blank" style="min-width:12mm"></span>%(%p)다.</div><div class="line"></div></div>
-  <div class="box"><div class="label"><b>4.2 왜 그렇게 되었을까 (나의 의견)</b></div><div class="line"></div><div class="line"></div></div>
-  <div class="box"><div class="label"><b>4.3 의견의 근거</b> (다른 통계 수치, 책 내용, 기사 등. 출처를 함께)</div><div class="line"></div><div class="line"></div></div>
-  <h2><span class="chip">5</span> 결론 <span class="score">20점 · 발표로 채점. 세 문장이 발표의 마지막 장</span></h2>
-  <div class="box">
-    <div class="label">통계가 보여 준 것</div><div class="line"></div>
-    <div class="label" style="margin-top:1mm">그래서 나의 주장</div><div class="line"></div>
-    <div class="label" style="margin-top:1mm">제안 (무엇을 하자. 숫자를 넣으면 좋다)</div><div class="line"></div>
-  </div>
-  <div class="box small"><div class="label"><b>참고 자료</b> (쓴 자료의 출처를 모두)</div><div class="line"></div><div class="line"></div>
-    <div style="margin-top:1.5mm">AI 사용 확인: AI는 자료 검색과 전문 자료 요약에만 썼고, 표·그래프·해석·결론은 제가 직접 썼습니다. (AI를 쓴 곳: <span class="blank" style="min-width:40mm"></span>) &nbsp;서명 <span class="blank" style="min-width:24mm"></span></div>
-  </div>
-  <div class="teacher"><b>교사 확인</b> &nbsp;1 도서 [ 20 · 15 · 5 ] → ____ &nbsp;|&nbsp; 2 자료 <span class="chk"></span>3.1 <span class="chk"></span>3.2 <span class="chk"></span>3.3 <span class="chk"></span>3.4 [ 4개 30 · 3개 25 · 1~2개 15 · 0개 5 ] → ____ &nbsp;|&nbsp; 3 해석 <span class="chk"></span>4.1 <span class="chk"></span>4.2 <span class="chk"></span>4.3 [ 3개 30 · 2개 25 · 1개 20 · 0개 5 ] → ____ &nbsp;|&nbsp; 4 발표 [ 20 · 15 · 10 · 5 ] → ____ &nbsp;|&nbsp; <b>합계 ____</b></div>
+  <h2><span class="chip">4</span> 통계 자료의 해석 <span class="score">숫자로 변화 → 가공한 자료로 낸 의견·추측 → 그 근거(출처와 함께). 자유롭게</span></h2>
+  <div class="box"><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div></div>
+  <h2><span class="chip">5</span> 결론 <span class="score">통계가 보여 준 것 → 통계 분석 → 결론(무엇을 하자, 나는 무엇을 하겠다). 자유롭게</span></h2>
+  <div class="box"><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div></div>
+  <h2 class="plain" style="margin-top:3mm">참고 자료 <span class="score">쓴 자료의 링크(누리집 주소)를 모두</span></h2>
+  <div class="box"><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div></div>
+  <div class="box small">AI 사용 확인: AI는 자료 검색과 전문 자료 요약에만 썼고, 표·그래프·해석·결론은 제가 직접 썼습니다. (AI를 쓴 곳: <span class="blank" style="min-width:45mm"></span>) &nbsp;서명 <span class="blank" style="min-width:24mm"></span></div>
 </section>
 </body>
 </html>
