@@ -199,6 +199,7 @@ def load_elements():
     EL['foot_l'] = grab(23, (990, 3520, 1225, 3590))   # 강대모의고사K
     EL['foot_r'] = grab(23, (1395, 3520, 1520, 3590))  # 31회
     # 문항
+    EL['c8'] = question_img(4, 'L', 0)
     EL['c9'] = question_img(4, 'L', 1)
     EL['c10'] = question_img(4, 'R', 0)
     EL['c11'] = question_img(5, 'L', 0)
@@ -206,12 +207,20 @@ def load_elements():
     EL['c13'] = question_img(6, 'L', 0)
     EL['c14'] = question_img(6, 'R', 0)
     EL['c15'] = question_img(7, 'L', 0)
+    EL['c18'] = question_img(8, 'L', 0)
+    EL['c19'] = question_img(8, 'L', 1)
     EL['c20'] = question_img(8, 'R', 0)
     EL['c21'] = question_img(9, 'L', 0)
+    EL['p26'] = question_img(11, 'R', 0)
+    EL['p27'] = question_img(12, 'L', 0)
     EL['p28'] = question_img(12, 'R', 0)
     EL['p29'] = question_img(13, 'L', 0, skip_hdr=True)
+    EL['m26'] = question_img(15, 'R', 0)
+    EL['m27'] = question_img(16, 'L', 0)
     EL['m28'] = question_img(16, 'R', 0)
     EL['m29'] = question_img(17, 'L', 0, skip_hdr=True)
+    EL['g26'] = question_img(19, 'R', 0)
+    EL['g27'] = question_img(20, 'L', 0)
     EL['g28'] = question_img(20, 'R', 0)
     EL['g29'] = question_img(21, 'L', 0, skip_hdr=True)
     for k, v in EL.items():
@@ -230,57 +239,67 @@ FOOT_BOX = (1191, 3546, 1358, 3624)
 HDR_GAP = 90          # 유형 머리글(5지선다형 등)과 문항 사이 간격
 
 SUBJ = {
-    'prob': dict(name='확률과 통계', file='확률과통계', subj='subj_p', box='box_c_p', q=['p28', 'p29'], label='label_p', ans={28: '②', 29: '477'}),
-    'calc': dict(name='미적분', file='미적분', subj='subj_m', box='box_c_m', q=['m28', 'm29'], label='label_m', ans={28: '⑤', 29: '4'}),
-    'geo': dict(name='기하', file='기하', subj='subj_g', box='box_c_g', q=['g28', 'g29'], label='label_g', ans={28: '②', 29: '208'}),
+    'prob': dict(name='확률과 통계', file='확률과통계', subj='subj_p', box='box_c_p', q=['p26', 'p27', 'p28', 'p29'], label='label_p', ans={26: '④', 27: '①', 28: '②', 29: '477'}),
+    'calc': dict(name='미적분', file='미적분', subj='subj_m', box='box_c_m', q=['m26', 'm27', 'm28', 'm29'], label='label_m', ans={26: '①', 27: '④', 28: '⑤', 29: '4'}),
+    'geo': dict(name='기하', file='기하', subj='subj_g', box='box_c_g', q=['g26', 'g27', 'g28', 'g29'], label='label_g', ans={26: '①', 27: '③', 28: '②', 29: '208'}),
 }
-COMMON_Q = ['c9', 'c10', 'c11', 'c12', 'c13', 'c14', 'c15', 'c20', 'c21']
-COMMON_ANS = {9: '④', 10: '②', 11: '③', 12: '②', 13: '①', 14: '③', 15: '②', 20: '12', 21: '23'}
+COMMON_Q = ['c8', 'c9', 'c10', 'c11', 'c12', 'c13', 'c14', 'c18', 'c19', 'c20', 'c21']
+COMMON_ANS = {8: '③', 9: '④', 10: '②', 11: '③', 12: '②', 13: '①', 14: '③', 18: '10', 19: '16', 20: '12', 21: '23'}
+POINTS3 = {8, 18, 19, 26, 27}      # 3점 문항 (나머지는 4점)
 
 
 def layout_section(items, subject):
     """items: [('hdr', img) | ('q', img) | ('break',)] → 페이지 목록.
-    각 단은 상/하 두 슬롯. 문항 높이가 슬롯의 여유를 넘으면 단 전체를 차지한다."""
+    각 단은 상/하 두 슬롯. 문항이 슬롯 여유를 넘으면 단 위쪽에 통째로 놓고(stack), 남는 공간에 다음 문항이 들어가면 이어 붙인다."""
     pages = []
+    st = {}
 
     def new_page():
         kind = 'first' if not pages else 'cont'
         top = (FIRST_RULE_Y if kind == 'first' else CONT_RULE_Y) + 40
         pages.append({'kind': kind, 'subject': subject, 'num': len(pages) + 1, 'placed': [], 'top': top})
-        return pages[-1]
+        st.update(page=pages[-1], col=0, mode='empty', next_y=top)
 
-    page = new_page(); col_i = 0; slot = 0; pending = None
+    def advance():
+        st['col'] += 1
+        if st['col'] > 1:
+            new_page()
+        else:
+            st.update(mode='empty', next_y=st['page']['top'])
+
+    new_page(); pending = None
     for it in items:
         if it[0] == 'hdr':
             pending = it[1]; continue
         if it[0] == 'break':
-            if slot != 0:
-                col_i += 1; slot = 0
+            if st['mode'] != 'empty':
+                st['mode'] = 'done'
             continue
         img = it[1]
         extra = (pending.height + HDR_GAP) if pending is not None else 0
         need = img.height + extra
-        if col_i > 1:
-            page = new_page(); col_i = 0; slot = 0
-        half = (CONTENT_BOTTOM - page['top']) // 2
-        full = need > half - 100
-        if full and slot != 0:
-            col_i += 1; slot = 0
-            if col_i > 1:
-                page = new_page(); col_i = 0
-            half = (CONTENT_BOTTOM - page['top']) // 2
-        assert need <= CONTENT_BOTTOM - page['top'] - 10, f'too tall: {need}'
-        col = 'LR'[col_i]
-        y = page['top'] + slot * half
+        while True:
+            if st['mode'] == 'done':
+                advance()
+            page = st['page']; top = page['top']; half = (CONTENT_BOTTOM - top) // 2
+            full = need > half - 100
+            if st['mode'] == 'empty':
+                y = top
+                if full:
+                    assert need <= CONTENT_BOTTOM - top - 10, f'too tall: {need}'
+                    st['mode'] = 'stack'; st['next_y'] = top + need + 140
+                else:
+                    st['mode'] = 'half'; st['next_y'] = top + half
+                break
+            if st['mode'] == 'half' and not full:
+                y = top + half; st['mode'] = 'done'; break
+            if st['mode'] == 'stack' and st['next_y'] + need <= CONTENT_BOTTOM - 40:
+                y = st['next_y']; st['next_y'] += need + 140; break
+            st['mode'] = 'done'
+        col = 'LR'[st['col']]
         if pending is not None:
             page['placed'].append((col, COL_X[col], y, pending)); y += pending.height + HDR_GAP; pending = None
         page['placed'].append((col, COL_X[col], y, img))
-        if full:
-            col_i += 1; slot = 0
-        else:
-            slot += 1
-            if slot > 1:
-                col_i += 1; slot = 0
     return pages
 
 
@@ -336,10 +355,10 @@ def render_exam_page(pg, foot_n, foot_total):
 
 def build_exam(key):
     S = SUBJ[key]
-    items = [('hdr', EL['hdr5'])] + [('q', EL[q]) for q in COMMON_Q[:7]] + [('break',), ('hdr', EL['hdrS'])] + [('q', EL[q]) for q in COMMON_Q[7:]]
+    items = [('hdr', EL['hdr5'])] + [('q', EL[q]) for q in COMMON_Q[:7]] + [('break',), ('hdr', EL['hdrS'])] + [('q', EL[q]) for q in COMMON_Q[7:]]   # 5지선다형 8~14, 단답형 18~21
     common = layout_section(items, 'subj_c')
     add_end_box(common, EL[S['box']])
-    sel_items = [('hdr', EL['hdr5']), ('q', EL[S['q'][0]]), ('break',), ('hdr', EL['hdrS']), ('q', EL[S['q'][1]])]
+    sel_items = [('hdr', EL['hdr5'])] + [('q', EL[q]) for q in S['q'][:3]] + [('hdr', EL['hdrS']), ('q', EL[S['q'][3]])]   # 5지선다형 26~28, 단답형 29
     sel = layout_section(sel_items, S['subj'])
     add_end_box(sel, EL['box_end'])
     pages = common + sel
@@ -506,6 +525,7 @@ def seg(p, col, start, end):
 
 
 SOLS = {
+    'c8': [(23, 'L', ('hdr', 1085), ('hdr', 1629))],
     'c9': [(23, 'L', ('hdr', 1628), ('hdr', 2986))],
     'c10': [(23, 'L', ('hdr', 2986), 'end'), (23, 'R', 'top', ('hdr', 1245))],
     'c11': [(23, 'R', ('hdr', 1245), 'end'), (24, 'L', 'top', ('hdr', 978))],
@@ -513,12 +533,20 @@ SOLS = {
     'c13': [(24, 'R', ('hdr', 421), 'end'), (25, 'L', 'top', ('hdr', 791))],
     'c14': [(25, 'L', ('hdr', 791), 'end'), (25, 'R', 'top', ('hdr', 2567))],
     'c15': [(25, 'R', ('hdr', 2567), 'end'), (26, 'L', 'top', 'end'), (26, 'R', 'top', ('hdr', 2614))],
+    'c18': [(27, 'L', ('hdr', 416), ('hdr', 1065))],
+    'c19': [(27, 'L', ('hdr', 1065), ('hdr', 2204))],
     'c20': [(27, 'L', ('hdr', 2204), 'end'), (27, 'R', 'top', ('hdr', 2794))],
     'c21': [(27, 'R', ('hdr', 2794), 'end'), (28, 'L', 'top', 'end'), (28, 'R', 'top', 'end'), (29, 'L', 'top', ('hdr', 1588))],
+    'p26': [(30, 'L', ('hdr', 2235), 'end')],
+    'p27': [(30, 'R', ('hdr', 420), ('hdr', 1976))],
     'p28': [(30, 'R', ('hdr', 1976), 'end'), (31, 'L', 'top', 'end'), (31, 'R', 'top', ('hdr', 1724))],
     'p29': [(31, 'R', ('hdr', 1724), 'end'), (32, 'L', 'top', ('hdr', 2728))],
+    'm26': [(33, 'R', ('hdr', 2096), 'end'), (34, 'L', 'top', ('hdr', 762))],
+    'm27': [(34, 'L', ('hdr', 762), ('hdr', 3008))],
     'm28': [(34, 'L', ('hdr', 3007), 'end'), (34, 'R', 'top', 'end'), (35, 'L', 'top', ('hdr', 2495))],
     'm29': [(35, 'L', ('hdr', 2495), 'end'), (35, 'R', 'top', 'end')],
+    'g26': [(37, 'L', ('hdr', 2057), 'end'), (37, 'R', 'top', ('hdr', 932))],
+    'g27': [(37, 'R', ('hdr', 932), ('hdr', 2888))],
     'g28': [(37, 'R', ('hdr', 2888), 'end'), (38, 'L', 'top', 'end'), (38, 'R', 'top', ('hdr', 1797))],
     'g29': [(38, 'R', ('hdr', 1797), 'end'), (39, 'L', 'top', ('y', 840))],
 }
@@ -565,8 +593,8 @@ def trim_top(img):
 def answer_table(S, width):
     """정답표 이미지 (왼쪽 단용)"""
     fb = font(F_GOTHIC_B, 40); fn = font(F_SERIF_I, 44); fa = font(F_GOTHIC, 42); fa2 = font(F_SERIF, 42); fs = font(F_GOTHIC, 30)
-    rows_c = [[(9, '④'), (10, '②'), (11, '③'), (12, '②'), (13, '①')], [(14, '③'), (15, '②'), (20, '12'), (21, '23'), None]]
-    rows_s = [[(28, S['ans'][28]), (29, S['ans'][29]), None, None, None]]
+    rows_c = [[(8, '③'), (9, '④'), (10, '②'), (11, '③'), (12, '②')], [(13, '①'), (14, '③'), (18, '10'), (19, '16'), (20, '12')], [(21, '23'), None, None, None, None]]
+    rows_s = [[(26, S['ans'][26]), (27, S['ans'][27]), (28, S['ans'][28]), (29, S['ans'][29]), None]]
     cell_h = 64; ncol = 10; cw = width // ncol
     sections = [('공통과목', rows_c), (S['name'], rows_s)]
     total_h = sum(60 + cell_h * len(r) + 40 for _, r in sections) + 600
@@ -595,10 +623,17 @@ def answer_table(S, width):
                 ai = text_img(ans, F_SERIF if (ans.isascii() and ans.isdigit()) else F_GOTHIC, 42); paste(im, ai, (j * 2 + 1) * cw + (cw - ai.width) // 2, yy + (cell_h - ai.height) // 2)
             yy += cell_h
         y += h + 40
-    note1 = text_img('※ 강대모의고사K 31회에서 4점 문항만 발췌(22·30번 제외)한 60분 편집본', F_GOTHIC, 30)
-    note2 = text_img('※ 공통 9문항 + 선택 2문항 = 11문항, 전 문항 4점, 44점 만점', F_GOTHIC, 30)
-    paste(im, note1, 0, y + 10); paste(im, note2, 0, y + 55)
-    return im.crop((0, 0, width, y + 110))
+    notes = ['※ 강대모의고사K 31회 발췌 60분 편집본 (원본 번호 유지)',
+             '※ 공통 8~14·18~21번, 선택 26~29번: 15문항 55점 만점',
+             '※ 8·18·19·26·27번 3점, 나머지 10문항 4점']
+    yy = y + 10
+    for t in notes:
+        size = 30
+        ni = text_img(t, F_GOTHIC, size)
+        while ni.width > width and size > 20:
+            size -= 1; ni = text_img(t, F_GOTHIC, size)
+        paste(im, ni, 0, yy); yy += ni.height + 12
+    return im.crop((0, 0, width, yy + 10))
 
 
 def render_sol_page(placed, first, foot_n, foot_total, S):
