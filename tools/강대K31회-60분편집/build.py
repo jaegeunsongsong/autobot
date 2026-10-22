@@ -18,6 +18,9 @@ PREV = f'{SP}/preview'
 os.makedirs(OUTDIR, exist_ok=True); os.makedirs(PREV, exist_ok=True)
 
 W, H = 2550, 3794          # 출력 캔버스 (원본 스캔과 동일, 300dpi)
+STRIP_LOG = []             # (page, box, y) 괘선으로 판단해 지운 행
+SEG_INFO = {}              # name -> [(p, col, y0, y1)]
+SPLIT_LOG = []             # (name, seg_idx, cut_row, page_idx, col)
 INK = 200
 
 # ----------------------------------------------------------------- 원본 페이지 접근
@@ -32,32 +35,79 @@ def page_arr(p):
     return _cache[p]
 
 
-def grab(p, box, pad=0, strip_rules=True, trim_x=True, erase=None, strip_top=False):
+def erase_vruns(gray, ncols, minrun=40, band=4):
+    """gray(2차원 uint8, 복사본)의 왼쪽 ncols 열에서 세로로 minrun px 이상 이어지는 진한 잉크(단 구분선)를 찾아
+    그 열 ±band 열을 흰색으로 지운다 (기울어진 선의 흐린 테두리까지 제거)."""
+    dark = gray[:, :ncols] < 160
+    for x in range(dark.shape[1]):
+        ys = np.where(dark[:, x])[0]
+        if len(ys) < minrun:
+            continue
+        s0 = prev = ys[0]
+        for y in list(ys[1:]) + [None]:
+            if y is None or y - prev > 2:
+                if prev - s0 + 1 >= minrun:
+                    gray[s0:prev + 1, max(0, x - band):x + band + 1] = 255
+                if y is not None:
+                    s0 = y
+            if y is not None:
+                prev = y
+    return gray
+
+
+def grab(p, box, pad=0, strip_rules=True, trim_x=True, erase=None, strip_top=False, erase_vcols=0):
     """box=(x0,y0,x1,y1) 영역을 잘라, 가장자리에 걸친 긴 가로선(머리글 괘선)을 지우고 여백을 트림한다.
     erase: 페이지 좌표의 상자 목록 — 자르기 전에 흰색으로 지움.  strip_top: 위쪽 14행 중 잉크가 20%를 넘는 행(기울어진 괘선 잔상) 제거."""
     x0, y0, x1, y1 = [int(v) for v in box]
     a = page_arr(p)[y0:y1, x0:x1].copy()
     for (ex0, ey0, ex1, ey1) in (erase or []):
         a[max(0, ey0 - y0):max(0, ey1 - y0), max(0, ex0 - x0):max(0, ex1 - x0)] = 255
+    if erase_vcols:
+        erase_vruns(a, erase_vcols)
     ink = a < INK
     h, w = ink.shape
     keep = np.ones(h, bool)
     rowsum = ink.sum(axis=1)
+
+    def longest_run(row):
+        best = cur = 0
+        for v in row:
+            cur = cur + 1 if v else 0
+            if cur > best:
+                best = cur
+        return best
+
     if strip_rules:
-        for y in range(h):
-            if rowsum[y] > 0.5 * w and (y < 60 or y > h - 60):
+        rule_rows = []
+        for y in list(range(min(60, h))) + list(range(max(0, h - 60), h)):
+            if rowsum[y] > 0.25 * w and longest_run(ink[y]) >= 0.3 * w:
                 keep[max(0, y - 3):y + 4] = False
+                rule_rows.append(y)
+                STRIP_LOG.append((p, box, y0 + y))
+        if rule_rows:
+            # 기울어진 괘선의 나머지: 괘선 행 ±14행 안에 '완전히' 들어가는 세로 10px 이하의 잉크 조각만 지운다 (글자 획은 더 길다)
+            lo, hi = max(0, min(rule_rows) - 14), min(h, max(rule_rows) + 15)
+            for x in range(w):
+                ys = np.where(ink[:, x])[0]
+                if len(ys) == 0:
+                    continue
+                s0 = prev = ys[0]
+                for y in list(ys[1:]) + [None]:
+                    if y is None or y - prev > 1:
+                        if s0 >= lo and prev < hi and prev - s0 + 1 <= 10:
+                            a[s0:prev + 1, x] = 255
+                        if y is not None:
+                            s0 = y
+                    if y is not None:
+                        prev = y
+            ink = a < INK
+            rowsum = ink.sum(axis=1)
     if strip_top:
         # 위쪽 14행 중 '끊기지 않은 긴 가로 잉크(괘선)'가 있는 행만 지운다 (글자 행은 연속 구간이 짧다)
         for y in range(min(14, h)):
-            row = ink[y]
-            best = cur = 0
-            for v in row:
-                cur = cur + 1 if v else 0
-                if cur > best:
-                    best = cur
-            if best >= 0.25 * w:
+            if longest_run(ink[y]) >= 0.25 * w:
                 keep[y] = False
+                STRIP_LOG.append((p, box, y0 + y))
     ink2 = ink & keep[:, None]
     ys = np.where(ink2.any(axis=1))[0]
     xs = np.where(ink2.any(axis=0))[0]
@@ -323,17 +373,27 @@ def sol_meta(p):
     div = max(xs, key=lambda x: a[rule + 50:Hp - 300, x - 4:x + 5].any(axis=1).sum())
     left = {}
     for col, (xa, xb) in {'L': (100, div - 20), 'R': (div + 20, 2470)}.items():
-        reg = a[rule + 15:Hp - 330, xa:xb]
-        cs = np.where(reg.sum(axis=0) >= 40)[0]
-        left[col] = int(xa + cs.min())
+        reg_g = page_arr(p)[rule + 15:Hp - 330, xa:xb].copy()
+        erase_vruns(reg_g, 90)                 # 기울어 들어온 단 구분선은 가장자리 판단에서 제외
+        reg = reg_g < 140
+        colsum = reg.sum(axis=0)
+        lx = None
+        for x in np.where(colsum >= 8)[0]:
+            if colsum[x:x + 40].sum() >= 200:      # 잡티가 아니라 실제 글자 가장자리
+                lx = int(x); break
+        left[col] = int(xa + lx)
     _solmeta[p] = dict(rule=rule, div=div, left=left, H=Hp)
     return _solmeta[p]
 
 
+SEG_PAD = 30               # 해설 조각: 본문 왼쪽 가장자리 앞 여백 (바깥으로 나온 괄호·번호 보존)
+
+
 def sol_xrange(p, col):
     m = sol_meta(p)
-    x0 = m['left'][col] - 12
-    x1 = min(x0 + SOL_COL_W, m['div'] - 18) if col == 'L' else min(x0 + SOL_COL_W, 2470)
+    left = m['left'][col]
+    x0 = left - SEG_PAD if col == 'L' else max(left - SEG_PAD, m['div'] + 14)
+    x1 = min(left + 1100, m['div'] - 18) if col == 'L' else min(left + 1100, 2470)
     return x0, x1
 
 
@@ -383,9 +443,10 @@ def title_rule(p):
 def text_top(p, col):
     """단의 본문 첫 줄 위쪽 y. 제목('수학 영역') 영역은 제외하고, 각 열(x)에서 세로로 8px 이상 이어지는
     첫 잉크(글자 획·그림 선)를 찾아 그 최소 y를 쓴다. 휘거나 기울어진 얇은 제목 괘선(세로 2~6px)은 건너뛴다."""
-    a = page_arr(p) < INK
     x0, x1 = sol_xrange(p, col)
-    reg = a[280:900, x0:x1].copy()
+    reg_g = page_arr(p)[280:900, x0:x1].copy()
+    erase_vruns(reg_g, max(sol_meta(p)['left'][col] - x0 - 6, 0))
+    reg = reg_g < INK
     tx0, tx1 = max(980 - x0, 0), max(1640 - x0, 0)
     reg[:66, tx0:tx1] = False
     best = None
@@ -410,11 +471,12 @@ def text_top(p, col):
 
 
 def col_end(p, col):
-    a = page_arr(p) < INK
     m = sol_meta(p)
     x0, x1 = sol_xrange(p, col)
     lim = footer_top(p) - 30
-    reg = a[m['rule'] + 12:lim, x0:x1]
+    reg_g = page_arr(p)[m['rule'] + 12:lim, x0:x1].copy()
+    erase_vruns(reg_g, max(m['left'][col] - x0 - 6, 0))
+    reg = reg_g < INK
     rows = np.where(reg.sum(axis=1) >= 3)[0]
     return int(rows.max() + m['rule'] + 12 + 1)
 
@@ -431,7 +493,16 @@ def seg(p, col, start, end):
         y1 = end[1]
     x0, x1 = sol_xrange(p, col)
     erase = [(980, 0, 1640, 346)] if (start == 'top' and y0 < 350) else None
-    return grab(p, (x0, y0, x1, y1), strip_rules=False, trim_x=False, erase=erase, strip_top=True)
+    SEG_INFO.setdefault(_cur_seg[0], []).append((p, col, int(y0), int(y1)))
+    off = m['left'][col] - x0
+    img = grab(p, (x0, y0, x1, y1), strip_rules=False, trim_x=False, erase=erase, strip_top=True, erase_vcols=max(off - 6, 0))
+    if off < SEG_PAD:
+        padded = Image.new('L', (img.width + SEG_PAD - off, img.height), 255)
+        padded.paste(img, (SEG_PAD - off, 0))
+        img = padded
+    # 본문 가장자리에서 10px 이상 왼쪽은 단 구분선 잔상뿐이므로 모두 흰색으로
+    arr = np.asarray(img).copy(); arr[:, :SEG_PAD - 10] = 255
+    return Image.fromarray(arr)
 
 
 SOLS = {
@@ -454,8 +525,12 @@ SOLS = {
 _segcache = {}
 
 
+_cur_seg = [None]
+
+
 def sol_segments(name):
     if name not in _segcache:
+        _cur_seg[0] = name
         _segcache[name] = [seg(*s) for s in SOLS[name]]
         for i, im in enumerate(_segcache[name]):
             im.save(f'{SP}/crops/sol_{name}_{i}.png')
@@ -517,7 +592,7 @@ def answer_table(S, width):
                     continue
                 n, ans = cell
                 ni = text_img(str(n), F_SERIF_I, 44); paste(im, ni, j * 2 * cw + (cw - ni.width) // 2, yy + (cell_h - ni.height) // 2)
-                ai = text_img(ans, F_GOTHIC if not ans.isdigit() else F_SERIF, 42); paste(im, ai, (j * 2 + 1) * cw + (cw - ai.width) // 2, yy + (cell_h - ai.height) // 2)
+                ai = text_img(ans, F_SERIF if (ans.isascii() and ans.isdigit()) else F_GOTHIC, 42); paste(im, ai, (j * 2 + 1) * cw + (cw - ai.width) // 2, yy + (cell_h - ai.height) // 2)
             yy += cell_h
         y += h + 40
     note1 = text_img('※ 강대모의고사K 31회에서 4점 문항만 발췌(22·30번 제외)한 60분 편집본', F_GOTHIC, 30)
@@ -579,12 +654,12 @@ def build_solutions(key):
         else:
             state['y'] = state['top']
 
-    def put(img, gap):
+    def put(img, gap, tag=None):
         while True:
             y = state['y'] + (gap if state['y'] > state['top'] else 0)
             avail = SOL_BOTTOM - y
             if img.height <= avail:
-                state['page']['placed'].append(('LR'[state['col']], SOL_COL_X['LR'[state['col']]] - 12, y, img))
+                state['page']['placed'].append(('LR'[state['col']], SOL_COL_X['LR'[state['col']]] - SEG_PAD, y, img))
                 state['y'] = y + img.height
                 return
             cut = find_cut(img, avail)
@@ -593,7 +668,8 @@ def build_solutions(key):
                     raise RuntimeError(f'segment too tall for a column: {img.height}')
                 advance(); gap = 0; continue
             top_part = img.crop((0, 0, img.width, cut))
-            state['page']['placed'].append(('LR'[state['col']], SOL_COL_X['LR'[state['col']]] - 12, y, top_part))
+            SPLIT_LOG.append((tag, int(cut), len(pages), 'LR'[state['col']], int(y)))
+            state['page']['placed'].append(('LR'[state['col']], SOL_COL_X['LR'[state['col']]] - SEG_PAD, y, top_part))
             img = trim_top(img.crop((0, cut, img.width, img.height)))
             advance(); gap = 0
 
@@ -602,11 +678,11 @@ def build_solutions(key):
         if kind == 'label':
             lab = v
             # 라벨은 단 중앙 정렬: 폭 1125 기준으로 가운데 배치된 이미지로 감싼다
-            wrap = Image.new('L', (SOL_COL_W, lab.height), 255); paste(wrap, lab, (SOL_COL_W - lab.width) // 2, 0)
+            wrap = Image.new('L', (SEG_PAD + 1100, lab.height), 255); paste(wrap, lab, SEG_PAD + (1100 - lab.width) // 2, 0)
             put(wrap, 70)
         else:
             for i, s in enumerate(sol_segments(v)):
-                put(s, 70 if i == 0 else 28)
+                put(s, 70 if i == 0 else 28, tag=(v, i))
     total = len(pages)
     return [render_sol_page(pg['placed'], pg['first'], i + 1, total, S) for i, pg in enumerate(pages)]
 
