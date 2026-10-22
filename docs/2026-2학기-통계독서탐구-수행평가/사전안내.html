@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>통계독서탐구 미리 안내</title>
+<meta name="description" content="2학년 확률과 통계 수행평가 통계독서탐구: 보고서를 쓰는 날(10월 30일)까지 학생이 준비할 것 1쪽">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --ink: #1b211d; --muted: #6b6759; --rule: #b9b4a6; --rule-soft: #dcd8cc; --fill: #f3f1ea;
+    --accent: #2f5d50; --accent-soft: #e1ebe5; --ans: #1c5cab; --ans-soft: #eaf2fc;
+    --sans: "Noto Sans KR", "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #e6e4dc; color: var(--ink); font-family: var(--sans); font-size: 10.5pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .toolbar { position: sticky; top: 0; z-index: 2; background: #fff; border-bottom: 1px solid var(--rule-soft); padding: 8px 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 10pt; }
+  .toolbar button { font: inherit; padding: 6px 14px; border: 1px solid var(--accent); background: var(--accent); color: #fff; border-radius: 4px; cursor: pointer; }
+  .toolbar span { color: var(--muted); }
+  .page { background: #fff; width: 210mm; min-height: 297mm; margin: 10mm auto; padding: 11mm 15mm 10mm; box-shadow: 0 1px 6px rgba(0,0,0,.18); position: relative; }
+  .page::after { content: attr(data-foot); position: absolute; left: 15mm; right: 15mm; bottom: 5mm; font-size: 8pt; color: var(--muted); }
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; }
+    .toolbar { display: none; }
+    .page { width: 210mm; min-height: 297mm; margin: 0; box-shadow: none; page-break-after: always; break-after: page; }
+    .page:last-child { page-break-after: auto; break-after: auto; }
+  }
+
+  h1 { font-size: 19pt; margin: 1.5mm 0 1mm; letter-spacing: -0.02em; line-height: 1.25; }
+  h2 { font-size: 12pt; margin: 3.5mm 0 1.5mm; display: flex; align-items: center; gap: 2mm; line-height: 1.3; }
+  h2.plain { padding-left: 2.5mm; border-left: 3px solid var(--accent); }
+  h3 { font-size: 10.5pt; margin: 2.5mm 0 1mm; }
+  p { margin: 0 0 1.5mm; }
+  .kicker { font-size: 9pt; color: var(--muted); letter-spacing: 0.04em; }
+  .meta { font-size: 9.5pt; color: var(--muted); margin-bottom: 1.5mm; }
+  .hdr { border-bottom: 2px solid var(--ink); padding-bottom: 1.5mm; margin-bottom: 1mm; display: flex; justify-content: space-between; align-items: flex-end; gap: 4mm; }
+  .hdr .right { font-size: 9.5pt; color: var(--muted); text-align: right; white-space: nowrap; padding-bottom: 1.5mm; }
+  .note { font-size: 9.5pt; color: var(--muted); }
+  .small { font-size: 9pt; }
+  .lead { font-size: 11.5pt; font-weight: 500; margin: 1.5mm 0 1mm; }
+  ul.tight { margin: 0 0 1mm; padding-left: 4.5mm; }
+  ul.tight li { margin-bottom: 0.8mm; }
+  .chip { display: inline-flex; align-items: center; justify-content: center; width: 5.6mm; height: 5.6mm; border-radius: 50%; background: var(--accent); color: #fff; font-size: 9.5pt; font-weight: 700; flex: none; line-height: 1; }
+  .chip.sm { width: 4.6mm; height: 4.6mm; font-size: 8pt; vertical-align: -0.9mm; }
+  .score { margin-left: auto; font-size: 9.5pt; color: var(--muted); font-weight: 400; }
+  .ok { display: inline-block; border: 1px solid var(--accent); color: var(--accent); border-radius: 2px; font-size: 8pt; padding: 0 1.2mm; line-height: 1.5; vertical-align: 0.3mm; margin-right: 1mm; }
+  .ans { color: var(--ans); font-weight: 500; }
+  .memo { font-size: 8.8pt; color: var(--accent); background: var(--accent-soft); padding: 1mm 2mm; margin-top: 1.2mm; border-radius: 2px; }
+  .memo b { font-weight: 700; }
+
+  table.grid { width: 100%; border-collapse: collapse; margin: 1mm 0 2mm; font-size: 9.5pt; }
+  table.grid th, table.grid td { border: 1px solid var(--rule); padding: 1.2mm 2mm; vertical-align: top; text-align: left; }
+  table.grid th { background: var(--fill); font-weight: 500; white-space: nowrap; }
+  table.grid td.c, table.grid th.c { text-align: center; }
+  table.grid td.num, table.grid th.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  table.grid.ansg td.num { color: var(--ans); font-weight: 500; }
+
+  .box { border: 1px solid var(--ink); padding: 2mm 2.5mm; margin: 1mm 0 2mm; }
+  .box .label { font-size: 9.5pt; margin-bottom: 1mm; }
+  .box .label b { font-weight: 500; }
+  .box.soft { border-color: var(--rule); }
+  .box.fillbg { background: var(--fill); }
+  .line { border-bottom: 1px solid var(--rule); height: 7mm; }
+  .line.first { margin-top: 0.5mm; }
+  .blank { display: inline-block; border-bottom: 1px solid var(--ink); min-width: 28mm; height: 5mm; vertical-align: bottom; margin: 0 1mm; }
+  .chk { display: inline-block; width: 3.4mm; height: 3.4mm; border: 1px solid var(--ink); vertical-align: -0.5mm; margin-right: 1.2mm; border-radius: 0.5mm; }
+  .chk.on { background: var(--ans); border-color: var(--ans); }
+  .form-table { width: 100%; border-collapse: collapse; margin-top: 1mm; }
+  .form-table td { border: 1px solid var(--rule); height: 7.5mm; padding: 0 1.5mm; font-size: 9pt; color: var(--muted); }
+  .form-table tr:first-child td { background: var(--fill); }
+  .canvas { border: 1px dashed var(--rule); height: 52mm; margin-top: 1mm; position: relative; }
+  .canvas .hint { position: absolute; right: 2mm; bottom: 1mm; font-size: 8.5pt; color: var(--muted); }
+  .teacher { border: 1px solid var(--ink); background: var(--fill); padding: 1.5mm 2.5mm; font-size: 9pt; margin-top: 2mm; }
+  .teacher b { font-weight: 500; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; align-items: start; }
+  .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; align-items: stretch; }
+
+  /* spine & flow */
+  table.spine { width: 100%; border-collapse: collapse; font-size: 9.3pt; margin: 1mm 0 1.5mm; }
+  table.spine th, table.spine td { border: 1px solid var(--rule); padding: 1.3mm 2mm; vertical-align: top; }
+  table.spine th { background: var(--fill); font-weight: 500; text-align: left; }
+  table.spine th.hd { background: var(--accent-soft); color: var(--accent); text-align: center; }
+  table.spine td.first { white-space: nowrap; font-weight: 500; }
+  .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 2mm; align-items: stretch; margin: 1mm 0 2mm; }
+  .flow .step { border: 1px solid var(--accent); border-radius: 2px; padding: 2mm 2.5mm; font-size: 9.5pt; }
+  .flow .step .t { font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 1.5mm; margin-bottom: 0.8mm; }
+  .flow .step .d { color: var(--muted); font-size: 9pt; margin-bottom: 0.8mm; }
+  .flow .arrow { align-self: center; color: var(--accent); font-size: 14pt; }
+  .steps { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+  .steps td { border-bottom: 1px solid var(--rule-soft); padding: 1.6mm 1.5mm; vertical-align: top; }
+  .steps td.n { width: 8mm; padding-left: 0; }
+  .steps td.w { width: 34mm; color: var(--accent); font-weight: 500; }
+  .steps b { font-weight: 700; }
+  .timebar { display: grid; grid-template-columns: 1fr 2fr 2fr 1fr; gap: 1mm; margin: 1mm 0 1.5mm; font-size: 9pt; }
+  .timebar div { background: var(--accent-soft); color: var(--accent); padding: 1mm 1.5mm; border-radius: 2px; text-align: center; }
+  .timebar div b { display: block; font-size: 10pt; }
+
+  /* charts */
+  .chart { font-family: var(--sans); display: block; }
+  .chart .grid-line { stroke: #e1e0d9; stroke-width: 1; }
+  .chart .baseline { stroke: #c3c2b7; stroke-width: 1; }
+  .chart .tick { fill: #52514e; font-size: 8.5px; }
+  .chart .series { fill: none; stroke: #2a78d6; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .chart .dot { fill: #2a78d6; stroke: #ffffff; stroke-width: 2; }
+  .chart .bar { fill: #2a78d6; }
+  .chart .vlabel { fill: #1b211d; font-size: 9px; font-weight: 500; }
+  .chart .ctitle { fill: #1b211d; font-size: 9.5px; font-weight: 500; }
+
+  .compact { font-size: 9.8pt; }
+  .compact .hdr { padding-bottom: 1mm; }
+  .compact h1 { font-size: 17pt; }
+  .compact h2 { margin: 2.5mm 0 1.2mm; }
+  .compact .box { margin: 1mm 0 1.5mm; padding: 1.6mm 2.5mm; }
+  .compact .memo { font-size: 8.5pt; }
+  .compact p { margin: 0 0 1mm; }
+
+  /* slide wireframes */
+  .wire { border: 1px solid var(--rule); border-radius: 1.5mm; padding: 2mm 2.5mm; font-size: 8.8pt; min-height: 40mm; background: #fff; }
+  .wire .wt { font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 1.5mm; margin-bottom: 1mm; }
+  .wire .wb { background: var(--fill); border-radius: 1mm; padding: 1mm 1.5mm; margin-bottom: 1mm; }
+  .wire .wb.dash { background: #fff; border: 1px dashed var(--rule); color: var(--muted); text-align: center; }
+  .script td { vertical-align: top; padding: 1.3mm 1.5mm; border-bottom: 1px solid var(--rule-soft); font-size: 9.5pt; }
+  .script td.t { width: 22mm; color: var(--accent); font-weight: 700; white-space: nowrap; }
+
+  /* roster */
+  table.roster { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 1.5mm; }
+  table.roster th, table.roster td { border: 1px solid var(--rule); padding: 0 0.8mm; text-align: center; height: 5.8mm; }
+  table.roster th { background: var(--fill); font-weight: 500; height: 5mm; line-height: 1.2; }
+  table.roster th.grp { background: var(--accent-soft); }
+  table.roster td.name { width: 19mm; }
+  table.roster td.memo-c { width: 17mm; }
+  table.roster .sum { background: #fafaf7; }
+
+  .form h2 { margin: 2.4mm 0 1mm; }
+  .form .box { margin: 0.6mm 0 1.6mm; padding: 1.6mm 2.5mm; }
+  .form .box .label { margin-bottom: 0.6mm; }
+  .ruled { font-size: 10pt; line-height: 8mm; min-height: 32mm; margin: 0; color: var(--ans); font-weight: 500; text-align: justify;
+           background: repeating-linear-gradient(to bottom, transparent 0, transparent 7.7mm, var(--rule) 7.7mm, var(--rule) 8mm); }
+  .refline { font-size: 9.5pt; line-height: 8mm; height: 8mm; color: var(--ans); font-weight: 500; border-bottom: 1px solid var(--rule); white-space: nowrap; overflow: hidden; }
+  .form-table td { height: var(--rowh, 7mm); }
+  .cap { font-size: 9pt; color: var(--muted); text-align: center; margin: 1mm 0 0.5mm; }
+  table.rtab { font-size: 9pt; }
+  table.rtab th { font-weight: 500; }
+  table.rtab td { padding: 0.7mm 1.8mm; }
+  table.rtab td:first-child, table.rtab th { white-space: nowrap; }
+  .figsvg { padding: 0 1mm; }
+  .figsvg svg { width: 94%; margin: 0 auto; }
+</style>
+</head>
+<body>
+<div class="toolbar"><button type="button" onclick="window.print()">A4로 인쇄</button><span>1쪽. 보고서 쓰는 날 1주 전에 나눠 주거나 화면으로 보여 줍니다.</span></div>
+
+<section class="page" style="padding:9mm 15mm 9mm" data-foot="통계독서탐구 미리 안내 · 10월 30일(금)까지 준비할 것">
+  <div class="hdr">
+    <div><div class="kicker">2026학년도 2학기 · 2학년 확률과 통계 · 수행평가 〈통계독서탐구〉</div><h1>미리 안내: 10월 30일(금)까지 준비할 것</h1></div>
+    <div class="right">100점 · 반영 30%<br>보고서 2쪽 + PPT 4장 발표</div>
+  </div>
+  <p class="lead">책 한 권을 참고해 주장을 정하고, 실제 통계로 표 2개와 그래프 1개를 만들어 보고서에 쓰고 PPT 4장으로 발표합니다.</p>
+  <p>30일(금) 수업 시간에 보고서 양식을 받아 그 자리에서 쓰므로, 아래 여섯 가지를 집에서 준비해 옵니다.</p>
+  <h2 class="plain">준비해 올 것 여섯 가지</h2>
+  <table class="grid" style="font-size:9.5pt">
+    <tr><th style="width:8mm"></th><th style="width:40mm">준비할 것</th><th>이렇게</th><th style="width:10mm" class="c">확인</th></tr>
+    <tr><td class="c"><span class="chip sm">1</span></td><td><b>주장 한 문장 + 제목 키워드</b></td><td>진로·관심과 이어지는 주제로 "~이 해마다 늘고 있다, 그래서 ~해야 한다" 꼴 한 문장. 제목은 키워드로 짧게(예: 고등학생 아침 결식 증가와 잠·학습)</td><td class="c"><span class="chk"></span></td></tr><tr><td class="c"><span class="chip sm">2</span></td><td><b>책 1권</b></td><td>주장을 정하거나 통계를 읽는 데 도움이 된 책. 도서명·저자와 "이 책을 어떻게 썼는지" 한두 문장. 다 읽지 않아도 됨</td><td class="c"><span class="chk"></span></td></tr><tr><td class="c"><span class="chip sm">3</span></td><td><b>가공 전 표 (원자료)</b></td><td>국가통계 누리집에서 연도별 숫자가 3개 이상 있는 표를 찾아 캡처 또는 출력. 기관 이름·조사 이름·링크 메모. 전수조사인지 표본조사인지 "통계설명자료"에서 확인</td><td class="c"><span class="chk"></span></td></tr><tr><td class="c"><span class="chip sm">4</span></td><td><b>가공한 표</b></td><td>원자료에서 필요한 행·열만 3~8개 골라 다시 만든 표. 단위 바꾸기, 늘어난 양·비율을 계산한 열을 넣으면 더 좋음</td><td class="c"><span class="chk"></span></td></tr><tr><td class="c"><span class="chip sm">5</span></td><td><b>그래프 1개</b></td><td>가공한 표를 그래프로. 시간 변화는 꺾은선, 크기 비교는 막대. 세로축 0부터, 제목과 단위. 손그림 또는 엑셀 출력</td><td class="c"><span class="chk"></span></td></tr><tr><td class="c"><span class="chip sm">6</span></td><td><b>참고 링크</b></td><td>쓴 자료의 누리집 주소를 모두 메모</td><td class="c"><span class="chk"></span></td></tr>
+  </table>
+  <h2 class="plain">자료는 어디서</h2>
+  <p style="font-size:9.5pt;margin:0 0 1mm"><b>KOSIS 국가통계포털</b> kosis.kr (거의 모든 국가통계, 표마다 통계설명자료) · <b>e-나라지표</b> index.go.kr (주요 지표의 연도별 표·그래프, 처음이면 여기부터) · <b>교육통계서비스</b> kess.kedi.re.kr (학생 수) · <b>청소년건강행태조사</b> kdca.go.kr/yhs (아침 식사·수면·신체활동) · <b>국토교통 통계누리</b> stat.molit.go.kr (자동차·주택) · <b>한국은행 ECOS</b> ecos.bok.or.kr (물가·금리·환율) · <b>문화셈터</b> stat.mcst.go.kr (독서·여가·체육) · <b>기상자료개방포털</b> data.kma.go.kr (기온·강수)</p>
+  <p class="note">진로별 예: 간호·보건 → 청소년건강행태조사, 국민건강영양조사 · 공학 → 자동차 등록현황, 에너지 통계 · 교육 → 교육기본통계 · 경제·경영 → ECOS, 고용노동통계 · 체육·예술 → 문화셈터 · 환경 → 기상자료개방포털. 전체 목록은 '통계 자료를 얻을 수 있는 사이트 모음'</p>
+  <h2 class="plain">꼭 지킬 것</h2>
+  <table class="grid" style="font-size:9.5pt">
+    <tr><td style="width:30mm"><b>실제 통계만</b></td><td>출처(기관 이름·조사 이름·링크)가 있는 실제 통계만. 뉴스 그래프 캡처만 쓰거나 출처를 '네이버·구글'로 적으면 안 됨</td></tr>
+    <tr><td><b>AI</b></td><td>자료 검색과 전문 자료 요약에만. 표·그래프·해석·결론을 AI로 쓰면 그 요소는 최하점. 발표 뒤 선생님 질문 1개</td></tr>
+    <tr><td><b>짧게, 핵심만</b></td><td>보고서는 칸마다 핵심만 4줄 안(음슴체 가능). 제목은 키워드. 표·그래프에는 제목과 단위</td></tr>
+    <tr><td><b>발표에서 말할 것</b></td><td>도서·저자, 책을 어떻게 썼나, 출처, 전수/표본, 가공 전·후, 그래프, 숫자의 변화, 의견과 근거를 모두 말함. 체크리스트로 채점. PPT 자체는 점수 없음</td></tr>
+  </table>
+  <h2 class="plain">일정과 점수</h2>
+  <div class="timebar" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2mm;font-size:9.5pt">
+    <div>~10/29(목) 집에서 준비</div><div>10/30(금) 수업 시간에 보고서 작성·제출</div><div>11월 ___일 PPT 4장 만들기</div><div>11월 ___일 발표 (1인 2분)</div>
+  </div>
+  <p class="note" style="margin-top:1.5mm">점수: 도서 20 · 통계자료 만들기 30 · 통계자료 해석 30 · 결론 발표 20 = 100점. 자세한 기준과 작성 예시는 보고서 양식과 함께 30일에 나눠 줍니다.</p>
+</section>
+</body>
+</html>
