@@ -1,0 +1,91 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>예약 신청 흐름</title>
+<style>
+/*FONTS*/
+@page{size:A4;margin:12mm 13mm 13mm 13mm}
+html{font-family:'Noto Sans KR','Noto Color Emoji',sans-serif;font-size:10.3pt;line-height:1.5;color:#111;word-break:keep-all;overflow-wrap:anywhere}
+body{margin:0}
+h1{font-size:16pt;margin:0 0 2pt;line-height:1.3}
+.sub{color:#555;font-size:8.8pt;margin:0 0 8pt}
+.legend{display:flex;gap:10pt;font-size:9.2pt;margin-bottom:9pt}
+.legend span{display:inline-flex;align-items:center;gap:4pt}
+.legend i{display:inline-block;width:11pt;height:11pt;border-radius:2pt;border:1px solid #999}
+.flow{width:176mm;margin:0 auto}
+.node{border:1.3px solid #777;border-radius:5pt;padding:5pt 8pt 6pt;background:#fff;page-break-inside:avoid}
+.node .tag{display:inline-block;font-size:8pt;font-weight:700;padding:0 5pt;border-radius:3pt;margin-right:5pt;vertical-align:1px;color:#fff}
+.node .title{font-weight:700;font-size:11pt}
+.node ul{margin:3pt 0 0;padding-left:14pt}
+.node li{margin:1pt 0}
+.guest{border-color:#2f6db5;background:#eef4fb}.guest .tag{background:#2f6db5}
+.auto{border-color:#777;background:#f3f3f3}.auto .tag{background:#666}
+.owner{border-color:#d2691e;background:#fdf1e7}.owner .tag{background:#d2691e}
+.decide{border-color:#b8960c;background:#fff8d6;text-align:center}.decide .tag{background:#b8960c}
+.end{border-style:dashed;background:#fafafa;text-align:center;color:#444}
+.arrow{width:0;height:14pt;border-left:1.6px solid #555;margin:0 auto;position:relative}
+.arrow::after{content:'';position:absolute;left:-5.5px;bottom:-1px;border:5px solid transparent;border-top:7px solid #555}
+.arrow.tall{height:18pt}
+.note{font-size:9pt;color:#444;margin:2pt 0 0}
+.y{background:#fff3b0;border-radius:3pt;padding:0 3pt}
+/* 갈래 */
+.fork{position:relative;height:16pt;margin:0 auto;width:60%}
+.fork::before{content:'';position:absolute;left:50%;top:0;height:7pt;border-left:1.6px solid #555}
+.fork::after{content:'';position:absolute;left:0;right:0;top:7pt;border-top:1.6px solid #555}
+.fork i{position:absolute;top:7pt;height:9pt;border-left:1.6px solid #555}
+.fork i::after{content:'';position:absolute;left:-5.5px;bottom:-1px;border:5px solid transparent;border-top:7px solid #555}
+.fork i.l{left:0}.fork i.r{right:0;margin-right:-1.6px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10pt;align-items:start}
+.pill{display:inline-block;font-size:8pt;font-weight:700;padding:0 6pt;border-radius:8pt;background:#555;color:#fff;margin-bottom:3pt}
+.arrow.left{margin:0 0 0 calc(25% - 1px)}.arrow.right{margin:0 0 0 calc(75% - 1px)}
+.spacer{height:4pt}
+.fork2::before{left:auto;right:-1.6px}
+</style></head><body>
+<h1>쁘띠레코드 예약 신청 흐름 — 신청부터 입금 대기까지</h1>
+<p class="sub">2026-10-23 · 🟡 = 아직 확인·구현이 남은 것</p>
+<div class="legend"><span><i style="background:#eef4fb;border-color:#2f6db5"></i>손님이 하는 일</span><span><i style="background:#f3f3f3"></i>자동으로 되는 일</span><span><i style="background:#fdf1e7;border-color:#d2691e"></i>대표가 하는 일</span><span><i style="background:#fff8d6;border-color:#b8960c"></i>판단</span></div>
+
+<div class="flow">
+<div class="node guest"><span class="tag">손님</span><span class="title">인스타 · 카톡 · 당근 · 블로그 → 네이버 예약 링크</span>
+<ul><li>전화 손님만 ▶ <b>대표</b>가 네이버에 직접 등록</li></ul></div>
+<div class="arrow"></div>
+
+<div class="node guest"><span class="tag">손님</span><span class="title">상품 선택</span>
+<ul><li><b>베이직 13만</b> — 4명 · 2시간, 30분 단위로 최대 4시간 · 30분 25,000</li>
+<li><b>패밀리 27만</b> — 8명 · 4시간, 최대 8시간 · 30분 25,000</li>
+<li>추가 인원 베이직 15,000 / 패밀리 12,000 (최대 15명)</li></ul></div>
+<div class="arrow"></div>
+
+<div class="node guest"><span class="tag">손님</span><span class="title">날짜 · 시작 시간 선택 → 추가 질문</span>
+<ul><li>① 방문 총인원 (필수)</li><li>② 기념일 종류 (필수: 백일 · 돌 · 생일 · 칠순 · 환갑 · 가족사진 · 기타)</li><li>③ 아기 이름 (선택)</li></ul></div>
+<div class="arrow"></div>
+
+<div class="node guest"><span class="tag">손님</span><span class="title">[신청] — 결제 없음</span></div>
+
+<div class="fork"><i class="l"></i><i class="r"></i></div>
+<div class="cols">
+  <div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">네이버 "신청 접수" 알림 → 손님</span>
+    <ul><li>입금액(이용료 + 보증금 5만) · KB 계좌 · <b>3시간 기한</b></li><li>22시 이후 신청 → 다음 날 10시</li><li>입금자명 = 예약자명 · 다른 이름이면 채널로 알려 달라</li></ul>
+    <p class="note"><span class="y">🟡</span> 문구 넣기가 안 되면 ▶ <b>⓪ 예약 접수 알림톡</b>으로 대신</p></div>
+    <div class="arrow"></div>
+    <div class="node end">손님은 3시간 안에 입금 → 다음 단계(입금 확인)로</div>
+  </div>
+  <div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">스마트플레이스 "새 예약 신청" 푸시 → 대표</span></div>
+    <div class="arrow tall"></div>
+    <div class="node decide"><span class="tag">판단</span><span class="title">대표: 겹치는 예약 있나?</span></div>
+  </div>
+</div>
+<div class="fork fork2" style="width:50%;margin-left:25%"><i class="l"></i><i class="r"></i></div>
+<div class="cols">
+  <div><span class="pill">있음</span>
+    <div class="node owner"><span class="tag">대표</span><span class="title">네이버 [거절]</span></div>
+    <div class="arrow"></div><div class="node end">끝</div></div>
+  <div><span class="pill">없음</span>
+    <div class="node owner"><span class="tag">대표</span><span class="title">시트에 3칸 입력</span>
+    <ul><li>이름 · 전화 · 받을 금액</li><li>상태 = <b>신청</b></li><li>이때 손님에게 나가는 알림톡 없음</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">시트가 입력 시각 기록 → 3시간 타이머</span>
+    <p class="note"><span class="y">🟡</span> 스크립트 추가 필요</p></div>
+  </div>
+</div>
+</div>
+</body></html>
