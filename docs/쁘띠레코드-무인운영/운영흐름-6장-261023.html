@@ -1,0 +1,293 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>쁘띠레코드 운영 흐름 6장</title>
+<style>
+/*FONTS*/
+@page{size:A4;margin:12mm 13mm 13mm 13mm}
+html{font-family:'Noto Sans KR','Noto Color Emoji',sans-serif;font-size:10.3pt;line-height:1.5;color:#111;word-break:keep-all;overflow-wrap:anywhere}
+body{margin:0}
+h1{font-size:16pt;margin:0 0 2pt;line-height:1.3}
+.sub{color:#555;font-size:8.8pt;margin:0 0 8pt}
+.legend{display:flex;gap:10pt;font-size:9.2pt;margin-bottom:9pt}
+.legend span{display:inline-flex;align-items:center;gap:4pt}
+.legend i{display:inline-block;width:11pt;height:11pt;border-radius:2pt;border:1px solid #999}
+.flow{width:176mm;margin:0 auto}
+.node{border:1.3px solid #777;border-radius:5pt;padding:5pt 8pt 6pt;background:#fff;page-break-inside:avoid}
+.node .tag{display:inline-block;font-size:8pt;font-weight:700;padding:0 5pt;border-radius:3pt;margin-right:5pt;vertical-align:1px;color:#fff}
+.node .title{font-weight:700;font-size:11pt}
+.node ul{margin:3pt 0 0;padding-left:14pt}
+.node li{margin:1pt 0}
+.guest{border-color:#2f6db5;background:#eef4fb}.guest .tag{background:#2f6db5}
+.auto{border-color:#777;background:#f3f3f3}.auto .tag{background:#666}
+.owner{border-color:#d2691e;background:#fdf1e7}.owner .tag{background:#d2691e}
+.decide{border-color:#b8960c;background:#fff8d6;text-align:center}.decide .tag{background:#b8960c}
+.end{border-style:dashed;background:#fafafa;text-align:center;color:#444}
+.arrow{width:0;height:14pt;border-left:1.6px solid #555;margin:0 auto;position:relative}
+.arrow::after{content:'';position:absolute;left:-5.5px;bottom:-1px;border:5px solid transparent;border-top:7px solid #555}
+.arrow.tall{height:18pt}
+.note{font-size:9pt;color:#444;margin:2pt 0 0}
+.y{background:#fff3b0;border-radius:3pt;padding:0 3pt}
+/* 갈래 */
+.fork{position:relative;height:16pt;margin:0 auto;width:60%}
+.fork::before{content:'';position:absolute;left:50%;top:0;height:7pt;border-left:1.6px solid #555}
+.fork::after{content:'';position:absolute;left:0;right:0;top:7pt;border-top:1.6px solid #555}
+.fork i{position:absolute;top:7pt;height:9pt;border-left:1.6px solid #555}
+.fork i::after{content:'';position:absolute;left:-5.5px;bottom:-1px;border:5px solid transparent;border-top:7px solid #555}
+.fork i.l{left:0}.fork i.r{right:0;margin-right:-1.6px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10pt;align-items:start}
+.pill{display:inline-block;font-size:8pt;font-weight:700;padding:0 6pt;border-radius:8pt;background:#555;color:#fff;margin-bottom:3pt}
+.arrow.left{margin:0 0 0 calc(25% - 1px)}.arrow.right{margin:0 0 0 calc(75% - 1px)}
+.spacer{height:4pt}
+.fork2::before{left:auto;right:-1.6px}
+
+.page{page-break-after:always}
+.page:last-child{page-break-after:auto}
+h1 small{display:inline-block;font-size:9.5pt;font-weight:700;color:#fff;background:#333;border-radius:3pt;padding:1pt 6pt;margin-right:7pt;vertical-align:3px}
+.node table{border-collapse:collapse;width:100%;margin:4pt 0 0;font-size:9.2pt}
+.node th,.node td{border:1px solid #bbb;padding:2pt 5pt;text-align:left;vertical-align:top;background:#fff}
+.node th{background:#eee}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:9pt}
+.card{border:1.3px solid #777;border-radius:5pt;padding:6pt 9pt 7pt;background:#fff;page-break-inside:avoid}
+.card h3{margin:0 0 3pt;font-size:11pt}
+.card ol,.card ul{margin:2pt 0 0;padding-left:15pt}
+.card li{margin:1.5pt 0}
+.c-morning{border-color:#2f6db5;background:#eef4fb}.c-day{border-color:#777;background:#f3f3f3}.c-night{border-color:#d2691e;background:#fdf1e7}.c-week{border-color:#5a9a5a;background:#eef7ee}.c-month{border-color:#8060b0;background:#f3eefa}.c-backup{border-color:#b8960c;background:#fff8d6}
+.wide{grid-column:1 / -1}
+.r{color:#b00020;font-weight:700}
+.compact{font-size:9.7pt;line-height:1.42}
+.compact .node{padding:4pt 7pt 5pt}
+.compact .arrow{height:11pt}
+.compact .node .title{font-size:10.4pt}
+</style></head><body>
+<div class="page">
+<h1><small>1 / 6</small> 신청 → 입금 대기</h1>
+<p class="sub">쁘띠레코드 운영 흐름 · 2026-10-23 · 🟡 = 아직 확인·구현이 남은 것 · 🔴 = 꼭 지킬 것</p>
+<div class="legend"><span><i style="background:#eef4fb;border-color:#2f6db5"></i>손님이 하는 일</span><span><i style="background:#f3f3f3"></i>자동으로 되는 일</span><span><i style="background:#fdf1e7;border-color:#d2691e"></i>대표가 하는 일</span><span><i style="background:#fff8d6;border-color:#b8960c"></i>판단</span></div>
+
+<div class="flow">
+<div class="node guest"><span class="tag">손님</span><span class="title">인스타 · 카톡 · 당근 · 블로그 → 네이버 예약 링크</span>
+<ul><li>전화 손님만 ▶ <b>대표</b>가 네이버에 직접 등록</li></ul></div>
+<div class="arrow"></div>
+
+<div class="node guest"><span class="tag">손님</span><span class="title">상품 선택</span>
+<ul><li><b>베이직 13만</b> — 4명 · 2시간, 30분 단위로 최대 4시간 · 30분 25,000</li>
+<li><b>패밀리 27만</b> — 8명 · 4시간, 최대 8시간 · 30분 25,000</li>
+<li>추가 인원 베이직 15,000 / 패밀리 12,000 (최대 15명)</li></ul></div>
+<div class="arrow"></div>
+
+<div class="node guest"><span class="tag">손님</span><span class="title">날짜 · 시작 시간 선택 → 추가 질문</span>
+<ul><li>① 방문 총인원 (필수)</li><li>② 기념일 종류 (필수: 백일 · 돌 · 생일 · 칠순 · 환갑 · 가족사진 · 기타)</li><li>③ 아기 이름 (선택)</li></ul></div>
+<div class="arrow"></div>
+
+<div class="node guest"><span class="tag">손님</span><span class="title">[신청] — 결제 없음</span></div>
+
+<div class="fork"><i class="l"></i><i class="r"></i></div>
+<div class="cols">
+  <div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">네이버 "신청 접수" 알림 → 손님</span>
+    <ul><li>입금액(이용료 + 보증금 5만) · KB 계좌 · <b>3시간 기한</b></li><li>22시 이후 신청 → 다음 날 10시</li><li>입금자명 = 예약자명 · 다른 이름이면 채널로 알려 달라</li></ul>
+    <p class="note"><span class="y">🟡</span> 문구 넣기가 안 되면 ▶ <b>⓪ 예약 접수 알림톡</b>으로 대신</p></div>
+    <div class="arrow"></div>
+    <div class="node end">손님은 3시간 안에 입금 → 다음 단계(입금 확인)로</div>
+  </div>
+  <div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">스마트플레이스 "새 예약 신청" 푸시 → 대표</span></div>
+    <div class="arrow tall"></div>
+    <div class="node decide"><span class="tag">판단</span><span class="title">대표: 겹치는 예약 있나?</span></div>
+  </div>
+</div>
+<div class="fork fork2" style="width:50%;margin-left:25%"><i class="l"></i><i class="r"></i></div>
+<div class="cols">
+  <div><span class="pill">있음</span>
+    <div class="node owner"><span class="tag">대표</span><span class="title">네이버 [거절]</span></div>
+    <div class="arrow"></div><div class="node end">끝</div></div>
+  <div><span class="pill">없음</span>
+    <div class="node owner"><span class="tag">대표</span><span class="title">시트에 3칸 입력</span>
+    <ul><li>이름 · 전화 · 받을 금액</li><li>상태 = <b>신청</b></li><li>이때 손님에게 나가는 알림톡 없음</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">시트가 입력 시각 기록 → 3시간 타이머</span>
+    <p class="note"><span class="y">🟡</span> 스크립트 추가 필요</p></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="page">
+<h1><small>2 / 6</small> 입금 → 확정 → 비번 발송</h1>
+<p class="sub">1쪽에서 시트 상태 '신청' · 3시간 타이머가 도는 상태에서 이어짐</p>
+<div class="flow">
+<div class="node auto"><span class="tag">자동</span><span class="title">시트 상태 = 신청 · 3시간 타이머 진행 중</span></div>
+<div class="fork"><i class="l"></i><i class="r"></i></div>
+<div class="cols">
+  <div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">KB 앱 입금 알림 → 대표</span><ul><li>입금자명 · 금액</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node decide"><span class="tag">판단</span><span class="title">입금자명 = 예약자명이고 금액이 맞나?</span></div>
+    <div class="arrow"></div>
+    <div class="node owner"><span class="tag">대표</span><span class="title">아니오 → 톡방·전화로 확인</span>
+    <ul><li>손님이 채널로 "다른 이름으로 보냈다"고 알렸는지 먼저 확인</li><li>맞으면 아래로 · 끝내 못 찾으면 보류하고 손님 연락을 기다림</li></ul></div>
+  </div>
+  <div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">3시간이 지남 → 시트 비고에 "기한 지남" 표시</span><p class="note"><span class="y">🟡</span> 스크립트 추가</p></div>
+    <div class="arrow"></div>
+    <div class="node owner"><span class="tag">대표</span><span class="title">네이버 [취소] → 시트 상태 '취소'</span></div>
+    <div class="arrow"></div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">네이버 취소 알림 → 손님</span></div>
+    <div class="arrow"></div>
+    <div class="node end">끝 · 기한 뒤에 돈이 들어오면: 자리가 비어 있으면 왼쪽 흐름으로, 이미 찼으면 전액 환불(5쪽)</div>
+  </div>
+</div>
+<div class="arrow left tall"></div>
+<div class="node owner"><span class="tag">대표</span><span class="title">예 → 네이버 [확정]</span>
+<ul><li><b>자동</b>: 네이버 확정 알림 → 손님 ("출입 비밀번호는 카카오톡으로 갑니다")</li></ul></div>
+<div class="arrow"></div>
+<div class="node owner"><span class="tag">대표</span><span class="title">도어락 주기 비밀번호 생성</span>
+<ul><li>유효: 이용일 <b>시작 15분 전 ~ 끝 15분 후</b> · 이름 "성함+날짜"</li>
+<li><span class="y">🟡</span> 1순위 매장 공폰을 집에서 원격으로 · 안 되면 전날 매장에서 만들어 두고 <b>전날 21시 출입 안내 알림톡</b>으로 보냄(이때 ①은 비번 없이 확정만)</li>
+<li><span class="r">🔴</span> 완료 화면에서 <b>[복사]</b> — 화면을 벗어나면 다시 못 봄(놓치면 삭제 후 재생성)</li></ul></div>
+<div class="arrow"></div>
+<div class="node owner"><span class="tag">대표</span><span class="title">시트: 비밀번호 붙여넣기 → 상태 '입금확인'</span>
+<ul><li>여기까지가 대표의 일. 받을 금액 칸과 실제 입금액이 같은지 한 번 더</li></ul></div>
+<div class="arrow"></div>
+<div class="node auto"><span class="tag">자동</span><span class="title">10분 안에 ① 확정·비번 알림톡 → 손님 · 상태 '확정'</span>
+<ul><li>일시 · 출입 비밀번호 · 입장 가능 시각 · 주소(중흥로 237, 4층 · 승강기) · 유모차·양말·인화·정리·퇴실 버튼 수칙 · "이용 규칙에 동의한 것으로 봅니다" · "문의는 이 채팅방에 답장"</li>
+<li>같은 시각에 ② 퇴실 안내가 <b>예약 종료 시각</b>으로 예약됨</li>
+<li>손님: 이 메시지를 이용일까지 보관 · 전날 네이버 리마인드 알림(자동)에 "비밀번호는 확정 카카오톡 참고"</li></ul></div>
+</div>
+</div>
+
+<div class="page compact">
+<h1><small>3 / 6</small> 이용 당일</h1>
+<p class="sub">대표는 매장에 가지 않음 · 손님이 하는 일은 파랑, 저절로 되는 일은 회색</p>
+<div class="flow">
+<div class="node guest"><span class="tag">손님</span><span class="title">시작 15분 전 도착 → 1층 앞뒤 빈자리 주차 → 승강기 4층 → 비밀번호 입력</span></div>
+<div class="fork"><i class="l"></i><i class="r"></i></div>
+<div class="cols">
+  <div>
+    <span class="pill">열림</span>
+    <div class="node auto"><span class="tag">자동</span><span class="title">조명 ON · 대표 폰에 입장 알림</span></div>
+    <div class="arrow"></div>
+    <div class="node guest"><span class="tag">손님</span><span class="title">촬영</span>
+    <ul><li>현관에 유모차 · 매트 위는 양말 · 삼각대·리모컨 · 의상 · 수유실(커튼 칸) · 화장실은 들어가면 불·환풍기 자동</li>
+    <li>끝 20분 전 인화 <b>4×6 두 장</b>(요금 포함) · 추가 인화·액자는 <b>매장 안 송금 QR</b></li>
+    <li>끝 10분 전 소품 제자리</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node guest"><span class="tag">손님</span><span class="title">나갈 때 문 옆 퇴실 버튼 두 번</span></div>
+    <div class="arrow"></div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">소등 + 입구 미등 15분</span>
+    <ul><li>버튼을 깜빡해도 입장 4시간 15분 뒤 자동 소등 <span class="y">🟡</span> · 새벽 1시 전체 소등</li></ul></div>
+  </div>
+  <div>
+    <span class="pill">안 열림</span>
+    <div class="node guest"><span class="tag">손님</span><span class="title">0507 전화 또는 톡방</span></div>
+    <div class="arrow"></div>
+    <div class="node owner"><span class="tag">대표</span><span class="title">① 다시 발송 → 안 되면 ③ 일회용 비밀번호</span>
+    <ul><li>③: 솔라피 콘솔에서 발송 · 발급 후 <b>15분 안 1회</b> · 유효 시각 전에 눌렀는지 먼저 확인</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node owner"><span class="tag">대표</span><span class="title">그래도 안 되면 그날의 <b>일일 비상 비밀번호</b></span>
+    <ul><li>09:00~20:15 · 대표만 보관 · 15분 안에 못 들어갈 상황(주차·늦음·재입장 반복)에도 사용</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node owner"><span class="tag">대표</span><span class="title">도어락이 아예 반응 없음(방전·고장) → 비상 열쇠</span>
+    <ul><li>대표 · 1층 부모님 보관 · 문 앞 키박스 없음 · <span class="y">🟡</span> 비상 전원 단자(보조배터리)는 설명서 확인</li>
+    <li>인터넷 끊김이면 조명만 안 켜짐 → 벽 스위치(안내판 표기)</li></ul></div>
+  </div>
+</div>
+<div class="spacer"></div><div class="spacer"></div>
+<div class="cols">
+  <div class="node owner"><span class="tag">대표</span><span class="title">연장 요청이 톡방으로 올 때</span>
+  <ol style="margin:3pt 0 0;padding-left:15pt"><li>네이버에서 뒤 예약 확인(연장 끝 + 정리 1시간이 비어야)</li><li>가능하면 답 → 손님이 매장 QR로 <b>30분 25,000</b> → 입금 확인</li><li>아카라 소등 지연 +30분</li><li>중간에 나갔다 올 일이 있으면 ③ 일회용 또는 일일 비번(주기 비번은 끝 15분 후 만료)</li></ol>
+  <p class="note">불가 답: "다음 예약이 있어 연장이 어려워요. 다음에는 예약하실 때 시간을 넉넉히 잡아 주세요"</p></div>
+  <div class="node owner"><span class="tag">대표</span><span class="title">당일까지 미입금인 팀(기한 뒤 입금 허용 건)</span>
+  <ol style="margin:3pt 0 0;padding-left:15pt"><li>시작 2시간 전 톡방·전화로 한 번 더 안내</li><li>시작 시각까지 미입금 → <b>③ 일회용 비밀번호</b>(시작 15분 전 발급) → 입장 후 <b>매장 QR</b>로 입금 → 확인</li><li>돌려보내지 않음 · 늦어진 시간은 이용 시간에 포함</li></ol></div>
+</div>
+</div>
+</div>
+
+<div class="page compact">
+<h1><small>4 / 6</small> 퇴실 → 보증금 반환 · 리뷰 페이백</h1>
+<p class="sub">왼쪽은 손님과 주고받는 일, 오른쪽은 대표가 매장에서 하는 일 · 둘이 만나는 곳이 다음 날 21시</p>
+<div class="flow">
+<div class="cols">
+  <div>
+    <div class="node auto"><span class="tag">자동</span><span class="title">예약 종료 시각 → ② 퇴실 안내 알림톡 → 손님</span>
+    <ul><li>"보증금 5만 원은 점검 후 내일 21시까지 이체" · "이 채팅방에 답장으로 반환 계좌" · "불편하셨던 점"</li><li>연장과 무관하게 원래 종료 시각에 나감</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node guest"><span class="tag">손님</span><span class="title">계좌를 답장 → 1:1 톡방 열림</span></div>
+    <div class="arrow"></div>
+    <div class="node owner"><span class="tag">대표</span><span class="title">채팅으로 리뷰 이벤트 안내(붙여넣기 문구)</span>
+    <ul><li>네이버 예약 리뷰(사진 3장↑) <b>1만</b> · 블로그 후기 <b>2만</b> 따로 · 별점·내용 무관 · 두 곳 첫 줄 "쁘띠레코드로부터 리뷰 혜택을 받았습니다" · 12/31까지</li><li>증빙(캡처·링크)은 이 방에 올려 달라</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node end">답장이 없으면 → 다음 날 21시 1회 재요청 → 두 번 미회신이면 보류(연락 오면 기한 없이 지급)</div>
+  </div>
+  <div>
+    <div class="node owner"><span class="tag">대표</span><span class="title">매장 점검(다음 팀 전 또는 다음 날 21시 전)</span>
+    <ol style="margin:3pt 0 0;padding-left:15pt"><li><b>사진 먼저</b></li><li>파손 확인 — 기준 하나: "다음 손님에게 다시 쓸 수 있나" · 의상 감가 6개월 미만 100% / 1년 미만 70% / 1년 이상 50%(배상표)</li><li>정리 12단계 · 화장실·수유실 · 의상 회수 → 검수 → 살균 → 재진열</li><li>기념일상은 빈 상으로 · 다음 팀 세팅(기념일 종류·총인원·아기 이름)</li><li>나올 때 퇴실 버튼 두 번</li></ol></div>
+    <div class="arrow"></div>
+    <div class="node decide"><span class="tag">판단</span><span class="title">깎을 것이 있나?</span></div>
+  </div>
+</div>
+<div class="fork fork2" style="width:50%;margin-left:25%"><i class="l"></i><i class="r"></i></div>
+<div class="cols">
+  <div><span class="pill">없음</span>
+    <div class="node owner"><span class="tag">대표</span><span class="title">다음 날 21시 보증금 50,000원 이체</span><ul><li>받은 계좌로 · KB 1일 한도 100만 원(모자라면 보조 계좌, 장부에 표시)</li></ul></div></div>
+  <div><span class="pill">있음</span>
+    <div class="node owner"><span class="tag">대표</span><span class="title">⑤ 점검 결과 알림톡(솔라피 콘솔) → 나머지 이체</span>
+    <ul><li>확인된 내용 · 차감액 · 잔액 이체일 · "사진·설명은 답장하시면 보내 드립니다"</li><li>보증금을 넘는 손해: 10만 미만 포기 / 10~50만 내용증명 → 지급명령 / 50만 이상 끝까지 · 아이 파손 = 부모 감독 책임</li></ul></div></div>
+</div>
+<div class="arrow"></div>
+<div class="node guest"><span class="tag">손님</span><span class="title">리뷰 캡처 · 블로그 링크를 톡방에 올림</span></div>
+<div class="arrow"></div>
+<div class="node owner"><span class="tag">대표</span><span class="title">21시 루틴에서 확인 → 1만 / 2만 같은 계좌로 이체 → 모든 리뷰에 사장님 답글</span>
+<ul><li>확인: 사진 3장 이상 · 첫 줄 표시 문구 · 네이버 리뷰는 네이버 예약 손님만 가능(전화 등록 손님은 블로그만 <span class="y">🟡</span>)</li><li>시트 L~S에 반환일·차감·지급일 기록 · 장부 · 이용료 현금영수증은 21시 루틴(6쪽)</li></ul></div>
+</div>
+</div>
+
+<div class="page compact">
+<h1><small>5 / 6</small> 취소 · 날짜 변경 · 환불</h1>
+<p class="sub">유의사항·신청 알림·확정 알림·취소 알림 네 곳에 "취소·환불·반환은 카카오톡 채널 톡방으로" · "날짜 변경은 네이버에서 취소하지 말고 먼저 연락"</p>
+<div class="flow">
+<div class="cols">
+  <div class="node guest"><span class="tag">손님</span><span class="title">톡방(알림톡에 답장)이나 0507로 연락</span></div>
+  <div class="node auto"><span class="tag">자동</span><span class="title">네이버에서 바로 취소한 손님 → 취소 알림만 옴</span><ul><li>톡방이 없으면 대표가 먼저 쓸 수 없음 → 손님 연락이 올 때까지 환불 보류(기한 없이 지급)</li></ul></div>
+</div>
+<div class="arrow"></div>
+<div class="node decide"><span class="tag">판단</span><span class="title">연락 시점이 언제인가? (이용 시작 시각 기준)</span>
+<table><tr><th>연락 시점</th><th>이용료</th><th>보증금</th></tr>
+<tr><td>3일 전까지</td><td>100% 환불</td><td rowspan="6">어느 경우나 전액 반환</td></tr>
+<tr><td>3일 전 ~ 24시간 전</td><td>50% 환불</td></tr>
+<tr><td>24시간 이내 · 시작 전</td><td>30% 환불 <b>또는</b> 10일 안 1회 날짜 변경(손님 선택)</td></tr>
+<tr><td>시작 후 당일 연락</td><td>환불 없음 · 10일 안 1회 날짜 변경</td></tr>
+<tr><td>연락 없음(노쇼)</td><td>환불·변경 없음</td></tr>
+<tr><td>매장 사정</td><td>100% 환불</td></tr></table></div>
+<div class="fork"><i class="l"></i><i class="r"></i></div>
+<div class="cols">
+  <div><span class="pill">환불</span>
+    <div class="node owner"><span class="tag">대표</span><span class="title">네이버 [취소] → 환불액 계산</span><ul><li>이용료 × 비율 + 보증금 전액 · 자동 취소 알림이 손님에게 감</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node owner"><span class="tag">대표</span><span class="title">톡방에서 계좌 받고 이체</span><ul><li>KB 한도 100만 원 넘으면 보조 계좌(장부에 표시) · 입금 내역에는 이름만 있어 계좌는 꼭 물어야 함</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node owner"><span class="tag">대표</span><span class="title">뒷정리</span><ul><li>발급한 <b>현금영수증 취소</b>(홈택스)</li><li>도어락 비밀번호 삭제 <span class="y">🟡</span>(공폰 원격 · 안 되면 다음 매장 방문 때)</li><li>시트 상태 '취소' → ② 예약 발송이 저절로 멈춤 · Q열에 환불액·일</li></ul></div>
+  </div>
+  <div><span class="pill">날짜 변경(10일 안 1회)</span>
+    <div class="node owner"><span class="tag">대표</span><span class="title">네이버에서 날짜 변경</span><ul><li>새 날짜가 비어 있는지 먼저 · 변경은 1회만</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node owner"><span class="tag">대표</span><span class="title">옛 비밀번호 삭제 → 새 날짜 비밀번호 생성 → 시트 날짜·시각 수정 → ① 다시 발송</span><ul><li>보증금·이용료는 그대로 이월 · 현금영수증은 그대로</li></ul></div>
+    <div class="arrow"></div>
+    <div class="node end">새 날짜에 2쪽 ①부터 다시 이어짐</div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="page compact">
+<h1><small>6 / 6</small> 매일 · 매주 · 매월 루틴과 백업</h1>
+<p class="sub">낮에는 알림이 올 때 1~2분씩 두 번, 나머지는 밤 9시에 몰아서</p>
+<div class="cards">
+<div class="card c-morning"><h3>매일 아침</h3><ul><li>오늘 예약(기념일 종류·총인원·아기 이름) 확인 → 세팅</li><li>어젯밤 알림톡 발송 결과(시트 K열 비고) · 실패 건은 전화</li><li>어젯밤 이후 입금한 팀 → 네이버 확정 → 비번 → 시트 '입금확인'(① 발송)</li><li>인화기 테스트 1장</li></ul></div>
+<div class="card c-day"><h3>낮 · 알림이 올 때</h3><ul><li>스마트플레이스 "새 예약 신청" → <b>1쪽</b> (겹침 확인 → 시트 3칸)</li><li>KB 입금 알림 → <b>2쪽</b> (매칭 → 확정 → 비번 → '입금확인')</li><li>3시간 경과 표시 → 네이버 취소 → 시트 '취소'</li><li>톡방 문의·연장·취소 → <b>3·5쪽</b></li><li>입장 알림이 오면 소등 자동화가 걸렸는지 한 번 보기</li></ul></div>
+<div class="card c-night wide"><h3>매일 밤 9시 (한 번에)</h3><ol><li>오늘 입금받은 <b>이용료 현금영수증</b> 발급 — 손택스 · 보증금 제외 · 10만 원 이상은 요청 없어도 · 번호 모르면 010-000-1234 무기명</li><li>어제 이용한 팀 점검 결과 → <b>보증금 5만 원 이체</b> (차감 시 ⑤ 점검 결과 알림톡 먼저, 나머지만)</li><li>톡방에 들어온 리뷰 캡처·블로그 링크 확인 → <b>1만 / 2만 이체</b> → 사장님 답글</li><li>취소 건 환불 (연락 시점 비율) + <b>현금영수증 취소</b></li><li>계좌 미회신 팀 1회 재요청 (두 번째면 보류)</li><li>시트 L~S(반환 계좌·반환일·차감·지급일·환불·영수증)에 기록 → 장부로</li><li>내일 세팅 메모</li></ol></div>
+<div class="card c-week"><h3>매주</h3><ul><li>지난 비밀번호 삭제 (도어락 최대 75개)</li><li>일일 비상 비밀번호 7일치 보충 (원격이 안 될 때)</li><li>솔라피 잔액 · 도어락 배터리 · 인화지·액자 재고</li><li>소등 자동화·새벽 1시 소등이 그대로인지</li></ul></div>
+<div class="card c-month"><h3>매월</h3><ul><li>네이버 예약 내역 ↔ KB 입출금 ↔ 시트 대조 → 세무 자료</li><li>세무사 확인 사항(현금영수증 의무·리뷰 지급 처리·예수금) 반영</li><li>개설 3개월 뒤 KB 1일 이체 한도 상향 신청 (그 전엔 보조 계좌 · 해제 서류 문의)</li></ul></div>
+<div class="card c-backup wide"><h3>대표가 없을 때</h3><ul><li><b>남편</b>: 네이버 스마트플레이스 매니저 · 아카라 구성원 · 카카오 채널 매니저(관리자 앱) · 솔라피 · KB 입금 조회 · 시트 공유 — 이체만 대표 계좌라 대표가 함(부재가 길면 일정 공유)</li><li><b>1층 부모님</b>: 비상 열쇠 · 공유기·허브 재시작 · 공폰 화면 허용 누르기</li><li>손님 쪽 비상 연락: 채널 톡방(09~22시) → 0507 → 응급 119(안내판·① 알림톡 표기)</li></ul></div>
+</div>
+</div>
+
+</body></html>
