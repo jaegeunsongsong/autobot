@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>쁘띠레코드 운영 순서도</title>
+<meta name="description" content="1인 운영 무인 사진 스튜디오(쁘띠레코드) 운영 순서도 6쪽 · 2026-10-27 기준 · 대표·남편용 내부 문서">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --ink: #1f2328;
+    --muted: #5f6673;
+    --line: #9aa0a6;
+    --cust: #3a6fd8;  --cust-bg: #edf3fd;  --cust-tag: #2f5fc4;
+    --auto: #8c9199;  --auto-bg: #f2f3f5;  --auto-tag: #5f646c;
+    --own:  #e8873b;  --own-bg:  #fff3e9;  --own-tag:  #d9671b;
+    --dec:  #dfb53a;  --dec-bg:  #fff8dc;  --dec-tag:  #efc44a;
+    --red:  #d7263d;
+    --paper: #ffffff;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans KR", "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", "WenQuanYi Zen Hei", sans-serif;
+    color: var(--ink);
+    font-size: 10pt;
+    line-height: 1.38;
+    background: #d9dbe0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  .nw { white-space: nowrap; }
+
+  /* ---------- 종이 한 장 = A4 세로 한 쪽 ---------- */
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 11mm 12mm 10mm;
+    margin: 0 auto 6mm;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    break-after: page;
+    page-break-after: always;
+    box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  }
+  .page:last-of-type { break-after: auto; page-break-after: auto; }
+  @page { size: A4 portrait; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+  @media screen and (max-width: 820px) {
+    body { padding: 0 16px; }
+    .page { width: 100%; height: auto; min-height: 0; padding: 20px 16px 48px; margin: 12px 0; }
+  }
+
+  /* ---------- 쪽 머리·꼬리 ---------- */
+  .ph { margin: 0 0 6px; }
+  .ph-top { display: flex; align-items: center; gap: 8px; }
+  .pno { background: #2c3038; color: #fff; font-weight: 700; font-size: 9.5pt; border-radius: 5px; padding: 1px 8px; white-space: nowrap; }
+  h1 { font-size: 16.5pt; margin: 0; line-height: 1.25; font-weight: 700; }
+  .sub { margin: 3px 0 0; color: var(--muted); font-size: 8.8pt; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+  .lg { font-size: 8.3pt; border: 1px solid; border-radius: 4px; padding: 0 6px; line-height: 1.6; }
+  .lg.cust { border-color: var(--cust); color: var(--cust-tag); background: var(--cust-bg); }
+  .lg.auto { border-color: var(--auto); color: var(--auto-tag); background: var(--auto-bg); }
+  .lg.own  { border-color: var(--own);  color: var(--own-tag);  background: var(--own-bg); }
+  .lg.dec  { border-color: var(--dec);  color: #6b4e00;         background: var(--dec-bg); }
+  .lg.mustl{ border-color: var(--red);  color: var(--red); }
+  .pf { position: absolute; left: 12mm; right: 12mm; bottom: 6mm; font-size: 8pt; color: var(--muted); display: flex; justify-content: space-between; border-top: 1px solid #e3e5e9; padding-top: 3px; }
+
+  /* ---------- 상자 ---------- */
+  .box { border: 1.5px solid; border-radius: 6px; padding: 5px 9px; background: #fff; }
+  .box.cust { border-color: var(--cust); background: var(--cust-bg); }
+  .box.auto { border-color: var(--auto); background: var(--auto-bg); }
+  .box.own  { border-color: var(--own);  background: var(--own-bg); }
+  .box.dec  { border-color: var(--dec);  background: var(--dec-bg); }
+  .bt { font-weight: 700; font-size: 10.3pt; line-height: 1.3; }
+  .tag { display: inline-block; color: #fff; font-size: 8.3pt; font-weight: 700; border-radius: 4px; padding: 0 5px; margin-right: 6px; vertical-align: 1px; line-height: 1.55; }
+  .cust .tag { background: var(--cust-tag); }
+  .auto .tag { background: var(--auto-tag); }
+  .own  .tag { background: var(--own-tag); }
+  .dec  .tag { background: var(--dec-tag); color: #3d2e00; }
+  .box ul { margin: 2px 0 0; padding-left: 15px; }
+  .box li { margin: 0; }
+  .box li + li { margin-top: 1px; }
+  .sm { font-size: 8.8pt; color: #4b5563; }
+  b.n { font-weight: 700; }
+  .must { display: inline-block; background: var(--red); color: #fff; font-weight: 700; font-size: 8.3pt; border-radius: 4px; padding: 0 5px; margin-right: 5px; vertical-align: 1px; line-height: 1.55; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--red); margin-right: 4px; vertical-align: 0; }
+  .warn { color: var(--red); font-weight: 700; }
+
+  /* ---------- 화살표·갈림길 ---------- */
+  .arr { width: 0; height: 0; margin: 3px auto; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--line); }
+  .fork { margin-top: 0; }
+  .bracket { position: relative; height: 9px; margin: 0 25%; border-top: 1.5px solid var(--line); }
+  .bracket::before, .bracket::after { content: ""; position: absolute; top: -1px; height: 10px; border-left: 1.5px solid var(--line); }
+  .bracket::before { left: -1px; }
+  .bracket::after  { right: -1px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; align-items: start; }
+  .lbl { display: inline-block; font-size: 8.3pt; font-weight: 700; background: #3b3f46; color: #fff; border-radius: 4px; padding: 0 6px; margin: 1px 0 3px; line-height: 1.6; }
+  .note { border: 1.5px dashed #b4b8bf; border-radius: 6px; padding: 3px 10px; color: #4b5563; text-align: center; font-size: 9.2pt; background: #fff; }
+  .goto { font-weight: 700; color: #2c3038; }
+  h2.sec { font-size: 11pt; margin: 8px 0 4px; padding: 2px 8px; background: #2c3038; color: #fff; border-radius: 4px; font-weight: 700; }
+
+  /* ---------- 표 ---------- */
+  table.t { width: 100%; border-collapse: collapse; font-size: 8.7pt; margin-top: 3px; background: #fff; }
+  .t th, .t td { border: 1px solid #cfd3d9; padding: 1px 5px; text-align: left; vertical-align: top; line-height: 1.32; }
+  .t.colors td:first-child { white-space: nowrap; }
+  .t th { background: #f1f2f4; font-weight: 700; white-space: nowrap; }
+  .sw { display: inline-block; width: 11px; height: 11px; border-radius: 2px; vertical-align: -1px; margin-right: 4px; border: 1px solid rgba(0,0,0,.18); }
+
+  /* ---------- 6쪽 격자 ---------- */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 8px; align-items: start; }
+  .span2 { grid-column: 1 / -1; }
+  .steps { margin: 2px 0 0; padding-left: 18px; }
+  .steps li { margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- =================================================== 1 / 6 -->
+<section class="page">
+  <header class="ph">
+    <div class="ph-top"><span class="pno">1 / 6</span><h1>예약 · 결제 (네이버 예약)</h1></div>
+    <p class="sub">쁘띠레코드 운영 순서도 · 2026-10-27 기준 · 대표·남편용 내부 문서(손님에게 보내지 않음) · 상품은 "촬영 예약" 1개 · 네이버페이 선결제 · 신청 즉시 자동 확정</p>
+    <div class="legend">
+      <span class="lg cust">손님이 하는 일</span>
+      <span class="lg auto">자동으로 되는 일 (네이버 · 시트 · 솔라피 · 아카라)</span>
+      <span class="lg own">대표가 하는 일</span>
+      <span class="lg dec">판단</span>
+      <span class="lg mustl"><span class="dot"></span>꼭 지킬 것</span>
+    </div>
+  </header>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>네이버 예약에서 "촬영 예약" 선택 → 날짜 · 시작 시각 · 이용 시간 고르기</div>
+    <ul>
+      <li>시간당 <b class="n">50,000원</b> · <b class="n">1시간 단위</b> · <b class="n">2~8시간</b> · 시작 <b class="n">09:00~21:00</b> (22시 종료) · 매 1시간 1팀</li>
+      <li>예약 마감: <b class="n">이용 전날 19시</b> (그 뒤에는 그 날짜 예약이 안 들어옴)</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>옵션 고르기 (네이버 결제 화면)</div>
+    <ul>
+      <li>촬영 구성 (하나만): <b class="n">베이직 세팅 30,000원</b> (4인 기준) / <b class="n">패밀리 세팅 70,000원</b> (8인 기준 · <b class="n">4시간 이상</b>만)</li>
+      <li><b class="n">보증금 50,000원</b> (필수 · 이용 후 돌려줌)</li>
+      <li>추가 인원 <b class="n">1명당 15,000원</b> (베이직 · 패밀리 같음)</li>
+      <li class="sm">네이버가 "하나만 고르기"를 막아 주지 못함 → 안내 문구만 있음 · 대표가 예약 내용과 시트에서 확인</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>추가 질문 4개에 답하기</div>
+    <ul>
+      <li>전체 인원수 · 촬영 테마(아기 기념일상 / 가족사진) · 어떤 기념일인지 · 이니셜 또는 영어 문구</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>네이버페이로 미리 결제 = 이용료 + 세팅 + 보증금</div>
+    <ul>
+      <li>예: 베이직 2시간 <b class="n">180,000원</b> (100,000 + 30,000 + 50,000) · 패밀리 4시간 <b class="n">320,000원</b> (200,000 + 70,000 + 50,000)</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box auto">
+    <div class="bt"><span class="tag">자동</span>네이버: 신청 즉시 자동 확정 → 대표 휴대폰에 "새 예약" 알림</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box own">
+    <div class="bt"><span class="tag">대표</span><span class="must">꼭</span>네이버 달력에서 이 예약 <b class="n">바로 뒤 1시간(정리 시간)을 직접 막기</b></div>
+    <ul>
+      <li>자동으로 막히지 않음 → 알림 받자마자 가장 먼저 할 일 (안 막으면 바로 뒤 시간에 다른 손님이 예약할 수 있음)</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box dec">
+    <div class="bt"><span class="tag">판단</span>예약 내용이 규칙에 맞나? (네이버 예약 상세에서 확인)</div>
+    <ul>
+      <li>촬영 구성이 <b class="n">하나만</b> 골라져 있나 · 패밀리면 <b class="n">4시간 이상</b>인가 · 보증금이 들어 있나 · 추가 질문 답이 있나</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="fork">
+    <div class="bracket"></div>
+    <div class="cols">
+      <div class="col">
+        <span class="lbl">맞음</span>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>시트에 한 줄 입력</div>
+          <ul><li class="goto">→ 2쪽 (시트 입력 · 비밀번호 · ① 알림톡)</li></ul>
+        </div>
+      </div>
+      <div class="col">
+        <span class="lbl">안 맞음 (구성 미선택 · 중복 선택 · 패밀리인데 4시간 미만)</span>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>채팅방이나 전화로 손님께 연락해 바로잡기</div>
+          <ul>
+            <li>구성 다시 고르기 · 시간 늘리기 등 손님과 정리</li>
+            <li>더 낸 옵션 돈은 2쪽 "차액" 순서로 돌려주기</li>
+            <li class="goto">→ 정리가 끝나면 시트 입력 → 2쪽</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arr"></div>
+  <div class="note">손님 연락 기준 = 카카오 채널 <b>"쁘띠레코드 베이비셀프스튜디오"</b> 채팅 (대표·남편이 관리자) · 카톡이 없는 손님은 매장 번호 <b class="nw">010-5162-9870</b> 문자 · 네이버 톡톡은 예약 전 문의용</div>
+
+  <footer class="pf"><span>쁘띠레코드 운영 순서도 · 2026-10-27 기준</span><span>내부용 · 요약 문서와 다른 예전 문서는 쓰지 않음</span></footer>
+</section>
+
+<!-- =================================================== 2 / 6 -->
+<section class="page">
+  <header class="ph">
+    <div class="ph-top"><span class="pno">2 / 6</span><h1>시트 입력 → 비밀번호 → ① 알림톡</h1></div>
+    <p class="sub">시트에 <b>비밀번호</b>와 상태 <b>'확정'</b>을 대표가 직접 넣어야 ① 예약확정출입안내 알림톡이 나간다 · 시트는 10분 안에 자동으로 보낸다</p>
+    <div class="legend">
+      <span class="lg cust">손님이 하는 일</span>
+      <span class="lg auto">자동으로 되는 일</span>
+      <span class="lg own">대표가 하는 일</span>
+      <span class="lg dec">판단</span>
+    </div>
+  </header>
+
+  <div class="box own">
+    <div class="bt"><span class="tag">대표</span>시트에 한 줄 입력 (또는 예약 내용을 대화창에 주면 Claude가 입력)</div>
+    <ul>
+      <li>이름 · 전화(<span class="nw">010-1234-5678</span> 모양) · 이용일 · 시작 · 종료 · 구성 · 방문인원 · 추가인원옵션 · 결제금액 · 테마</li>
+      <li class="sm">방문인원 · 결제금액은 <b>숫자만</b> (원, 명 같은 글자 쓰지 않기)</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box auto">
+    <div class="bt"><span class="tag">자동</span>시트: 맞는금액 · 차액 자동 계산 · 문제는 색으로 표시</div>
+    <ul>
+      <li><span class="sw" style="background:#f4a7a7"></span>빨강 = 구성 미선택/중복 · 패밀리 4시간 미만 · 종료가 시작보다 빠름 · <b>덜 낸</b> 차액 &nbsp; <span class="sw" style="background:#f9c784"></span>주황 = <b>더 낸</b> 차액</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box dec">
+    <div class="bt"><span class="tag">판단</span>차액 칸이 0인가?</div>
+    <ul><li>0이면 바로 아래 "비밀번호 만들기"로 · 0이 아니면 색에 따라 좌우 중 하나</li></ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="fork">
+    <div class="bracket"></div>
+    <div class="cols">
+      <div class="col">
+        <span class="lbl">빨강 = 덜 냄 (차액 +)</span>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>채팅방으로 부족한 금액과 계좌 안내 → 입금 확인</div>
+          <ul><li>끝나면 시트 <b>차액처리</b> 칸 표시</li></ul>
+        </div>
+      </div>
+      <div class="col">
+        <span class="lbl">주황 = 더 냄 (차액 −)</span>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>네이버 예약(확정 상태)에서 남는 옵션만 부분 환불</div>
+          <ul><li>끝나면 시트 <b>차액처리</b> 칸 표시</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box own">
+    <div class="bt"><span class="tag">대표</span>아카라 앱에서 도어락 <b>정기 비밀번호</b> 만들기</div>
+    <ul>
+      <li>기간: 이용일 · <b class="n">시작 15분 전 ~ 종료 15분 후</b></li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box own">
+    <div class="bt"><span class="tag">대표</span><span class="must">꼭</span>시트에 <b class="n">비밀번호 입력</b> + 상태를 <b class="n">'확정'</b>으로 — <span class="warn">둘 다 넣어야 ①이 나감</span></div>
+    <ul>
+      <li>비밀번호가 비어 있으면 ① 결과 칸에 "대기: 비밀번호 입력 필요"(노랑) → 비밀번호를 채우면 그대로 자동 발송</li>
+      <li>상태가 '확정'이 아니면 아무것도 나가지 않음</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box auto">
+    <div class="bt"><span class="tag">자동</span>10분 안에 <b>① 예약확정출입안내</b> 알림톡 → 손님 (비밀번호 포함 · "확인" 답장 요청)</div>
+    <ul>
+      <li>카톡으로 못 보내면 <b class="nw">010-5162-9870</b> 번호의 문자로 자동 대체 · 결과는 시트 ① 결과 칸에 기록</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box dec">
+    <div class="bt"><span class="tag">판단</span>① 결과 칸에 뭐라고 적혔나?</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="fork">
+    <div class="bracket"></div>
+    <div class="cols">
+      <div class="col">
+        <span class="lbl">성공</span>
+        <div class="box cust">
+          <div class="bt"><span class="tag">손님</span>채팅방에 "확인" 답장</div>
+        </div>
+        <div class="arr"></div>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>시트 <b>비번확인</b> 칸에 '답장'</div>
+          <ul><li class="goto">→ 3쪽 (전날 준비 · 당일)</li></ul>
+        </div>
+      </div>
+      <div class="col">
+        <span class="lbl">실패: … (빨강)</span>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>적힌 사유 확인 → 전화번호 등 고치기 → <b>결과 칸을 지우면</b> 다시 보냄</div>
+          <ul>
+            <li>문자로도 안 가면 전화로 비밀번호 안내</li>
+            <li class="goto">→ 성공하면 왼쪽과 같이 진행</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="pf"><span>쁘띠레코드 운영 순서도 · 2026-10-27 기준</span><span>① 예약확정출입안내 · ② 이용감사안내 · ⑤ 매장점검결과안내 (알림톡 3가지)</span></footer>
+</section>
+
+<!-- =================================================== 3 / 6 -->
+<section class="page">
+  <header class="ph">
+    <div class="ph-top"><span class="pno">3 / 6</span><h1>전날 준비 → 당일 입장 · 이용</h1></div>
+    <p class="sub">전날 21시에 두 가지(비밀번호 미확인 전화 · 소등 시각 입력) · 입장 문제는 채팅방에서 바로 해결 · 소등은 손님 종료 시각 기준</p>
+    <div class="legend">
+      <span class="lg cust">손님이 하는 일</span>
+      <span class="lg auto">자동으로 되는 일</span>
+      <span class="lg own">대표가 하는 일</span>
+      <span class="lg dec">판단</span>
+    </div>
+  </header>
+
+  <div class="box own">
+    <div class="bt"><span class="tag">대표</span>전날 21시: 두 가지 확인</div>
+    <ul>
+      <li>시트 <b>비번확인</b> 칸이 노랑(아직 "확인" 답장 없음)이면 → <b class="n">전화</b>해서 비밀번호를 받았는지 확인 → 확인되면 '답장'</li>
+      <li>아카라 <b>소등</b> 칸에 손님 <b class="n">종료 시각 입력</b> → 종료 <b class="n">+15분</b>에 자동 소등 ("한 번 실행됨" 켜기)</li>
+      <li class="sm">최후 안전장치: 새벽 1시 전체 소등은 항상 켜 둔 상태</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>당일: 도어락에 비밀번호 입력 (시작 15분 전부터 열림)</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box dec">
+    <div class="bt"><span class="tag">판단</span>문이 열리나?</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="fork">
+    <div class="bracket"></div>
+    <div class="cols">
+      <div class="col">
+        <span class="lbl">열림</span>
+        <div class="box auto">
+          <div class="bt"><span class="tag">자동</span>웰컴: 조명 자동 ON · 대표에게 입장 알림</div>
+        </div>
+      </div>
+      <div class="col">
+        <span class="lbl">안 열림</span>
+        <div class="box cust">
+          <div class="bt"><span class="tag">손님</span>채팅방(또는 전화)으로 연락</div>
+        </div>
+        <div class="arr"></div>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>비상 비밀번호를 바로 전달</div>
+          <ul><li>도어락이 아예 먹통이면 <b>비상 열쇠</b></li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>셀프 촬영 · 의상 · 기념일 세팅 이용</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>끝나기 20분 전: 4x6 인화</div>
+    <ul>
+      <li><b class="n">베이직 2장</b> / <b class="n">패밀리 4장 + 5x7 1장</b></li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box dec">
+    <div class="bt"><span class="tag">판단</span>손님이 더 원하나? (연장 · 추가 인화 · 액자)</div>
+    <ul><li>원하는 게 없으면 바로 4쪽 "퇴실"로</li></ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="fork">
+    <div class="bracket"></div>
+    <div class="cols">
+      <div class="col">
+        <span class="lbl">연장</span>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>네이버 달력에서 <b>뒤 예약이 비었나</b> 확인</div>
+          <ul>
+            <li>비었으면 <b class="n">1시간 50,000원</b> → 매장 송금 QR로 받기</li>
+            <li>아카라 소등 칸의 종료 시각을 늦추기</li>
+            <li>뒤 예약이 있으면 연장 불가 안내</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <span class="lbl">추가 인화 · 액자</span>
+        <div class="box cust">
+          <div class="bt"><span class="tag">손님</span>매장 송금 QR로 결제</div>
+        </div>
+        <div class="arr"></div>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>입금 확인</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="arr"></div>
+  <div class="note"><span class="goto">→ 4쪽 (퇴실 · ② 알림톡 · 보증금 환불 · 리뷰)</span></div>
+
+  <footer class="pf"><span>쁘띠레코드 운영 순서도 · 2026-10-27 기준</span><span>비밀번호 기간 = 시작 15분 전 ~ 종료 15분 후 · 소등 = 종료 +15분</span></footer>
+</section>
+
+<!-- =================================================== 4 / 6 -->
+<section class="page">
+  <header class="ph">
+    <div class="ph-top"><span class="pno">4 / 6</span><h1>퇴실 → ② 알림톡 → 보증금 환불 · 리뷰</h1></div>
+    <p class="sub"><span class="dot"></span><b>보증금 환불은 반드시 네이버 '이용완료'를 누르기 전에</b> · 리뷰 혜택은 계좌 이체 · 시트의 '이용완료'는 자동, 네이버의 '이용완료'는 대표가 누르는 것</p>
+    <div class="legend">
+      <span class="lg cust">손님이 하는 일</span>
+      <span class="lg auto">자동으로 되는 일</span>
+      <span class="lg own">대표가 하는 일</span>
+      <span class="lg dec">판단</span>
+    </div>
+  </header>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>정리 → <b class="n">퇴실 버튼 두 번</b> → 소등</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box auto">
+    <div class="bt"><span class="tag">자동</span>아카라: 종료 시각 <b class="n">+15분</b>에 소등 (전날 입력한 소등 칸) · 새벽 1시 전체 소등</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box auto">
+    <div class="bt"><span class="tag">자동</span>종료 시각이 지나면 <b>② 이용감사안내</b> 알림톡 → 손님 · 시트 상태가 <b>'이용완료'</b>로 바뀜</div>
+    <ul>
+      <li>알림톡 내용: 보증금은 <b class="n">다음 날 21시까지</b> 결제한 수단으로 환불</li>
+      <li class="sm">※ 시트의 '이용완료'는 자동으로 바뀌는 것 · 네이버 예약의 '이용완료' 버튼은 <b>대표가 아래 순서대로</b> 누르는 것</li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box own">
+    <div class="bt"><span class="tag">대표</span>매일 밤 9시: 매장 점검</div>
+    <ul>
+      <li>사진 · 소품 · 의상 · 기념일 세팅 확인 · 기준 = <b>"다음 손님에게 다시 쓸 수 있나"</b></li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box dec">
+    <div class="bt"><span class="tag">판단</span>차감할 파손이 있나?</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="fork">
+    <div class="bracket"></div>
+    <div class="cols">
+      <div class="col">
+        <span class="lbl">없음</span>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span><span class="must">꼭</span>먼저: 네이버 예약 화면에서 <b>'보증금' 옵션만 부분 환불</b></div>
+          <ul>
+            <li><b class="n">50,000원 전액</b> · 환불 금액에 수수료 없음</li>
+          </ul>
+        </div>
+        <div class="arr"></div>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>그 다음에: 네이버 <b>'이용완료'</b> 누르기 → 시트 보증금 칸 <b>'환불완료'</b></div>
+          <ul>
+            <li class="sm"><span class="warn">순서가 바뀌면</span>(완료를 먼저 누르면) 네이버 페이센터에서 따로 취소해야 하고 충전금까지 필요 → 피하기</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <span class="lbl">있음</span>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>보증금 옵션은 <b>환불하지 않기</b></div>
+          <ul>
+            <li>차감하고 남은 돈만 나중에 계좌로 돌려줌</li>
+            <li class="goto">→ 5쪽 "파손이 있을 때 (⑤)"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>리뷰 이벤트: 채팅방에 캡처·링크 + 계좌 보냄</div>
+    <ul>
+      <li>네이버 리뷰 사진 3장 이상 → <b class="n">10,000원</b> · 블로그 사진 3장 이상 → <b class="n">20,000원</b></li>
+    </ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box own">
+    <div class="bt"><span class="tag">대표</span>리뷰 확인 → 계좌로 이체 → 장부에 기록</div>
+  </div>
+
+  <footer class="pf"><span>쁘띠레코드 운영 순서도 · 2026-10-27 기준</span><span>보증금은 어떤 경우에도 전액 돌려주는 돈 (파손 차감만 예외)</span></footer>
+</section>
+
+<!-- =================================================== 5 / 6 -->
+<section class="page">
+  <header class="ph">
+    <div class="ph-top"><span class="pno">5 / 6</span><h1>취소 · 변경 · 파손(⑤)</h1></div>
+    <p class="sub">취소·변경은 채팅방으로 받고 대표가 네이버에서 처리 · 기준 시각 = 이용 시작 시각 · 보증금은 어떤 경우에도 전액 · 파손은 ⑤ 매장점검결과안내 알림톡</p>
+    <div class="legend">
+      <span class="lg cust">손님이 하는 일</span>
+      <span class="lg auto">자동으로 되는 일</span>
+      <span class="lg own">대표가 하는 일</span>
+      <span class="lg dec">판단</span>
+    </div>
+  </header>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>채팅방으로 취소 또는 변경 요청</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box dec">
+    <div class="bt"><span class="tag">판단</span>취소인가, 변경인가? (이용 시작 시각 기준으로 언제 연락했나)</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="fork">
+    <div class="bracket"></div>
+    <div class="cols">
+      <div class="col">
+        <span class="lbl">변경</span>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>변경 규칙 확인</div>
+          <ul>
+            <li>24시간 이내 · 시작 전: <b class="n">1회 변경</b> (30% 환불 대신)</li>
+            <li>시작 후: <b class="n">당일 변경만</b></li>
+            <li>그 전에는 자유롭게 시간 조정</li>
+          </ul>
+        </div>
+        <div class="arr"></div>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>네이버에서 시간 직접 조정</div>
+          <ul>
+            <li>옛 자리 뒤에 막아 둔 정리 1시간 풀기 → 새 자리 뒤 1시간 다시 막기</li>
+          </ul>
+        </div>
+        <div class="arr"></div>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>비밀번호 새로 만들기 → 시트 고치기</div>
+          <ul>
+            <li>아카라: 옛 비밀번호 삭제 · 새 기간으로 다시 만들기</li>
+            <li>시트: 이용일 · 시작 · 종료 · 비밀번호 고치기 → <b>① 결과 칸 지우기</b> → ① 다시 나감</li>
+            <li>소등 칸도 새 종료 시각으로</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <span class="lbl">취소</span>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>이용료 환불 비율 (이용 시작 시각 기준)</div>
+          <table class="t">
+            <tr><th>연락 시점</th><th>이용료 환불</th></tr>
+            <tr><td>3일 전까지</td><td><b class="n">100%</b></td></tr>
+            <tr><td>3일 전 ~ 24시간 전</td><td><b class="n">50%</b></td></tr>
+            <tr><td>24시간 이내 · 시작 전</td><td><b class="n">30%</b> (또는 1회 변경)</td></tr>
+            <tr><td>시작 후</td><td>환불 없음 · 당일 변경만</td></tr>
+            <tr><td>연락 없이 안 옴</td><td>환불·변경 없음</td></tr>
+            <tr><td>매장 사정</td><td><b class="n">100%</b></td></tr>
+          </table>
+        </div>
+        <div class="arr"></div>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span><span class="must">꼭</span>보증금 <b class="n">50,000원은 항상 전액</b> 환불</div>
+          <ul><li>네이버 취소 수수료는 이용료에만 · 보증금은 건드리지 않음</li></ul>
+        </div>
+        <div class="arr"></div>
+        <div class="box own">
+          <div class="bt"><span class="tag">대표</span>네이버에서 취소 처리 → 뒷정리</div>
+          <ul>
+            <li>아카라 비밀번호 삭제 · 시트 상태 <b>'취소'</b>(회색)</li>
+            <li>달력에 막아 둔 정리 1시간 풀기 · 소등 칸 끄기</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec">파손이 있을 때 — ⑤ 매장점검결과안내 (4쪽 "있음"에서 이어짐)</h2>
+
+  <div class="box own">
+    <div class="bt"><span class="tag">대표</span>보증금 옵션은 네이버에서 환불하지 않은 채로 <b>'이용완료'</b> 누르기</div>
+    <ul><li>배상 기준: <b>"다음 손님에게 다시 쓸 수 있나"</b> → 못 쓰면 차감</li></ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box own">
+    <div class="bt"><span class="tag">대표</span>시트에 <b>점검내용</b> · <b>차감금액</b>(숫자만) 입력 → 보증금 칸 <b>'차감(⑤발송)'</b></div>
+    <ul><li>셋 중 하나라도 비면 ⑤ 결과 칸 "대기:"(노랑) → 빈 칸을 채우면 자동으로 나감</li></ul>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box auto">
+    <div class="bt"><span class="tag">자동</span><b>⑤ 매장점검결과안내</b> 알림톡 → 손님 (점검 결과 · 차감 금액 · 반환 계좌 요청)</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box cust">
+    <div class="bt"><span class="tag">손님</span>채팅방에 반환 계좌 보냄</div>
+  </div>
+  <div class="arr"></div>
+
+  <div class="box own">
+    <div class="bt"><span class="tag">대표</span><b class="n">50,000원 − 차감금액</b>을 계좌로 이체 → 장부에 기록</div>
+  </div>
+
+  <footer class="pf"><span>쁘띠레코드 운영 순서도 · 2026-10-27 기준</span><span>손님이 네이버에서 직접 취소하면 수수료 규칙이 적용될 수 있음 → 채팅방으로 먼저 연락받기</span></footer>
+</section>
+
+<!-- =================================================== 6 / 6 -->
+<section class="page">
+  <header class="ph">
+    <div class="ph-top"><span class="pno">6 / 6</span><h1>매일 · 매주 루틴 · 시트 색 뜻</h1></div>
+    <p class="sub">낮에는 새 예약 알림이 올 때 1~2분씩 · 나머지는 밤 9시에 한 번에 · 시트는 10분에 한 번씩 돌면서 알림톡을 보냄</p>
+    <div class="legend">
+      <span class="lg auto">자동으로 되는 일</span>
+      <span class="lg own">대표가 하는 일</span>
+      <span class="lg dec">판단 · 읽는 법</span>
+    </div>
+  </header>
+
+  <div class="grid2">
+    <div class="box own">
+      <div class="bt"><span class="tag">대표</span>새 예약 알림이 올 때 (순서대로)</div>
+      <ol class="steps">
+        <li>네이버 달력에서 뒤 1시간(정리) 막기</li>
+        <li>시트에 한 줄 입력</li>
+        <li>차액 칸 확인 (빨강 → 계좌 안내 / 주황 → 부분 환불)</li>
+        <li>아카라 정기 비밀번호 만들기</li>
+        <li>시트에 비밀번호 + '확정' → ① 자동</li>
+      </ol>
+    </div>
+    <div class="box own">
+      <div class="bt"><span class="tag">대표</span>전날 21시</div>
+      <ul>
+        <li>비번확인 칸 노랑 → 전화로 확인</li>
+        <li>아카라 소등 칸에 종료 시각 입력 (+15분 소등)</li>
+      </ul>
+      <div class="bt" style="margin-top:4px"><span class="tag">대표</span>매주 한 번</div>
+      <ul>
+        <li>아카라 지난 비밀번호 삭제 · 솔라피 잔액 확인</li>
+        <li>도어락 배터리 · 인화지 · 액자 재고</li>
+      </ul>
+    </div>
+
+    <div class="box own span2">
+      <div class="bt"><span class="tag">대표</span>매일 밤 9시 (한 번에)</div>
+      <ol class="steps">
+        <li>오늘 이용한 팀 매장 점검 (기준: 다음 손님에게 다시 쓸 수 있나)</li>
+        <li>이상 없음 → <span class="must">꼭</span>네이버 <b>'이용완료' 누르기 전에</b> 보증금 옵션만 부분 환불 (50,000원) → 그 다음 '이용완료' → 시트 <b>'환불완료'</b></li>
+        <li>파손 있음 → 보증금 환불하지 않고 '이용완료' → 시트에 점검내용 · 차감금액 → <b>'차감(⑤발송)'</b> → ⑤ 자동 → 계좌 받아 남은 돈 이체</li>
+        <li>리뷰 이벤트 지급 (네이버 10,000원 · 블로그 20,000원 계좌 이체)</li>
+        <li>장부 정리 · 시트에 빨강·노랑 칸이 남아 있지 않은지 확인</li>
+      </ol>
+    </div>
+
+    <div class="box auto span2">
+      <div class="bt"><span class="tag">자동</span>시트가 알아서 하는 것</div>
+      <ul>
+        <li>맞는금액 · 차액 계산 &nbsp;|&nbsp; <b>①</b> 비밀번호 + '확정' 뒤 10분 안 &nbsp;|&nbsp; <b>②</b> 종료 시각 지나면 → 상태 '이용완료' &nbsp;|&nbsp; <b>⑤</b> '차감(⑤발송)' + 점검내용 + 차감금액이 다 있으면</li>
+        <li>카톡 실패 → <span class="nw">010-5162-9870</span> 문자로 자동 대체 (문자 답장은 그 폰에서 확인) · 보내기 실패하면 알림 메일</li>
+      </ul>
+    </div>
+
+    <div class="box dec span2">
+      <div class="bt"><span class="tag">판단</span>시트 색 뜻</div>
+      <table class="t colors">
+        <tr><th>색</th><th>뜻</th><th>할 일</th></tr>
+        <tr><td><span class="sw" style="background:#f4a7a7"></span>빨강</td><td>알림톡 실패 · "발송중"이 멈춘 채 남음 · 시간 오류(종료가 시작보다 빠름) · 구성 미선택/중복 · 패밀리 4시간 미만 · 덜 낸 차액</td><td>사유를 고친 뒤 결과 칸 지우기(다시 보냄) · 손님 연락</td></tr>
+        <tr><td><span class="sw" style="background:#f9c784"></span>주황</td><td>더 낸 차액 · (제목 줄이 주황이면) 시험 모드</td><td>남는 옵션 부분 환불 · 시험 모드는 끄기</td></tr>
+        <tr><td><span class="sw" style="background:#fbe58a"></span>노랑</td><td>"대기:" (비밀번호 · 점검내용 · 시간 입력 필요) · 비번 미확인 · 보증금 처리 남음</td><td>빈 칸만 채우기 (결과 칸은 지우지 않기)</td></tr>
+        <tr><td><span class="sw" style="background:#d6d8dc"></span>회색</td><td>취소</td><td>없음</td></tr>
+      </table>
+    </div>
+
+    <div class="box dec span2">
+      <div class="bt"><span class="tag">판단</span>①②⑤ 결과 칸 글자 뜻</div>
+      <table class="t">
+        <tr><th>적힌 글자</th><th>뜻</th><th>할 일</th></tr>
+        <tr><td>성공</td><td>나감</td><td>없음</td></tr>
+        <tr><td>실패: …</td><td>안 나감</td><td>사유 고친 뒤 <b>결과 칸 지우기</b> → 다시 보냄 (②는 이용완료여도 됨)</td></tr>
+        <tr><td>대기: …</td><td>빠진 칸이 있음</td><td>지우지 말고 빠진 칸만 채우기</td></tr>
+        <tr><td>발송중 (빨강으로 남음)</td><td>보내다가 멈춤</td><td>솔라피 발송 내역 확인 → 나갔으면 <b>'성공 수동확인'</b> 적기 / 안 나갔으면 칸 비우기</td></tr>
+        <tr><td>성공 응답해석실패-솔라피내역확인</td><td>나갔을 수도 있음</td><td><b>지우지 말고</b> 솔라피 발송 내역 확인</td></tr>
+        <tr><td>메모 칸 "② 보류: …"</td><td>① 뒤에 시간이 잘못 고쳐짐</td><td>시작 · 종료를 바로잡으면 ② 자동</td></tr>
+        <tr><td>Z1 칸 '마지막 실행'이 20분 넘게 그대로</td><td>자동 발송이 꺼짐</td><td>메뉴 [쁘띠레코드] → <b>② 자동 발송 켜기</b></td></tr>
+      </table>
+    </div>
+
+    <div class="note span2">연락 기준: 카카오 채널 <b>"쁘띠레코드 베이비셀프스튜디오"</b> 채팅 (대표·남편 관리자) · 매장 번호 <b class="nw">010-5162-9870</b> (문자 · 카톡 없는 손님) · 네이버 톡톡 = 예약 전 문의용</div>
+  </div>
+
+  <footer class="pf"><span>쁘띠레코드 운영 순서도 · 2026-10-27 기준</span><span>끝 · 함께 보는 문서: 운영 매뉴얼(마크다운)</span></footer>
+</section>
+
+</body>
+</html>
