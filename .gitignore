@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 node_modules/
 out/
+tools/exam2/parts_*
+tools/exam2/*.pkl
+tools/exam2/enum
+tools/exam2/combos.txt
