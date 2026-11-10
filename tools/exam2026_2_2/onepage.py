@@ -130,10 +130,11 @@ def render(assign, tt, m, label, tagline, out_pdf, extra_lines=()):
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
     ]))
     four = sum(n for c, n in COMBOS for d in DAYS if len(set(c) & day_sets(assign)[d]) >= 4)
+    four_reg = sum(n for c, n in COMBOS for d in DAYS if len(set(c) & day_sets(assign)[d]) >= 4 and c not in (EXEMPT_ALL, EXEMPT_FOUR))
     lines = ["1학년 156명(6과목) · 2학년 176명(16과목) · 전원 1인 8과목",
              f"{label} — {tagline}",
              f"하루 3과목 최대 {m['max3']}명 · 마지막날 3과목 {m['tue3_all']}명",
-             f"4과목 {four}명{'(도움반 1명, 면제)' if four else '(도움반 포함)'} · 교사 하루 2과목 {len(m['teacher2'])}건",
+             f"4과목 {four}명{('(일반 학생 ' + str(four_reg) + '명, 하루 4과목 금지 위반)') if four_reg else ('(도움반 1명, 면제)' if four else '(도움반 포함)')} · 교사 하루 2과목 {len(m['teacher2'])}건",
              f"계열 중복 {m['dup_n']}명({len(m['dup'])}건) · 3학년담임 예외 {len(m['exc'])}건",
              f"연속 교시 {len(m['consec'])}건 {m['consec_n']}명"] + list(extra_lines)
     summary = P("<br/>".join(lines), size=8, leading=12)
