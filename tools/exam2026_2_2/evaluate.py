@@ -35,10 +35,11 @@ def day_options(day, subs, allowed, k, h):
 def teacher2_count(ds, k):
     """교사 하루 2과목(1학년 포함) 건수 — 요일 배정과 k(통합과학2 요일)로 결정"""
     n = 0
-    if "E" in ds["월"]: n += 1          # 김미애 + 통합사회2
-    if "I" in ds["월"]: n += 1          # 노석환 + 통합사회2
     if "O" in ds["금"]: n += 2          # 정인광·손경준 + 한국사2
-    sci = "금" if k else "월"
+    soc = "월" if G1_MODE == "A" else "금"
+    sci = ("금" if k else "월") if G1_MODE == "A" else "월"
+    if "E" in ds[soc]: n += 1          # 김미애 + 통합사회2
+    if "I" in ds[soc]: n += 1          # 노석환 + 통합사회2
     if "H" in ds[sci]: n += 1           # 최진호 + 통합과학2
     if "M" in ds[sci]: n += 1           # 조세라 + 통합과학2
     for d in DAYS:
@@ -84,7 +85,7 @@ def full_metrics(assign, tt):
     m["max3"] = max(m["three"].values())
     m["sum3"] = sum(m["three"].values())
     # 예외
-    exc = [("박현수", "통합사회2", "월", 2)]
+    exc = [("박현수", "통합사회2", "월", 2)] if G1_MODE == "A" else []
     for s, who in (("J", "배태안"), ("O", "손경준")):
         d = assign[SUBJ_IDX[s]]
         if d in ("월", "화"):
@@ -146,7 +147,7 @@ def full_metrics(assign, tt):
     m["dev"] = dev
     m["thu_p1"] = 1 in set(per["목"].values())
     m["k"], m["h"] = k, h
-    m["sci_day"] = "금" if k else "월"
+    m["sci_day"] = ("금" if k else "월") if G1_MODE == "A" else "월"
     return m
 
 

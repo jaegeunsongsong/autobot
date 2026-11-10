@@ -2,6 +2,7 @@
 
 모든 수치는 이 파일의 COMBOS에서 직접 계산한다. 추측 금지.
 """
+import os
 from collections import Counter
 from itertools import combinations
 
@@ -128,6 +129,9 @@ G1 = {
     "공통수학2": ["김순선", "최지혜"],
     "공통영어2": ["강승희", "이바다"],
 }
+# 1학년 배치 모드. A: 통합사회2 월요일 고정(박현수 예외 1건). B: 통합사회2를 금요일(한국사2와 함께), 월요일은 공통국어2+통합과학2
+G1_MODE = os.environ.get("G1_MODE", "A")
+
 HOMEROOM3 = {"최광진", "배태안", "박현수", "김영주", "변영민", "남재현", "손경준", "김수현", "정재훈"}
 
 # 면제 학생

@@ -20,11 +20,15 @@ def g1_slots(day, k, h):
     """1학년 과목의 (과목, 교시). k=1: 통합과학2 금(공통국어2 월), k=0: 통합과학2 월.
     h: 금요일 한국사2 교시(2 또는 7). 월요일 통합사회2는 박현수 예외 규칙으로 2교시 고정."""
     if day == "금":
-        other = "통합과학2" if k else "공통국어2"
-        return [("한국사2", h), (other, 9 - h)]
+        if G1_MODE == "A":
+            other = "통합과학2" if k else "공통국어2"
+            return [("한국사2", h), (other, 9 - h)]
+        return [("한국사2", h), ("통합사회2", 9 - h)]
     if day == "월":
-        other = "공통국어2" if k else "통합과학2"
-        return [("통합사회2", 2), (other, 7)]
+        if G1_MODE == "A":
+            other = "공통국어2" if k else "통합과학2"
+            return [("통합사회2", 2), (other, 7)]
+        return [("통합과학2", 2 if k else 7), ("공통국어2", 7 if k else 2)]   # 모드 B: k=1 이면 통합과학2 2교시
     if day == "화":
         return [("공통수학2", 2), ("공통영어2", 4)]
     return []

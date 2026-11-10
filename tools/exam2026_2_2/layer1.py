@@ -55,15 +55,21 @@ def enumerate_day_assignments(cap, hard_prefs=True, jo_pair_allowed=True, np_pai
         for d in D:
             m.Add(y["A", d] + y["B", d] + y["C", d] <= 1)  # ABC 다른 날
             m.Add(y["B", d] + y["D", d] <= 1)              # 구성희
-        m.Add(y["E", "월"] == 0)   # 김미애 통합사회2
-        m.Add(y["I", "월"] == 0)   # 노석환 통합사회2
         m.Add(y["O", "금"] == 0)   # 정인광·손경준 한국사2
-        # 최진호(H)·조세라(M) 는 통합과학2(금 또는 월)와 다른 날: k 변수
-        k = m.NewBoolVar("sci_on_fri")   # 1이면 통합과학2 금, 0이면 월
-        m.Add(y["H", "금"] == 0).OnlyEnforceIf(k)
-        m.Add(y["M", "금"] == 0).OnlyEnforceIf(k)
-        m.Add(y["H", "월"] == 0).OnlyEnforceIf(k.Not())
-        m.Add(y["M", "월"] == 0).OnlyEnforceIf(k.Not())
+        if G1_MODE == "A":
+            m.Add(y["E", "월"] == 0)   # 김미애 통합사회2
+            m.Add(y["I", "월"] == 0)   # 노석환 통합사회2
+            # 최진호(H)·조세라(M) 는 통합과학2(금 또는 월)와 다른 날: k 변수
+            k = m.NewBoolVar("sci_on_fri")   # 1이면 통합과학2 금, 0이면 월
+            m.Add(y["H", "금"] == 0).OnlyEnforceIf(k)
+            m.Add(y["M", "금"] == 0).OnlyEnforceIf(k)
+            m.Add(y["H", "월"] == 0).OnlyEnforceIf(k.Not())
+            m.Add(y["M", "월"] == 0).OnlyEnforceIf(k.Not())
+        else:
+            m.Add(y["E", "금"] == 0)   # 김미애 통합사회2(금)
+            m.Add(y["I", "금"] == 0)   # 노석환 통합사회2(금)
+            m.Add(y["H", "월"] == 0)   # 최진호 통합과학2(월)
+            m.Add(y["M", "월"] == 0)   # 조세라 통합과학2(월)
     if extra:
         extra(m, y)
 
@@ -114,7 +120,7 @@ def metrics(assign):
         for a, b in itertools.combinations(sorted(ds[d]), 2):
             if FIELD[a] == FIELD[b]:
                 dup.append((d, a, b, overlap(a, b)))
-    exc = 1 + (1 if assign[SUBJ_IDX["J"]] in ("월", "화") else 0) + (1 if assign[SUBJ_IDX["O"]] in ("월", "화") else 0)
+    exc = (1 if G1_MODE == "A" else 0) + (1 if assign[SUBJ_IDX["J"]] in ("월", "화") else 0) + (1 if assign[SUBJ_IDX["O"]] in ("월", "화") else 0)
     return dict(dist=dist, three=three, four=four, zero=zero, dup=dup, dup_n=sum(x[3] for x in dup),
                 dup_cnt=len(dup), exc=exc, tue3=three["화"], max3=max(three.values()), sum3=sum(three.values()))
 
