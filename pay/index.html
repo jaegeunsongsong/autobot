@@ -6,118 +6,141 @@
 <meta name="robots" content="noindex, nofollow">
 <title>시간 연장 결제</title>
 <style>
-  :root { --bg:#f6f7f9; --card:#fff; --ink:#111; --sub:#666; --line:#e5e7eb; --toss:#0064ff; --kakao:#fee500; --ok:#1a7f37; }
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#111; --sub:#666; --line:#e5e7eb; --toss:#0064ff; --naver:#03c75a; }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif; line-height:1.45; }
   main { max-width:480px; margin:0 auto; padding:20px 16px 48px; }
-  h1 { font-size:22px; margin:8px 0 4px; }
-  .sub { color:var(--sub); font-size:14px; margin:0 0 18px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 16px; margin-bottom:14px; }
-  .card h2 { font-size:17px; margin:0 0 2px; }
-  .price { font-size:28px; font-weight:700; margin:0 0 12px; }
-  .btn { display:block; width:100%; border:0; border-radius:12px; padding:16px; font-size:17px; font-weight:700; text-align:center; text-decoration:none; cursor:pointer; margin-top:8px; }
-  .btn.toss { background:var(--toss); color:#fff; }
-  .btn.kakao { background:var(--kakao); color:#191919; }
-  .btn.copy { background:#111; color:#fff; }
-  .btn.ghost { background:#fff; color:#111; border:1px solid var(--line); font-weight:600; }
-  .acct { font-size:15px; margin:4px 0 2px; }
+  h1 { font-size:20px; margin:4px 0 2px; }
+  .step { font-size:13px; color:var(--sub); margin:0 0 14px; }
+  h2 { font-size:22px; margin:0 0 14px; }
+  .choice { display:block; width:100%; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px 18px; margin-bottom:12px; text-align:left; cursor:pointer; text-decoration:none; color:var(--ink); }
+  .choice .t { font-size:18px; font-weight:700; }
+  .choice .p { font-size:26px; font-weight:800; margin-top:2px; }
+  .choice .d { font-size:13px; color:var(--sub); margin-top:4px; }
+  .choice.toss { border-color:var(--toss); }
+  .choice.toss .t { color:var(--toss); }
+  .choice.naver .t { color:#028a3f; }
+  .tag { display:inline-block; font-size:11px; font-weight:700; color:#fff; background:var(--toss); border-radius:999px; padding:2px 8px; margin-left:6px; vertical-align:middle; }
+  .amount { background:#111; color:#fff; border-radius:14px; padding:14px 16px; margin:0 0 14px; display:flex; justify-content:space-between; align-items:center; }
+  .amount b { font-size:22px; }
+  .amount span { font-size:14px; opacity:.85; }
+  .acct { font-size:15px; margin:10px 0 0; }
   .acct b { font-size:19px; letter-spacing:.5px; }
-  .note { font-size:13px; color:var(--sub); margin:12px 0 0; }
+  .back { display:inline-block; margin:6px 0 0; font-size:14px; color:var(--sub); text-decoration:underline; background:none; border:0; padding:0; cursor:pointer; }
+  .note { font-size:13px; color:var(--sub); margin:16px 0 0; padding-left:18px; }
   .note li { margin-bottom:4px; }
-  .toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%); background:#111; color:#fff; padding:12px 18px; border-radius:999px; font-size:14px; opacity:0; transition:opacity .2s; pointer-events:none; }
+  .toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%); background:#111; color:#fff; padding:12px 18px; border-radius:999px; font-size:14px; opacity:0; transition:opacity .2s; pointer-events:none; white-space:nowrap; }
   .toast.show { opacity:1; }
-  .hidden { display:none; }
+  .hidden { display:none !important; }
 </style>
 </head>
 <body>
 <main>
   <h1 id="storeName">시간 연장 결제</h1>
-  <p class="sub">원하시는 시간을 고르고 버튼을 눌러 주세요. 입금이 확인되면 바로 연장됩니다.</p>
 
-  <section class="card" id="card25">
-    <h2>연장 30분</h2>
-    <p class="price" id="price25">25,000원</p>
-    <a class="btn toss" id="toss25" href="#">토스로 25,000원 보내기</a>
-    <a class="btn kakao hidden" id="kakao25" href="#">카카오페이로 25,000원 보내기</a>
+  <!-- 1단계: 시간 선택 -->
+  <section id="step1">
+    <p class="step">1 / 2</p>
+    <h2>얼마나 연장하시나요?</h2>
+    <button class="choice" data-amt="25000" data-label="30분 연장">
+      <div class="t">30분 연장</div>
+      <div class="p">25,000원</div>
+    </button>
+    <button class="choice" data-amt="50000" data-label="1시간 연장">
+      <div class="t">1시간 연장</div>
+      <div class="p">50,000원</div>
+    </button>
   </section>
 
-  <section class="card" id="card50">
-    <h2>연장 1시간</h2>
-    <p class="price" id="price50">50,000원</p>
-    <a class="btn toss" id="toss50" href="#">토스로 50,000원 보내기</a>
-    <a class="btn kakao hidden" id="kakao50" href="#">카카오페이로 50,000원 보내기</a>
-  </section>
+  <!-- 2단계: 앱 선택 -->
+  <section id="step2" class="hidden">
+    <p class="step">2 / 2</p>
+    <h2>어떤 앱으로 보내시겠어요?</h2>
+    <div class="amount"><span id="pickLabel">30분 연장</span><b id="pickAmt">25,000원</b></div>
 
-  <section class="card">
-    <h2>다른 은행 앱으로 보내기</h2>
-    <p class="acct"><span id="bankName">KB국민은행</span> <b id="accountNo">000-00-000000</b></p>
-    <p class="acct">예금주 <span id="holder">홍길동</span></p>
-    <button class="btn copy" id="copyBtn">계좌번호 복사</button>
-    <p class="note">복사한 뒤 쓰시는 은행 앱에서 붙여 넣고 금액을 입력해 주세요.</p>
-  </section>
+    <a class="choice toss" id="tossBtn" href="#">
+      <div class="t">토스 <span class="tag">금액 자동 입력</span></div>
+      <div class="d">누르면 토스 앱이 열리고 금액이 채워져 있어요. 확인만 하면 끝.</div>
+    </a>
 
-  <ul class="note">
-    <li>보내실 때 <b>입금자명(받는 분에게 표시)에 예약자 성함</b>을 남겨 주시면 확인이 빨라요.</li>
-    <li id="receiptLine">현금영수증이 필요하시면 입금 후 <a id="contactLink" href="#">여기</a>로 휴대폰번호를 보내 주세요.</li>
-    <li>송금 수수료는 없습니다. 입금 확인은 사장 휴대폰으로 바로 옵니다.</li>
-  </ul>
+    <a class="choice naver" id="naverBtn" href="#">
+      <div class="t">네이버페이</div>
+      <div class="d">누르면 네이버페이 송금 화면이 열려요. 금액 <b id="naverAmt">25,000</b>원을 직접 입력해 주세요.</div>
+    </a>
+
+    <button class="choice" id="bankBtn">
+      <div class="t">다른 은행 앱 (계좌번호 복사)</div>
+      <div class="d">계좌번호를 복사한 뒤 쓰시는 은행 앱에서 보내 주세요.</div>
+      <p class="acct"><span id="bankName">KB국민은행</span> <b id="accountNo">000-00-000000</b> · 예금주 <span id="holder">홍길동</span></p>
+    </button>
+
+    <button class="back" id="backBtn">← 시간 다시 고르기</button>
+
+    <ul class="note">
+      <li>보내실 때 <b>입금자명(받는 분에게 표시)에 예약자 성함</b>을 남겨 주시면 확인이 빨라요.</li>
+      <li id="receiptLine">현금영수증이 필요하시면 입금 후 <a id="contactLink" href="#">여기</a>로 휴대폰번호를 보내 주세요.</li>
+      <li>송금 수수료는 없어요. 입금되면 사장 휴대폰으로 바로 알림이 와요.</li>
+    </ul>
+  </section>
 </main>
-<div class="toast" id="toast">계좌번호를 복사했어요</div>
+<div class="toast" id="toast"></div>
 
 <script>
 /* ===== 여기만 고치면 됩니다 =====================================
-   tossLink25 / tossLink50 : 토스 앱 '사진으로 송금 > QR 코드 발급'으로 만든
-                             25,000원·50,000원 QR에 들어 있는 링크(주소)를 그대로 붙여 넣기
-   kakaoLink25 / kakaoLink50 : 비워 두면 카카오페이 버튼이 안 보임(비공식 링크라 선택)
-   contact : 현금영수증 요청 받을 곳(카카오톡 채널 주소 또는 tel:010-0000-0000). 비우면 그 줄이 숨겨짐
+   tossLink25 / tossLink50 : 토스 '사진으로 송금 > QR 코드 발급'으로 만든
+                             25,000원·50,000원 QR에 들어 있는 링크를 그대로 붙여 넣기
+   naverLink : 네이버페이 'QR 보여주고 돈받기' QR에 들어 있는 링크
+               (네이버페이는 금액을 손님이 입력하므로 링크 1개면 됨)
+   contact   : 현금영수증 요청 받을 곳(카카오톡 채널 주소 또는 tel:010-0000-0000). 비우면 그 줄이 숨겨짐
+   토스/네이버 링크를 비워 두면 해당 버튼이 숨겨지고 계좌번호 복사만 보입니다.
 ================================================================== */
 const CONFIG = {
-  storeName:  "",                 // 예: "○○ 셀프 스튜디오" (비우면 '시간 연장 결제')
+  storeName:  "",                 // 예: "○○ 셀프 스튜디오"
   bankName:   "KB국민은행",
-  accountNo:  "000-00-000000",    // 하이픈 포함해서 적어도 됨
+  accountNo:  "000-00-000000",
   holder:     "홍길동",
   tossLink25: "",
   tossLink50: "",
-  kakaoLink25:"",
-  kakaoLink50:"",
+  naverLink:  "",
   contact:    ""
 };
 /* ================================================================ */
 
 const $ = id => document.getElementById(id);
+const won = n => Number(n).toLocaleString("ko-KR");
 if (CONFIG.storeName) { $("storeName").textContent = CONFIG.storeName + " · 시간 연장 결제"; document.title = CONFIG.storeName + " 시간 연장 결제"; }
 $("bankName").textContent = CONFIG.bankName;
 $("accountNo").textContent = CONFIG.accountNo;
 $("holder").textContent = CONFIG.holder;
+if (CONFIG.contact) $("contactLink").href = CONFIG.contact; else $("receiptLine").classList.add("hidden");
+if (!CONFIG.naverLink) $("naverBtn").classList.add("hidden"); else $("naverBtn").href = CONFIG.naverLink;
 
-function setLink(id, url) {
-  const a = $(id);
-  if (url) { a.href = url; a.classList.remove("hidden"); }
-  else if (id.startsWith("toss")) { a.classList.add("ghost"); a.textContent = a.textContent.replace("토스로 ", "토스로 ") + " (링크 준비 중)"; a.addEventListener("click", e => { e.preventDefault(); showToast("아래 계좌번호로 보내 주세요"); }); }
-  else { a.classList.add("hidden"); }
-}
-setLink("toss25", CONFIG.tossLink25);
-setLink("toss50", CONFIG.tossLink50);
-setLink("kakao25", CONFIG.kakaoLink25);
-setLink("kakao50", CONFIG.kakaoLink50);
-
-if (CONFIG.contact) { $("contactLink").href = CONFIG.contact; }
-else { $("receiptLine").classList.add("hidden"); }
+let picked = 25000;
+document.querySelectorAll("#step1 .choice").forEach(b => b.addEventListener("click", () => {
+  picked = Number(b.dataset.amt);
+  $("pickLabel").textContent = b.dataset.label;
+  $("pickAmt").textContent = won(picked) + "원";
+  $("naverAmt").textContent = won(picked);
+  const toss = picked === 50000 ? CONFIG.tossLink50 : CONFIG.tossLink25;
+  if (toss) { $("tossBtn").href = toss; $("tossBtn").classList.remove("hidden"); } else { $("tossBtn").classList.add("hidden"); }
+  $("step1").classList.add("hidden"); $("step2").classList.remove("hidden"); window.scrollTo(0, 0);
+}));
+$("backBtn").addEventListener("click", () => { $("step2").classList.add("hidden"); $("step1").classList.remove("hidden"); });
 
 function showToast(msg) {
   const t = $("toast"); t.textContent = msg; t.classList.add("show");
-  clearTimeout(showToast._h); showToast._h = setTimeout(() => t.classList.remove("show"), 1800);
+  clearTimeout(showToast._h); showToast._h = setTimeout(() => t.classList.remove("show"), 2000);
 }
-$("copyBtn").addEventListener("click", async () => {
-  const digits = CONFIG.accountNo.replace(/[^0-9]/g, "");
+async function copyText(text) {
   try {
-    if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(digits); }
-    else {
-      const ta = document.createElement("textarea"); ta.value = digits; ta.style.position = "fixed"; ta.style.opacity = "0";
-      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
-    }
-    showToast("계좌번호를 복사했어요");
-  } catch (e) { showToast("복사가 안 되면 번호를 길게 눌러 복사해 주세요"); }
+    if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+    else { const ta = document.createElement("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); }
+    return true;
+  } catch (e) { return false; }
+}
+$("bankBtn").addEventListener("click", async () => {
+  const ok = await copyText(CONFIG.accountNo.replace(/[^0-9]/g, ""));
+  showToast(ok ? "계좌번호를 복사했어요. 은행 앱에서 붙여 넣으세요" : "번호를 길게 눌러 복사해 주세요");
 });
 </script>
 </body>
