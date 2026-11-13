@@ -1,0 +1,1476 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>확률과 통계 Ⅲ 통계 수업안 (고쟁이 대응)</title>
+<style>
+@font-face { font-family: "Nanum Gothic"; font-weight: 400; src: url("https://cdn.jsdelivr.net/npm/@fontsource/nanum-gothic@5.2.5/files/nanum-gothic-korean-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Nanum Gothic"; font-weight: 700; src: url("https://cdn.jsdelivr.net/npm/@fontsource/nanum-gothic@5.2.5/files/nanum-gothic-korean-700-normal.woff2") format("woff2"); }
+
+@page { size: A4; margin: 16mm 14mm 18mm 14mm; }
+html { font-size: 10.5pt; }
+body { font-family: "Nanum Gothic","Noto Sans CJK KR","Noto Sans KR","NanumGothic","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+       line-height: 1.55; color: #1a1a1a; max-width: 190mm; margin: 0 auto; padding: 0 4mm; }
+section.doc { page-break-before: always; }
+section.doc:first-child { page-break-before: auto; }
+h1 { font-size: 1.55rem; border-bottom: 3px solid #6b2a4a; padding-bottom: .25rem; margin: 0 0 .8rem; color: #4a1b33; }
+h2 { font-size: 1.2rem; margin: 1.3rem 0 .5rem; padding-left: .45rem; border-left: 5px solid #c08a55; color: #4a1b33; }
+h3 { font-size: 1.02rem; margin: 1rem 0 .35rem; color: #0f3d5c; page-break-after: avoid; }
+h3 + p, h3 + table { page-break-before: avoid; }
+table { border-collapse: collapse; margin: .4rem 0 .7rem; font-size: .93rem; page-break-inside: avoid; }
+th, td { border: 1px solid #b9b9b9; padding: .22rem .55rem; text-align: center; vertical-align: top; }
+th { background: #f3e9ee; }
+td:first-child, th:first-child { text-align: left; }
+p { margin: .3rem 0; }
+ul, ol { margin: .25rem 0 .5rem 1.2rem; padding-left: .6rem; }
+li { margin: .12rem 0; }
+code { font-family: "D2Coding","Consolas",monospace; background: #f4f4f4; padding: 0 .25rem; border-radius: 3px; font-size: .9em; }
+pre { background: #f6f6f6; border: 1px solid #ddd; padding: .5rem .7rem; font-size: .85rem; overflow-x: auto; }
+strong { color: #222; }
+mjx-container { font-size: 105% !important; }
+mjx-container[display="true"] { margin: .35rem 0 !important; }
+.doc > p:first-of-type { }
+</style>
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+                   svg: { fontCache: 'global' },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
+</head><body>
+<section class="doc"><h1>확률과 통계 Ⅲ. 통계 — 고쟁이(2022 개정) 대응 7차시 수업안</h1>
+<p>2학년 2학기 2차 지필 범위(통계)를 <strong>고쟁이 528~835번을 스스로 풀 수 있는 수준</strong>까지 끌어올리기 위한 수업 준비 자료다.</p>
+<ul>
+<li>차시마다 <strong>예제 8개</strong>(기본 → 확장). 통계적 추정은 <strong>2파트</strong>로 나눴다.</li>
+<li>모든 차시는 <strong>심플한 예시 → 느낌·감각 → 확장</strong>의 순서로 설계했다. 도입 예시는 숫자가 작고 손으로 전부 나열할 수 있는 것만 썼다.</li>
+<li>예제의 답은 고쟁이 빠른 정답(p.213~214)과 대조해 맞춰 두었다. 예제 옆의 <strong>고쟁이 연계 번호</strong>는 "이 예제를 이해하면 바로 풀리는 문항"이다.</li>
+</ul>
+<h2>파일</h2>
+<table>
+<thead>
+<tr>
+<th>파일</th>
+<th>차시</th>
+<th>주제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>01-확률변수와-확률분포.md</code></td>
+<td>1</td>
+<td>확률변수, 확률질량함수, 확률밀도함수</td>
+</tr>
+<tr>
+<td><code>02-이산확률변수의-평균과-분산.md</code></td>
+<td>2</td>
+<td>기댓값·분산·표준편차, aX+b</td>
+</tr>
+<tr>
+<td><code>03-이항분포.md</code></td>
+<td>3</td>
+<td>이항분포의 뜻·평균·분산, 활용</td>
+</tr>
+<tr>
+<td><code>04-정규분포.md</code></td>
+<td>4</td>
+<td>정규분포, 표준정규분포, 활용</td>
+</tr>
+<tr>
+<td><code>05-이항분포와-정규분포.md</code></td>
+<td>5</td>
+<td>이항분포의 정규근사</td>
+</tr>
+<tr>
+<td><code>06-통계적추정1-표본평균과-표본비율.md</code></td>
+<td>6</td>
+<td>모집단과 표본, 표본평균·표본비율의 분포</td>
+</tr>
+<tr>
+<td><code>07-통계적추정2-모평균과-모비율의-추정.md</code></td>
+<td>7</td>
+<td>신뢰구간, 신뢰도, 표본의 크기, 모비율</td>
+</tr>
+</tbody>
+</table>
+<h2>차시 계획표와 고쟁이 대응</h2>
+<table>
+<thead>
+<tr>
+<th>차시</th>
+<th>주제</th>
+<th>고쟁이 유형</th>
+<th>개념 쪽</th>
+<th>STEP 1</th>
+<th>STEP 2</th>
+<th>STEP 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>확률변수와 확률분포(이산·연속)</td>
+<td>01 유형 01~03</td>
+<td>p.135</td>
+<td>528~545</td>
+<td>581~600</td>
+<td>685~689, 700</td>
+</tr>
+<tr>
+<td>2</td>
+<td>이산확률변수의 평균·분산·표준편차, aX+b</td>
+<td>01 유형 04~06</td>
+<td>p.136 (4, 5)</td>
+<td>546~556</td>
+<td>601~623</td>
+<td>692~697, 699</td>
+</tr>
+<tr>
+<td>3</td>
+<td>이항분포</td>
+<td>01 유형 07~08</td>
+<td>p.136 (1~3)</td>
+<td>557~566</td>
+<td>624~648, 스키마 p.169</td>
+<td>690, 691, 698</td>
+</tr>
+<tr>
+<td>4</td>
+<td>정규분포와 표준정규분포, 활용</td>
+<td>01 유형 09~10</td>
+<td>p.137 (1, 2)</td>
+<td>567~576</td>
+<td>649~674, 스키마 p.170</td>
+<td>701~712</td>
+</tr>
+<tr>
+<td>5</td>
+<td>이항분포와 정규분포의 관계</td>
+<td>01 유형 11</td>
+<td>p.137 (3)</td>
+<td>577~580</td>
+<td>675~684</td>
+<td>713~716</td>
+</tr>
+<tr>
+<td>6</td>
+<td>통계적 추정(1) 모집단과 표본, 표본평균·표본비율의 분포</td>
+<td>02 유형 01~05</td>
+<td>p.179~180</td>
+<td>717~742</td>
+<td>764~794, 스키마 p.203</td>
+<td>821~826, 831</td>
+</tr>
+<tr>
+<td>7</td>
+<td>통계적 추정(2) 모평균·모비율의 추정</td>
+<td>02 유형 06~09</td>
+<td>p.180~181</td>
+<td>743~763</td>
+<td>795~820, 스키마 p.204</td>
+<td>827~830, 832~835</td>
+</tr>
+</tbody>
+</table>
+<p>고쟁이 유형 01(평균·분산·표준편차, 중학 복습 528·529·581·582)은 2차시 도입에서 다룬다.</p>
+<h2>수업 운영 원칙</h2>
+<ol>
+<li><strong>도입 예시는 전부 나열 가능한 크기로.</strong> 동전 2개, 주사위 3번, 모집단 {1, 2, 3}처럼 학생이 표를 직접 완성할 수 있어야 "확률변수는 숫자 목록, 분포는 확률 목록"이라는 감각이 생긴다.</li>
+<li><strong>공식은 예시에서 확인한 뒤에 쓴다.</strong> E(X)=np, E(X̄)=m, V(X̄)=σ²/n 모두 작은 예시에서 직접 계산해 맞는지 확인한 다음 일반식을 적는다.</li>
+<li><strong>예제 1~4는 기본, 5~8은 확장.</strong> 기본 4개는 학생이 따라 풀고, 확장 4개는 교사가 풀이 흐름을 보여 준 뒤 고쟁이 STEP 2로 연결한다.</li>
+<li><strong>그림을 먼저 그린다.</strong> 연속확률변수의 넓이, 정규분포의 표준화, 신뢰구간의 "그물" 모두 그림 없이 식만 쓰면 감각이 안 생긴다.</li>
+<li><strong>빈출 표시(★) 문항은 과제 필수.</strong> 고쟁이의 빈출 표시 문항 번호를 각 차시 과제에 그대로 넣었다.</li>
+</ol>
+<h2>표준정규분포 핵심값 (칠판 상단 고정)</h2>
+<table>
+<thead>
+<tr>
+<th>z</th>
+<th>0.5</th>
+<th>1.0</th>
+<th>1.5</th>
+<th>1.96</th>
+<th>2.0</th>
+<th>2.5</th>
+<th>2.58</th>
+<th>3.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P(0≤Z≤z)</td>
+<td>0.1915</td>
+<td>0.3413</td>
+<td>0.4332</td>
+<td>0.4750</td>
+<td>0.4772</td>
+<td>0.4938</td>
+<td>0.4950</td>
+<td>0.4987</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>m±σ 안 약 68 %, m±2σ 안 약 95 %, m±3σ 안 약 99.7 %.</li>
+<li>신뢰도 95 % ↔ k=1.96 (문제에 따라 2), 신뢰도 99 % ↔ k=2.58 (문제에 따라 2.6 또는 3). <strong>문제에 주어진 값을 그대로 쓴다.</strong></li>
+</ul>
+<h2>2022 개정 교육과정에서 달라진 점 (수업 중 강조)</h2>
+<ul>
+<li><strong>모비율의 추정이 들어왔다.</strong> 표본비율 p̂의 분포(6차시), 모비율의 신뢰구간(7차시)이 시험 범위다. 2015 개정 자료(고3용)에는 없으므로 기출 자료를 섞어 쓸 때 주의.</li>
+<li><strong>표본분산은 n−1로 나눈다.</strong> 고쟁이 p.179 정의와 720번. 모분산(n으로 나눔)과 혼동하지 않게 한 번은 짚는다.</li>
+<li>신뢰구간에서 σ를 모르면 n이 충분히 클 때(n≥30) 표본표준편차 S로 대신한다(749, 752).</li>
+</ul></section><section class="doc"><h1>1차시. 확률변수와 확률분포 (이산·연속)</h1>
+<ul>
+<li><strong>고쟁이</strong> 개념 p.135 / STEP 1 528~545 (유형 01~03) / STEP 2 581~600 / STEP 3 685~689, 700</li>
+</ul>
+<p><strong>학습 목표</strong></p>
+<ol>
+<li>시행의 결과에 수를 대응시킨 것이 확률변수임을 알고, 이산과 연속을 구분한다.</li>
+<li>확률질량함수의 성질(각 확률은 0 이상 1 이하, 합은 1)로 미지수와 구간의 확률을 구한다.</li>
+<li>확률밀도함수의 성질(f(x)≥0, 전체 넓이 1)로 미지수와 구간의 확률(넓이)을 구한다.</li>
+</ol>
+<h2>수업 흐름 (50분)</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>시간</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>도입</td>
+<td>7분</td>
+<td>동전 2개 → 앞면 개수에 숫자 붙이기 → "확률 목록"이 확률분포</td>
+</tr>
+<tr>
+<td>개념 1</td>
+<td>8분</td>
+<td>이산확률변수, 확률질량함수, 성질 3가지</td>
+</tr>
+<tr>
+<td>예제 1~4</td>
+<td>12분</td>
+<td>표 읽기 → 빈칸 → 함수식 → 상황에서 분포 만들기</td>
+</tr>
+<tr>
+<td>개념 2</td>
+<td>8분</td>
+<td>연속확률변수: 한 점의 확률은 0, 구간의 확률은 넓이</td>
+</tr>
+<tr>
+<td>예제 5~8</td>
+<td>12분</td>
+<td>직사각형 → 삼각형 → 기울어진 직선 → 대칭 꺾은선</td>
+</tr>
+<tr>
+<td>마무리</td>
+<td>3분</td>
+<td>한 줄 정리, 과제</td>
+</tr>
+</tbody>
+</table>
+<h2>1. 도입: 심플한 예시로 감 잡기</h2>
+<p><strong>칠판</strong>: 동전 2개를 던진다. 결과는 HH, HT, TH, TT.</p>
+<ul>
+<li>질문 1. "앞면이 몇 개 나왔는지"만 궁금하다면? 결과를 숫자로 바꾸자. HH→2, HT→1, TH→1, TT→0.</li>
+</ul>
+<p>→ 이렇게 <strong>결과마다 숫자를 하나씩 붙인 것</strong>이 확률변수 X다. (X = 앞면의 개수)
+- 질문 2. X가 0, 1, 2가 될 확률은? 1/4, 1/2, 1/4. 표로 쓰면</p>
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>합계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P(X=x)</td>
+<td>1/4</td>
+<td>1/2</td>
+<td>1/4</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>→ 이 <strong>"값 ↔ 확률" 대응표</strong>가 확률분포. 합계가 1인 건 당연하다(전체 확률).
+- 질문 3. 앞면이 적어도 1개일 확률은? P(X≥1) = 1/2 + 1/4 = 3/4. 또는 1 − P(X=0).</p>
+<p><strong>감각 한 줄</strong>: 확률변수는 "관심 있는 숫자", 확률분포는 "그 숫자들의 확률 목록". 이 두 문장이 1차시의 절반이다.</p>
+<p><strong>이산 vs 연속 (1분)</strong>: 손님 수, 앞면 개수, 던진 횟수처럼 <strong>셀 수 있으면</strong> 이산. 온도, 기다린 시간, 적설량처럼 <strong>어떤 범위의 모든 실수</strong>를 가질 수 있으면 연속. (530, 531)</p>
+<h2>2. 개념 정리</h2>
+<h3>(1) 이산확률변수와 확률질량함수</h3>
+<ul>
+<li>$P(X=x_i)=p_i\ (i=1,2,\cdots,n)$</li>
+<li>성질 ① $0\le p_i\le 1$ ② $p_1+p_2+\cdots+p_n=1$ ③ $P(x_i\le X\le x_j)=p_i+p_{i+1}+\cdots+p_j$</li>
+<li><strong>표나 식이 주어지면</strong>: 합 = 1로 미지수를 먼저 → 구하는 확률은 해당 칸을 더한다.</li>
+<li><strong>상황이 주어지면</strong>: X가 가질 수 있는 값부터 나열 → 각 값의 확률을 경우의 수(조합)로 계산 → 합이 1인지 검산.</li>
+</ul>
+<h3>(2) 연속확률변수와 확률밀도함수</h3>
+<ul>
+<li>$\alpha\le X\le\beta$에서 $f(x)\ge 0$, 곡선과 x축 사이 전체 넓이 = 1, $P(a\le X\le b)$ = a부터 b까지의 넓이.</li>
+<li><strong>한 점의 확률은 0</strong>: $P(X=a)=0$. 그래서 $P(a\le X\le b)=P(a&lt;X&lt;b)$. 등호 유무를 신경 쓸 필요가 없다.</li>
+<li>이 단원의 넓이는 전부 <strong>직사각형·삼각형·사다리꼴</strong>이다. 적분은 쓰지 않는다.</li>
+<li>$f(a)$는 확률이 아니라 <strong>높이</strong>다. "상수 k를 구하라"는 넓이 = 1로 푼다.</li>
+</ul>
+<h3>자주 하는 실수</h3>
+<ul>
+<li>합 = 1 조건을 안 써서 k를 못 찾는다.</li>
+<li>연속에서 P(X=2)를 f(2)로 답한다. 정답은 0.</li>
+<li>삼각형 넓이의 밑변·높이를 잘못 잡는다. 꼭짓점 좌표를 먼저 적게 한다.</li>
+</ul>
+<h2>3. 예제 8 (기본 → 확장)</h2>
+<h3>예제 1 [기본] 상황 → 확률분포표</h3>
+<p>두 개의 동전을 동시에 던질 때 앞면이 나오는 동전의 개수를 X라 하자.</p>
+<p>(1) X의 확률분포를 표로 나타내시오. (2) P(X≥1)을 구하시오.</p>
+<p><strong>풀이</strong> 표본공간 {HH, HT, TH, TT}. P(X=0)=1/4, P(X=1)=2/4=1/2, P(X=2)=1/4.
+P(X≥1)=P(X=1)+P(X=2)=3/4. (여사건으로 1−P(X=0)=3/4도 보여 준다.)</p>
+<p><strong>포인트</strong> "X가 가질 수 있는 값"을 먼저 나열하게 한다.</p>
+<p><strong>고쟁이</strong> 532, 535, 583</p>
+<h3>예제 2 [기본] 표의 빈칸 채우기</h3>
+<p>확률변수 X의 확률분포가 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>합계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P(X=x)</td>
+<td>1/8</td>
+<td>a</td>
+<td>3/8</td>
+<td>1/4</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>(1) a의 값 (2) P(2≤X≤3) (3) P(X≥2)</p>
+<p><strong>풀이</strong> (1) 1/8 + a + 3/8 + 2/8 = 1 → a = 1/4.</p>
+<p>(2) P(2≤X≤3) = 1/4 + 3/8 = 5/8. (3) P(X≥2) = 1 − 1/8 = 7/8.</p>
+<p><strong>고쟁이</strong> 533, 534, 584, 585</p>
+<h3>예제 3 [기본→확장] 함수식으로 주어진 확률질량함수</h3>
+<p>$P(X=x)=k(x+1)\ (x=0,1,2,3)$일 때 (1) 상수 k (2) P(X≥2)</p>
+<p><strong>풀이</strong> (1) 합이 1: k(1+2+3+4)=10k=1 → k=1/10.</p>
+<p>(2) P(X≥2)=P(X=2)+P(X=3)=3/10+4/10=7/10.</p>
+<p><strong>포인트</strong> 식이 주어져도 결국 "표로 펼친 뒤 합 = 1"이다. 표를 그려 보여 준다.</p>
+<p><strong>고쟁이</strong> 536, 586, 587</p>
+<h3>예제 4 [확장] 상황에서 분포 만들기 (조합)</h3>
+<p>흰 공 3개, 검은 공 2개가 들어 있는 주머니에서 임의로 2개의 공을 동시에 꺼낼 때, 검은 공의 개수를 X라 하자. X의 확률분포를 표로 나타내고 P(X≥1)을 구하시오.</p>
+<p><strong>풀이</strong> 전체 경우 ${}_5C_2=10$.
+$P(X=0)=\dfrac{{}_3C_2}{10}=\dfrac{3}{10}$, $P(X=1)=\dfrac{{}_3C_1\times{}_2C_1}{10}=\dfrac{6}{10}$, $P(X=2)=\dfrac{{}_2C_2}{10}=\dfrac{1}{10}$.</p>
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>합계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P(X=x)</td>
+<td>3/10</td>
+<td>6/10</td>
+<td>1/10</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>P(X≥1)=1−3/10=7/10.</p>
+<p><strong>포인트</strong> 서술형 538의 틀 그대로다. "표 → 확률 → 합이 1인지 검산"을 습관으로. 이 표는 2차시 예제 5에서 평균·분산 계산에 다시 쓴다.</p>
+<p><strong>고쟁이</strong> 537, 538, 588, 606</p>
+<h3>예제 5 [기본] 연속: 직사각형</h3>
+<p>연속확률변수 X의 확률밀도함수가 $f(x)=k\ (0\le x\le 4)$일 때 (1) k (2) P(1≤X≤3) (3) P(X=2)</p>
+<p><strong>풀이</strong> (1) 직사각형 넓이 4k=1 → k=1/4. (2) 가로 2, 높이 1/4 → 1/2. (3) 0.</p>
+<p><strong>포인트</strong> (3)에서 "f(2)=1/4인데 왜 0이냐"는 질문이 나오면 성공. 선분의 넓이는 0.</p>
+<p><strong>고쟁이</strong> 539</p>
+<h3>예제 6 [기본→확장] 연속: 삼각형 그래프</h3>
+<p>$0\le X\le 3$에서 정의된 연속확률변수 X의 확률밀도함수 y=f(x)의 그래프가 세 점 (0, 0), (1, k), (3, 0)을 차례로 잇는 꺾은선일 때, P(2≤X≤3)을 구하시오.</p>
+<p><strong>풀이</strong> 전체 삼각형 넓이 $\frac12\times3\times k=1$ → k=2/3.
+$1\le x\le3$에서 직선은 (1, 2/3), (3, 0)을 지나므로 $f(x)=\dfrac{3-x}{3}$, f(2)=1/3.
+P(2≤X≤3) = 밑변 1, 높이 1/3인 삼각형 = 1/6.</p>
+<p><strong>포인트</strong> 닮음으로도 된다. x=2는 밑변(1~3)의 중점이므로 높이는 꼭짓점의 절반. "k부터 구하고, 구하는 구간의 양 끝 높이를 적는다."</p>
+<p><strong>고쟁이</strong> 540, 542, 543, 589, 590</p>
+<h3>예제 7 [확장] 연속: 기울어진 직선</h3>
+<p>$f(x)=kx\ (0\le x\le 2)$일 때 (1) k (2) P(1≤X≤2)</p>
+<p><strong>풀이</strong> (1) 삼각형 넓이 $\frac12\times2\times2k=2k=1$ → k=1/2.</p>
+<p>(2) P(0≤X≤1)=$\frac12\times1\times\frac12=\frac14$ 이므로 P(1≤X≤2)=1−1/4=3/4.
+(검산: 사다리꼴 $\frac12\left(\frac12+1\right)\times1=\frac34$)</p>
+<p><strong>포인트</strong> "여사건으로 빼기"와 "사다리꼴 직접"을 둘 다 보여 주면 544·545 같은 문제에서 유연해진다.</p>
+<p><strong>고쟁이</strong> 541, 545, 597, 598</p>
+<h3>예제 8 [확장] 연속: 구간별 식 + 대칭</h3>
+<p>연속확률변수 X의 확률밀도함수가
+$f(x)=\begin{cases}a+x &amp; (-1\le x&lt;0)\\ a-x &amp; (0\le x\le 1)\end{cases}$
+일 때, $P\left(|X|\le\dfrac12\right)$를 구하시오.</p>
+<p><strong>풀이</strong> 그래프는 (−1, a−1), (0, a), (1, a−1)을 잇는 ∧ 모양.
+넓이 = 사다리꼴 2개 = $2\times\frac12(a-1+a)\times1=2a-1=1$ → a=1.
+즉 $f(x)=1-|x|$, 양 끝 높이 0인 삼각형(넓이 1 확인).
+$P(|X|\le\frac12)=P(-\frac12\le X\le\frac12)=1-(\text{양쪽 작은 삼각형})=1-2\times\frac12\times\frac12\times\frac12=\dfrac34$.</p>
+<p><strong>포인트</strong> 대칭이면 반쪽만 계산해서 2배. |X|≤1/2를 구간으로 바꿔 쓰는 연습.</p>
+<p><strong>고쟁이</strong> 544, 593, 594, 596, 599</p>
+<h2>4. 마무리 &amp; 과제</h2>
+<ul>
+<li><strong>한 줄 정리</strong>: 이산은 "더하기", 연속은 "넓이". 둘 다 전체는 1.</li>
+<li><strong>과제(필수, STEP 1)</strong> 530, 531, 533, 534, 536, 537, 538, 540, 541, 543, 545</li>
+<li><strong>과제(선택, STEP 2)</strong> 584, 585, 587, 589, 590, 593, 596, 598</li>
+<li><strong>도전(STEP 3)</strong> 685(누적함수 F, G), 686, 688, 689</li>
+<li><strong>다음 차시 예고</strong>: "예제 4의 표에서 검은 공 개수의 평균을 구할 수 있을까?"</li>
+</ul></section><section class="doc"><h1>2차시. 이산확률변수의 평균·분산·표준편차, aX+b</h1>
+<ul>
+<li><strong>고쟁이</strong> 개념 p.136 (4, 5) / STEP 1 546~556 (유형 04~06) / STEP 2 601~623 / STEP 3 692~697, 699</li>
+<li>유형 01(중학 평균·분산 복습 528, 529, 581, 582)은 도입에서 함께 다룬다.</li>
+</ul>
+<p><strong>학습 목표</strong></p>
+<ol>
+<li>확률분포표에서 평균(기댓값), 분산, 표준편차를 구한다.</li>
+<li>$V(X)=E(X^2)-\{E(X)\}^2$를 이용해 계산을 줄인다.</li>
+<li>$E(aX+b)=aE(X)+b$, $V(aX+b)=a^2V(X)$, $\sigma(aX+b)=|a|\sigma(X)$를 상황에 맞게 쓴다.</li>
+</ol>
+<h2>수업 흐름 (50분)</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>시간</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>도입</td>
+<td>8분</td>
+<td>복권 한 장의 "기대 금액" → 값×확률의 합 / 같은 평균, 다른 흩어짐</td>
+</tr>
+<tr>
+<td>개념 1</td>
+<td>7분</td>
+<td>E(X), V(X), σ(X) 정의와 계산 편법</td>
+</tr>
+<tr>
+<td>예제 1~4</td>
+<td>12분</td>
+<td>표에서 평균 → 분산 두 가지 방법 → E(X²) 주어진 경우 → 함수식</td>
+</tr>
+<tr>
+<td>개념 2</td>
+<td>6분</td>
+<td>aX+b: "더하기는 흩어짐을 안 바꾸고, 곱하기는 편차를 a배"</td>
+</tr>
+<tr>
+<td>예제 5~8</td>
+<td>14분</td>
+<td>상황에서 평균·분산 → 큰 수 X → aX+b 계산 → 미지수+aX+b</td>
+</tr>
+<tr>
+<td>마무리</td>
+<td>3분</td>
+<td>과제</td>
+</tr>
+</tbody>
+</table>
+<h2>1. 도입: 심플한 예시로 감 잡기</h2>
+<p><strong>복권 예시.</strong> 복권 100장 중 10000원짜리 1장, 1000원짜리 9장, 나머지 90장은 꽝. 한 장에 200원이면 살 만한가?</p>
+<ul>
+<li>100장을 전부 사면 상금 총액 10000 + 9000 = 19000원. 한 장당 190원. → 200원 주고 사면 평균적으로 10원 손해.</li>
+<li>이 190원을 확률로 다시 써 보자: $10000\times\frac{1}{100}+1000\times\frac{9}{100}+0\times\frac{90}{100}=190$.</li>
+</ul>
+<p>→ <strong>(값 × 확률)의 합</strong> = 기댓값 E(X). 중학교 평균 "변량×도수의 합 ÷ 전체"에서 도수/전체가 확률로 바뀐 것일 뿐이다.</p>
+<p><strong>흩어짐 예시.</strong> 게임 A는 항상 5점, 게임 B는 0점 또는 10점이 반반.</p>
+<ul>
+<li>둘 다 평균 5점. 그런데 B는 들쭉날쭉하다. 이 "들쭉날쭉"을 수로 재는 게 분산.</li>
+<li>편차(값 − 평균)를 제곱해서 확률로 가중평균: A는 0, B는 $(0-5)^2\cdot\frac12+(10-5)^2\cdot\frac12=25$. 표준편차는 √25 = 5.</li>
+<li>계산 편법: $E(X^2)-m^2$. B에서 $E(X^2)=0\cdot\frac12+100\cdot\frac12=50$, $50-25=25$ ✓. "제곱의 평균 − 평균의 제곱".</li>
+</ul>
+<p><strong>복습 10초.</strong> 1, 2, 3, 4, 5, 6, 7의 평균 4, 분산 $(9+4+1+0+1+4+9)/7=4$, 표준편차 2. (528)</p>
+<h2>2. 개념 정리</h2>
+<h3>(1) 평균, 분산, 표준편차</h3>
+<ul>
+<li>$E(X)=m=x_1p_1+x_2p_2+\cdots+x_np_n$</li>
+<li>$V(X)=E((X-m)^2)=E(X^2)-m^2$, $\sigma(X)=\sqrt{V(X)}$</li>
+<li><strong>표에서 구할 때</strong> 행을 두 개 더 그린다: $x\cdot p$ 행(합 → E(X)), $x^2\cdot p$ 행(합 → E(X²)).</li>
+</ul>
+<h3>(2) aX+b의 평균, 분산, 표준편차</h3>
+<ul>
+<li>시험 점수 X에 전원 10점을 더하면(X+10): 평균 10↑, 흩어짐 그대로.</li>
+<li>전원 2배(2X): 평균 2배, 편차도 2배 → 분산 4배, 표준편차 2배.</li>
+<li>그래서 $E(aX+b)=aE(X)+b$, $V(aX+b)=a^2V(X)$, $\sigma(aX+b)=|a|\,\sigma(X)$.</li>
+<li>a가 음수여도 표준편차는 양수(|a|). 분산에 b는 영향 없음.</li>
+</ul>
+<h3>자주 하는 실수</h3>
+<ul>
+<li>$V(2X-3)=4V(X)-3$ (×). 상수는 분산에서 사라진다.</li>
+<li>$\sigma(-2X)=-2\sigma(X)$ (×). 표준편차는 음수가 될 수 없다.</li>
+<li>E(X²)와 {E(X)}²를 바꿔 쓴다.</li>
+</ul>
+<h2>3. 예제 8 (기본 → 확장)</h2>
+<h3>예제 1 [기본] 표에서 평균</h3>
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>합계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P(X=x)</td>
+<td>0.1</td>
+<td>0.3</td>
+<td>0.4</td>
+<td>0.2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>E(X)를 구하시오.</p>
+<p><strong>풀이</strong> $E(X)=0\times0.1+1\times0.3+2\times0.4+3\times0.2=0.3+0.8+0.6=1.7$.</p>
+<p><strong>고쟁이</strong> 546, 603</p>
+<h3>예제 2 [기본] 분산을 두 가지 방법으로</h3>
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>합계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P(X=x)</td>
+<td>1/6</td>
+<td>1/3</td>
+<td>1/2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>E(X), V(X), σ(X)를 구하시오.</p>
+<p><strong>풀이</strong> $E(X)=\frac16+\frac23+\frac32=\frac{1+4+9}{6}=\frac73$.
+방법 ① 편차 제곱: $\left(1-\frac73\right)^2\frac16+\left(2-\frac73\right)^2\frac13+\left(3-\frac73\right)^2\frac12=\frac{16}{54}+\frac{1}{27}+\frac{2}{9}=\frac{30}{54}=\frac59$.
+방법 ② $E(X^2)=\frac16+\frac43+\frac92=\frac{1+8+27}{6}=6$, $V(X)=6-\frac{49}{9}=\frac59$.
+$\sigma(X)=\dfrac{\sqrt5}{3}$.</p>
+<p><strong>포인트</strong> 방법 ①을 한 번은 보여 줘서 "분산 = 편차 제곱의 평균"임을 몸으로 느끼게 하고, 이후엔 ②만 쓴다.</p>
+<p><strong>고쟁이</strong> 547, 601, 602</p>
+<h3>예제 3 [기본] E(X), E(X²)만 주어진 경우</h3>
+<p>(1) $E(X)=3$, $E(X^2)=13$일 때 V(X), σ(X)</p>
+<p>(2) $E(X)=a$, $E(X^2)=8a$, $V(X)=16$일 때 $E\left(\frac12X-5\right)+V\left(\frac12X-5\right)$</p>
+<p><strong>풀이</strong> (1) $V(X)=13-9=4$, $\sigma(X)=2$.</p>
+<p>(2) $8a-a^2=16$ → $(a-4)^2=0$ → a=4. $E=\frac12\cdot4-5=-3$, $V=\frac14\cdot16=4$. 합 1.</p>
+<p><strong>고쟁이</strong> 548, 553, 554</p>
+<h3>예제 4 [기본→확장] 함수식으로 주어진 분포</h3>
+<p>$P(X=x)=\dfrac{x}{10}\ (x=1,2,3,4)$일 때 E(X), V(X)</p>
+<p><strong>풀이</strong> 합 $\frac{1+2+3+4}{10}=1$ ✓.
+$E(X)=\frac{1+4+9+16}{10}=3$, $E(X^2)=\frac{1+8+27+64}{10}=10$, $V(X)=10-9=1$.</p>
+<p><strong>고쟁이</strong> 549, 556, 605</p>
+<h3>예제 5 [확장] 상황에서 평균·분산 (1차시 예제 4 재활용)</h3>
+<p>흰 공 3개, 검은 공 2개에서 2개를 동시에 꺼낼 때 검은 공의 개수 X. E(X), V(X), σ(X)</p>
+<p><strong>풀이</strong> 1차시 표: P(X=0)=3/10, P(X=1)=6/10, P(X=2)=1/10.
+$E(X)=\frac{6}{10}+\frac{2}{10}=\frac45$, $E(X^2)=\frac{6}{10}+\frac{4}{10}=1$, $V(X)=1-\frac{16}{25}=\frac{9}{25}$, $\sigma(X)=\frac35$.</p>
+<p><strong>포인트</strong> 서술형 550의 답안 틀: 표 → E(X) → E(X²) → V(X). 세 줄이면 만점.</p>
+<p><strong>고쟁이</strong> 550, 551, 607, 619</p>
+<h3>예제 6 [확장] "큰 수"를 확률변수로</h3>
+<p>1, 2, 3, 4가 하나씩 적힌 4장의 카드에서 2장을 동시에 뽑아 큰 수를 X라 할 때 E(X), V(X)</p>
+<p><strong>풀이</strong> 전체 ${}_4C_2=6$. X=2: (1,2) 1가지, X=3: 2가지, X=4: 3가지.
+$E(X)=\frac{2\cdot1+3\cdot2+4\cdot3}{6}=\frac{20}{6}=\frac{10}{3}$.
+$E(X^2)=\frac{4+18+48}{6}=\frac{35}{3}$, $V(X)=\frac{35}{3}-\frac{100}{9}=\frac59$.</p>
+<p><strong>포인트</strong> "X=k인 경우의 수"를 세는 감각이 588, 692로 바로 이어진다 (12장 중 3장의 최댓값).</p>
+<p><strong>고쟁이</strong> 588, 606, 692</p>
+<h3>예제 7 [확장] aX+b 계산</h3>
+<p>(1) $E(X)=5$, $V(X)=4$일 때 $E(3X-2)$, $V(3X-2)$, $\sigma(-2X+1)$</p>
+<p>(2) $E(2X-3)=5$, $V(4X+1)=64$일 때 $E(X^2)$</p>
+<p><strong>풀이</strong> (1) 13, 36, $2\times2=4$.</p>
+<p>(2) $2E(X)-3=5$ → $E(X)=4$. $16V(X)=64$ → $V(X)=4$. $E(X^2)=V+m^2=4+16=20$.</p>
+<p><strong>포인트</strong> (2)는 "aX+b 역으로 풀기". 628, 630 같은 이항분포 문제의 뼈대다.</p>
+<p><strong>고쟁이</strong> 552, 553, 612, 613, 620</p>
+<h3>예제 8 [확장] 미지수가 있는 표 + aX+b</h3>
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>합계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P(X=x)</td>
+<td>a</td>
+<td>1/2</td>
+<td>b</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>$E(X)=1$일 때 $V(4X+1)$과 $\sigma(4X+1)$을 구하시오.</p>
+<p><strong>풀이</strong> 합: $a+b=\frac12$. 평균: $\frac12+2b=1$ → $b=\frac14$, $a=\frac14$.
+$E(X^2)=\frac12+4\cdot\frac14=\frac32$, $V(X)=\frac32-1=\frac12$.
+$V(4X+1)=16\times\frac12=8$, $\sigma(4X+1)=2\sqrt2$.</p>
+<p><strong>포인트</strong> 미지수 2개면 식 2개: "합 = 1"과 "평균 조건". 이 패턴이 555, 602, 614 전부다.</p>
+<p><strong>고쟁이</strong> 555, 556, 602, 614, 615</p>
+<h2>4. 마무리 &amp; 과제</h2>
+<ul>
+<li><strong>한 줄 정리</strong>: 평균은 값×확률의 합, 분산은 "제곱의 평균 − 평균의 제곱", aX+b는 평균만 b가 따라가고 분산은 a²배.</li>
+<li><strong>과제(필수, STEP 1)</strong> 546, 547, 549, 550, 552, 555, 556</li>
+<li><strong>과제(선택, STEP 2)</strong> 602, 604, 606, 608, 610, 612, 614, 617, 619, 621</li>
+<li><strong>도전(STEP 3)</strong> 692, 693, 695, 696, 699</li>
+<li><strong>심화 팁(581, 582)</strong>: 두 집단을 합칠 때도 $E(X^2)=V+m^2$를 쓴다. 581은 남:여 = 1:2이므로 전체 $E(X^2)=\frac13(3+49)+\frac23(4+16)=\frac{92}{3}$, 분산 $\frac{92}{3}-25=\frac{17}{3}$.</li>
+<li><strong>다음 차시 예고</strong>: "주사위를 3번 던져 6이 나온 횟수"의 분포는 어떤 모양일까?</li>
+</ul></section><section class="doc"><h1>3차시. 이항분포</h1>
+<ul>
+<li><strong>고쟁이</strong> 개념 p.136 (1~3) / STEP 1 557~566 (유형 07~08) / STEP 2 624~648, 스키마 p.169 / STEP 3 690, 691, 698</li>
+</ul>
+<p><strong>학습 목표</strong></p>
+<ol>
+<li>독립시행에서 "사건이 일어난 횟수"의 분포가 이항분포 B(n, p)임을 알고, 확률질량함수를 쓴다.</li>
+<li>$E(X)=np$, $V(X)=npq$, $\sigma(X)=\sqrt{npq}$를 구한다.</li>
+<li>실생활 상황을 B(n, p)로 번역하고, aX+b와 결합한 문제를 푼다.</li>
+</ol>
+<h2>수업 흐름 (50분)</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>시간</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>도입</td>
+<td>8분</td>
+<td>주사위 3번 → 6의 눈 횟수의 분포를 직접 만들기 → 이항정리 패턴 발견</td>
+</tr>
+<tr>
+<td>개념 1</td>
+<td>7분</td>
+<td>B(n, p)의 뜻, 확률질량함수, 평균·분산 공식 (작은 예시로 확인)</td>
+</tr>
+<tr>
+<td>예제 1~4</td>
+<td>12분</td>
+<td>직접 나열 → 공식 → 식에서 n, p 읽기 → E(X²)</td>
+</tr>
+<tr>
+<td>개념 2</td>
+<td>5분</td>
+<td>상황 번역 체크리스트 (독립시행인가? 1회 확률 p는? 횟수인가?)</td>
+</tr>
+<tr>
+<td>예제 5~8</td>
+<td>15분</td>
+<td>실생활 → p를 먼저 구하는 문제 → aX+b → 점수 변환</td>
+</tr>
+<tr>
+<td>마무리</td>
+<td>3분</td>
+<td>큰수의 법칙 한 줄, 과제</td>
+</tr>
+</tbody>
+</table>
+<h2>1. 도입: 심플한 예시로 감 잡기</h2>
+<p><strong>칠판</strong>: 주사위 한 개를 3번 던진다. 6의 눈이 나온 횟수를 X라 하자.</p>
+<ul>
+<li>X=0: 세 번 다 6이 아님 → $\left(\frac56\right)^3=\frac{125}{216}$</li>
+<li>X=1: 6이 1, 2, 3회 중 어느 한 번 → 3가지 × $\frac16\left(\frac56\right)^2$ = $\frac{75}{216}$</li>
+<li>X=2: 어느 두 번이냐 ${}_3C_2=3$가지 × $\left(\frac16\right)^2\frac56$ = $\frac{15}{216}$</li>
+<li>X=3: $\left(\frac16\right)^3=\frac{1}{216}$ (합 216/216 ✓)</li>
+</ul>
+<p>학생에게 보여 줄 패턴: $P(X=x)={}_3C_x\left(\frac16\right)^x\left(\frac56\right)^{3-x}$.
+"어디서 본 모양?" → $(p+q)^3$을 이항정리로 전개한 각 항! 그래서 이름이 <strong>이항</strong>분포. 기호 $B\left(3,\frac16\right)$.</p>
+<p><strong>평균 감각</strong>: 주사위를 60번 던지면 6이 몇 번쯤? 10번. 즉 $np$. 위 표로 직접 계산해도 $E(X)=\frac{75+30+3}{216}=\frac{108}{216}=\frac12=3\times\frac16$ ✓.</p>
+<p><strong>분산 감각</strong>: n=1일 때 X는 0 또는 1. $E(X)=p$, $E(X^2)=p$, $V(X)=p-p^2=pq$. n번 독립으로 반복하면 흩어짐이 n배 쌓여 $npq$. (증명은 교육과정 밖, 확인만.)</p>
+<h2>2. 개념 정리</h2>
+<h3>(1) 이항분포</h3>
+<ul>
+<li>1회 시행에서 사건 A가 일어날 확률 p, 일어나지 않을 확률 q=1−p. n회 <strong>독립시행</strong>에서 A가 일어나는 <strong>횟수</strong> X.</li>
+<li>$P(X=x)={}_nC_x\,p^x q^{n-x}\ (x=0,1,\cdots,n)$, $X\sim B(n,p)$</li>
+<li>$E(X)=np$, $V(X)=npq$, $\sigma(X)=\sqrt{npq}$</li>
+<li>이항분포는 이산확률분포의 하나이므로 2차시의 모든 공식(E(X²)=V+m², aX+b)이 그대로 적용된다.</li>
+</ul>
+<h3>(2) 상황을 B(n, p)로 번역하는 체크리스트</h3>
+<ol>
+<li>같은 시행을 <strong>독립적으로 n번</strong> 반복하는가? (꺼낸 공을 <strong>다시 넣는다</strong> = 독립. 안 넣으면 이항분포가 아니다.)</li>
+<li>1회에서 관심 사건의 확률 <strong>p</strong>는? (이 p를 먼저 구해야 하는 문제가 절반이다.)</li>
+<li>X는 그 사건이 일어난 <strong>횟수</strong>인가? (점수, 좌표 등이면 X = aY + b로 횟수 Y와 연결한다.)</li>
+</ol>
+<h3>(3) 큰수의 법칙 (한 줄)</h3>
+<p>n이 커질수록 상대도수 X/n은 확률 p에 가까워진다. "주사위를 많이 던질수록 6이 나온 비율은 1/6에 다가간다." 통계적 확률이 수학적 확률에 가까워지는 근거.</p>
+<h3>자주 하는 실수</h3>
+<ul>
+<li>$V(X)=np$로 쓴다. 분산에는 q가 붙는다.</li>
+<li>비복원(다시 안 넣음)인데 이항분포를 쓴다.</li>
+<li>식 ${}_{50}C_x\,p^x q^{50-x}$에서 n=50을 못 읽는다.</li>
+</ul>
+<h2>3. 예제 8 (기본 → 확장)</h2>
+<h3>예제 1 [기본] 직접 나열 → 이항분포</h3>
+<p>주사위 한 개를 3번 던질 때 6의 눈이 나오는 횟수 X의 확률분포를 표로 나타내고, P(X≥1)과 E(X)를 구하시오.</p>
+<p><strong>풀이</strong> (도입 표) P(X=0)=125/216, P(X=1)=75/216, P(X=2)=15/216, P(X=3)=1/216.
+$P(X\ge1)=1-\frac{125}{216}=\frac{91}{216}$. $E(X)=3\times\frac16=\frac12$.</p>
+<p><strong>포인트</strong> "직접 더해도 1/2"을 한 번 보여 준 뒤 np를 쓴다.</p>
+<p><strong>고쟁이</strong> 557, 563, 566</p>
+<h3>예제 2 [기본] 공식 적용</h3>
+<p>$X\sim B\left(200,\frac25\right)$일 때 E(X), V(X), σ(X)</p>
+<p><strong>풀이</strong> $E(X)=200\times\frac25=80$, $V(X)=200\times\frac25\times\frac35=48$, $\sigma(X)=\sqrt{48}=4\sqrt3$.</p>
+<p><strong>고쟁이</strong> 557(1)</p>
+<h3>예제 3 [기본] 식에서 n, p 읽기</h3>
+<p>$P(X=x)={}_{45}C_x\left(\frac13\right)^x\left(\frac23\right)^{45-x}\ (x=0,1,\cdots,45)$일 때 E(X)+V(X)</p>
+<p><strong>풀이</strong> $X\sim B\left(45,\frac13\right)$. $E(X)=15$, $V(X)=45\times\frac13\times\frac23=10$. 합 25.</p>
+<p><strong>고쟁이</strong> 559, 632, 633</p>
+<h3>예제 4 [기본→확장] E(X²) 구하기</h3>
+<p>$X\sim B(9,p)$이고 E(X)=3일 때 E(X²)</p>
+<p><strong>풀이</strong> $9p=3$ → $p=\frac13$. $V(X)=9\times\frac13\times\frac23=2$. $E(X^2)=V(X)+\{E(X)\}^2=2+9=11$.</p>
+<p><strong>포인트</strong> 이항분포에서 E(X²)를 묻는 문제는 100% "V+m²". 560, 564도 같은 구조.</p>
+<p><strong>고쟁이</strong> 558, 560, 564, 637</p>
+<h3>예제 5 [확장] 실생활 번역</h3>
+<p>발아율이 20 %인 씨앗 100개를 심을 때 발아하는 씨앗의 개수를 X라 하자. X의 평균과 표준편차의 합은?</p>
+<p><strong>풀이</strong> 체크: 씨앗마다 독립, p=0.2, X는 횟수 → $X\sim B(100,0.2)$.
+$E(X)=20$, $V(X)=100\times0.2\times0.8=16$, $\sigma(X)=4$. 합 24.</p>
+<p><strong>포인트</strong> 561처럼 "기호로 나타내기"만 따로 연습시키면 좋다. 사격 400발·적중률 0.8 → B(400, 0.8), 불량률 20 %·100개 → B(100, 0.2).</p>
+<p><strong>고쟁이</strong> 561, 562, 634, 635</p>
+<h3>예제 6 [확장] p를 먼저 구해야 하는 문제</h3>
+<p>3개의 동전을 동시에 던지는 시행을 64번 반복할 때, 앞면 2개·뒷면 1개가 나오는 횟수를 X라 하자. E(X)+V(X)는?</p>
+<p><strong>풀이</strong> 1회 시행에서 앞면 2개·뒷면 1개일 확률 $p={}_3C_2\left(\frac12\right)^3=\frac38$.
+$X\sim B\left(64,\frac38\right)$. $E(X)=24$, $V(X)=64\times\frac38\times\frac58=15$. 합 39.</p>
+<p><strong>포인트</strong> "p 구하기"는 Ⅱ단원 확률 문제다. 주사위 두 개의 눈의 합, 공 두 개의 색이 같을 확률(636) 등 p 계산을 따로 묻는 문제가 STEP 2의 핵심.</p>
+<p><strong>고쟁이</strong> 565, 636, 641, 643, 644</p>
+<h3>예제 7 [확장] 이항분포 + aX+b</h3>
+<p>$X\sim B\left(48,\frac14\right)$일 때 E(−2X+5)와 σ(−2X+5)</p>
+<p><strong>풀이</strong> $E(X)=12$, $V(X)=48\times\frac14\times\frac34=9$, $\sigma(X)=3$.
+$E(-2X+5)=-24+5=-19$, $\sigma(-2X+5)=|-2|\times3=6$.</p>
+<p><strong>포인트</strong> 628(빈출): 2X−5의 평균 175, 표준편차 12 → E(X)=90, σ(X)=6 → np=90, npq=36 → q=0.4, p=0.6, n=150. "aX+b 역산 → np, npq 연립"의 두 단계.</p>
+<p><strong>고쟁이</strong> 557(2), 624, 628, 630, 631</p>
+<h3>예제 8 [확장] 점수 변환 (스키마 p.169)</h3>
+<p>주사위 한 개를 던져 6의 약수가 나오면 3점을 얻고 그렇지 않으면 2점을 잃는 게임을 한다. 기본 점수 10점에서 시작해 주사위를 9번 던진 후의 점수를 X라 할 때 V(X)는?</p>
+<p><strong>풀이</strong> 6의 약수 1, 2, 3, 6 → $p=\frac46=\frac23$. 6의 약수가 나온 횟수를 Y라 하면 $Y\sim B\left(9,\frac23\right)$, $V(Y)=9\times\frac23\times\frac13=2$.
+$X=3Y-2(9-Y)+10=5Y-8$. $V(X)=25V(Y)=50$. (참고 $E(X)=5\times6-8=22$)</p>
+<p><strong>포인트</strong> 횟수 Y를 먼저 잡고 X를 Y의 일차식으로 쓴다. 645, 646, 648(좌표 이동)이 모두 이 틀.</p>
+<p><strong>고쟁이</strong> 645, 646, 647, 648</p>
+<h2>4. 마무리 &amp; 과제</h2>
+<ul>
+<li><strong>한 줄 정리</strong>: "독립시행 n번, 1회 확률 p, 횟수 X" 세 가지가 보이면 B(n, p). 평균 np, 분산 npq.</li>
+<li><strong>과제(필수, STEP 1)</strong> 557, 558, 559, 561, 562, 564, 565</li>
+<li><strong>과제(선택, STEP 2)</strong> 625, 627, 628, 630, 634, 636, 638, 642, 645, 648</li>
+<li><strong>도전(STEP 3)</strong> 690, 691, 698</li>
+<li><strong>다음 차시 예고</strong>: 동전을 100번 던져 앞면 횟수의 막대그래프를 그리면 어떤 모양? (종 모양 → 정규분포)</li>
+</ul></section><section class="doc"><h1>4차시. 정규분포와 표준정규분포, 활용</h1>
+<ul>
+<li><strong>고쟁이</strong> 개념 p.137 (1, 2) / STEP 1 567~576 (유형 09~10) / STEP 2 649~674, 스키마 p.170 / STEP 3 701~712</li>
+</ul>
+<p><strong>학습 목표</strong></p>
+<ol>
+<li>정규분포곡선의 성질(대칭축 m, 퍼짐 σ, 넓이 1)을 그림으로 설명한다.</li>
+<li>표준화 $Z=\dfrac{X-m}{\sigma}$로 바꾸어 표준정규분포표로 확률을 구한다.</li>
+<li>실생활 상황을 N(m, σ²)로 번역하고, 확률이 주어졌을 때 경계값·m·σ를 역산한다.</li>
+</ol>
+<h2>수업 흐름 (50분)</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>시간</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>도입</td>
+<td>7분</td>
+<td>키·점수·무게 히스토그램 → 종 모양 / m은 위치, σ는 퍼짐 / 68-95-99.7</td>
+</tr>
+<tr>
+<td>개념 1</td>
+<td>8분</td>
+<td>곡선 성질 6가지, 표준화의 뜻("σ 몇 개만큼"), 표 읽기 4패턴</td>
+</tr>
+<tr>
+<td>예제 1~4</td>
+<td>12분</td>
+<td>표 읽기 → 표준화 → 역산 → 곡선 비교</td>
+</tr>
+<tr>
+<td>개념 2</td>
+<td>5분</td>
+<td>활용 절차: 상황 → N(m, σ²) → 구간 → 표준화 → 표</td>
+</tr>
+<tr>
+<td>예제 5~8</td>
+<td>15분</td>
+<td>대칭성 → 활용 → 상대 비교 → 상위 k % 역산</td>
+</tr>
+<tr>
+<td>마무리</td>
+<td>3분</td>
+<td>과제</td>
+</tr>
+</tbody>
+</table>
+<h2>1. 도입: 심플한 예시로 감 잡기</h2>
+<p><strong>칠판에 종 모양 곡선 하나.</strong> 우리 반 키, 전국 모의고사 점수, 공장 과자 무게는 모두 "평균 근처가 가장 많고 양쪽으로 갈수록 드문" 종 모양이 된다. 이 곡선이 정규분포 $N(m,\sigma^2)$. 연속확률변수이니 <strong>확률 = 넓이</strong>, 전체 넓이 1 (1차시 복습).</p>
+<ul>
+<li><strong>m은 위치</strong>: m이 커지면 곡선이 오른쪽으로 그대로 이동한다(모양 불변).</li>
+<li><strong>σ는 퍼짐</strong>: σ가 크면 납작하고 넓게, 작으면 높고 뾰족하게. 넓이는 항상 1이므로 넓어지면 낮아질 수밖에 없다.</li>
+</ul>
+<p><strong>68-95-99.7로 감 잡기</strong> (그림에 표시): $m\pm\sigma$ 안에 약 68 %, $m\pm2\sigma$ 안에 약 95 %, $m\pm3\sigma$ 안에 약 99.7 %.
+"키 평균 170 cm, σ 5 cm면 165~175가 약 68 %, 160~180이 약 95 %." 이 감각이 있으면 답의 자릿수가 틀렸을 때 바로 안다.</p>
+<p><strong>표준화의 뜻</strong>: 국어 84점(평균 76, σ 10)과 수학 80점(평균 68, σ 8) 중 어느 게 더 잘 본 건가? 점수 자체로는 비교가 안 된다. <strong>"평균에서 σ 몇 개만큼 떨어졌나"</strong>로 단위를 통일하자 → 국어 0.8개, 수학 1.5개. 이 "σ 몇 개" 가 바로 $Z=\dfrac{X-m}{\sigma}$. Z는 항상 N(0, 1)을 따르고, 그 표가 표준정규분포표다.</p>
+<h2>2. 개념 정리</h2>
+<h3>(1) 정규분포곡선의 성질 (567 OX 체크리스트)</h3>
+<p>① 직선 x=m에 대칭, x축이 점근선 ② x=m에서 최댓값 ③ 곡선과 x축 사이 넓이 1
+④ m 일정, σ 커지면 → 가운데가 <strong>낮아지고</strong> 양옆으로 퍼진다 (567 ④는 틀린 설명)
+⑤ σ 일정, m 달라지면 → 위치만 이동, 모양 불변</p>
+<h3>(2) 표준정규분포와 표 읽기</h3>
+<ul>
+<li>표는 $P(0\le Z\le z)$만 준다. 그림을 그리고 0.5를 더하거나 뺀다. (0 &lt; a &lt; b)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>구하는 것</th>
+<th>식</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$P(Z\le a)$</td>
+<td>$0.5+P(0\le Z\le a)$</td>
+</tr>
+<tr>
+<td>$P(Z\ge a)$</td>
+<td>$0.5-P(0\le Z\le a)$</td>
+</tr>
+<tr>
+<td>$P(-a\le Z\le b)$</td>
+<td>$P(0\le Z\le a)+P(0\le Z\le b)$</td>
+</tr>
+<tr>
+<td>$P(a\le Z\le b)$</td>
+<td>$P(0\le Z\le b)-P(0\le Z\le a)$</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>$P(Z\le -a)=P(Z\ge a)$ (대칭), $P(|Z|\le a)=2P(0\le Z\le a)$.</li>
+</ul>
+<h3>(3) 정규분포의 표준화</h3>
+<p>$X\sim N(m,\sigma^2)$이면 $Z=\dfrac{X-m}{\sigma}\sim N(0,1)$, $P(a\le X\le b)=P\left(\dfrac{a-m}{\sigma}\le Z\le\dfrac{b-m}{\sigma}\right)$.</p>
+<h3>(4) 활용 문제 절차</h3>
+<p>상황 읽기 → "X는 N(m, σ²)" 한 줄로 쓰기 → 구하는 확률을 P(a≤X≤b)로 → 표준화 → 그림 → 표.
+<strong>역산형</strong>(확률이 주어짐): 표에서 z를 찾고 $x=m+z\sigma$. "상위 k %" 는 $P(X\ge x)=\frac{k}{100}$.</p>
+<h3>자주 하는 실수</h3>
+<ul>
+<li>표준화할 때 분산 σ²으로 나눈다. N(40, 16)이면 σ=4.</li>
+<li>$P(Z\ge a)$를 $1-P(0\le Z\le a)$로 쓴다 (0.5를 빼야 한다).</li>
+<li>그림 없이 부호만 보고 더할지 뺄지 결정한다.</li>
+</ul>
+<h2>3. 예제 8 (기본 → 확장)</h2>
+<p>표준정규분포표 (예제 공통): P(0≤Z≤0.5)=0.1915, P(0≤Z≤1)=0.3413, P(0≤Z≤1.5)=0.4332, P(0≤Z≤2)=0.4772, P(0≤Z≤2.5)=0.4938</p>
+<h3>예제 1 [기본] 표 읽기 4패턴</h3>
+<p>Z가 N(0, 1)을 따를 때 (1) P(Z≤1.5) (2) P(|Z|≤1) (3) P(1≤Z≤2) (4) P(−1≤Z≤1.5)</p>
+<p><strong>풀이</strong> (1) 0.5+0.4332=0.9332 (2) 2×0.3413=0.6826 (3) 0.4772−0.3413=0.1359 (4) 0.3413+0.4332=0.7745</p>
+<p><strong>포인트</strong> 네 문제 모두 그림을 그리고 색칠한 뒤 식을 쓰게 한다.</p>
+<p><strong>고쟁이</strong> 571, 657, 658</p>
+<h3>예제 2 [기본] 표준화</h3>
+<p>X가 N(40, 4²)을 따를 때 (1) P(32≤X≤36) (2) P(36≤X≤50)</p>
+<p><strong>풀이</strong> (1) $P\left(\frac{32-40}{4}\le Z\le\frac{36-40}{4}\right)=P(-2\le Z\le-1)=P(1\le Z\le2)=0.1359$</p>
+<p>(2) $P(-1\le Z\le2.5)=0.3413+0.4938=0.8351$</p>
+<p><strong>고쟁이</strong> 572, 574</p>
+<h3>예제 3 [기본] 역산 (확률 → z)</h3>
+<p>(1) P(Z≤a)=0.8413 (2) P(Z≥b)=0.0668 (3) P(Z≥c)=0.9772 를 만족하는 a, b, c</p>
+<p><strong>풀이</strong> (1) 0.5+0.3413 → a=1 (2) 0.5−0.4332 → b=1.5 (3) 0.9772 &gt; 0.5이므로 c는 음수: 0.5+0.4772 → c=−2</p>
+<p><strong>포인트</strong> (3)에서 "0.5보다 크면 경계가 평균 왼쪽"이라는 감각을 심는다.</p>
+<p><strong>고쟁이</strong> 573, 655, 656</p>
+<h3>예제 4 [기본→확장] 곡선 비교</h3>
+<p>ㄱ. N(0, 3²) ㄴ. N(1, 1²) ㄷ. N(3, 4²) ㄹ. N(5, 2²) 중 그래프의 높이가 가장 높은 것과 대칭축이 가장 왼쪽에 있는 것을 차례로 고르시오.</p>
+<p><strong>풀이</strong> 높이는 σ가 작을수록 높다 → ㄴ. 대칭축은 m → 가장 작은 ㄱ. 답 ㄴ, ㄱ.</p>
+<p><strong>포인트</strong> 568(두 곡선 그림 보고 m, σ 비교), 649, 650(보기 ㄱㄴㄷ)이 전부 "높이 ↔ σ, 위치 ↔ m".</p>
+<p><strong>고쟁이</strong> 567, 568, 569, 649, 650, 662</p>
+<h3>예제 5 [확장] 대칭성 활용</h3>
+<p>(1) X가 N(m, σ²)을 따르고 P(X≤14)=P(X≥26)일 때 m</p>
+<p>(2) X가 N(7, 2²)을 따를 때 P(t−4≤X≤t+2)가 최대가 되는 t</p>
+<p><strong>풀이</strong> (1) 14와 26의 중점이 대칭축 → m=20.</p>
+<p>(2) 길이가 6으로 고정된 구간은 <strong>가운데가 평균일 때</strong> 넓이가 최대 → 구간의 중점 t−1=7 → t=8.</p>
+<p><strong>포인트</strong> 660, 661, 704, 705처럼 f(a)=f(b)나 P(X≤a)=P(X≥b) 조건은 "a, b의 평균 = m".</p>
+<p><strong>고쟁이</strong> 570, 652, 660, 661, 704</p>
+<h3>예제 6 [확장] 실생활 활용</h3>
+<p>어느 공장 과자 1봉지의 무게는 평균 130 g, 표준편차 10 g인 정규분포를 따른다. 임의로 고른 1봉지의 무게가 135 g 이상 145 g 이하일 확률은?</p>
+<p><strong>풀이</strong> $X\sim N(130,10^2)$. $P(135\le X\le145)=P(0.5\le Z\le1.5)=0.4332-0.1915=0.2417$.</p>
+<p><strong>포인트</strong> 574 그대로. "X는 N(130, 10²)" 한 줄을 반드시 쓰게 한다. 575(세차 시간 33분 이상)는 P(Z≥1.5)=0.0668.</p>
+<p><strong>고쟁이</strong> 574, 575, 664, 667</p>
+<h3>예제 7 [확장] 서로 다른 분포 비교</h3>
+<p>반 전체의 국어·영어·수학 성적이 각각 N(76, 10²), N(72, 12²), N(68, 8²)을 따른다. 미정이의 점수가 국어 84, 영어 76, 수학 80일 때 상대적으로 잘 본 과목부터 나열하시오.</p>
+<p><strong>풀이</strong> 표준화: 국어 $\frac{84-76}{10}=0.8$, 영어 $\frac{76-72}{12}=\frac13$, 수학 $\frac{80-68}{8}=1.5$. 수학 &gt; 국어 &gt; 영어.</p>
+<p><strong>포인트</strong> 576(두 제품의 확률이 같다 → 표준화한 구간이 대칭으로 같다 → k=20.25)도 같은 원리. 618의 표준점수 $T=15\cdot\frac{X-m}{\sigma}+50$도 이 Z에 일차변환을 한 것.</p>
+<p><strong>고쟁이</strong> 576, 663, 665, 673</p>
+<h3>예제 8 [확장] 상위 k % 역산 (스키마 p.170)</h3>
+<p>어느 대학 수학과 모집인원은 60명인데 500명이 응시했다. 응시자 점수가 N(72, 10²)을 따를 때 합격 최저 점수는? (P(0≤Z≤1.2)=0.38로 계산)</p>
+<p><strong>풀이</strong> 합격 비율 $\frac{60}{500}=0.12$. 최저 점수를 k라 하면 $P(X\ge k)=0.12$.
+$P\left(Z\ge\frac{k-72}{10}\right)=0.12$ → $0.5-P\left(0\le Z\le\frac{k-72}{10}\right)=0.12$ → $P(0\le Z\le z)=0.38$ → z=1.2.
+$\frac{k-72}{10}=1.2$ → k=84.</p>
+<p><strong>포인트</strong> "비율 → 확률 식 → 0.5 − (표의 값) → z → x=m+zσ" 다섯 단계. 668(상위 5 %), 670(40명 중 3명), 672(상위 11 %)가 전부 이 틀.</p>
+<p><strong>고쟁이</strong> 668, 669, 670, 671, 672</p>
+<h2>4. 마무리 &amp; 과제</h2>
+<ul>
+<li><strong>한 줄 정리</strong>: 정규분포는 "평균에서 σ 몇 개"로 바꾸면 전부 하나의 표로 통한다. 그림 → 표준화 → 표.</li>
+<li><strong>과제(필수, STEP 1)</strong> 567, 568, 571, 572, 574, 575, 576</li>
+<li><strong>과제(선택, STEP 2)</strong> 650, 651, 653, 655, 656, 660, 663, 665, 668, 669, 672</li>
+<li><strong>도전(STEP 3)</strong> 701, 703, 704, 706, 708, 710</li>
+<li><strong>다음 차시 예고</strong>: 동전 100번 던져 앞면 45번 이하일 확률을 "정규분포표"로 구할 수 있을까?</li>
+</ul></section><section class="doc"><h1>5차시. 이항분포와 정규분포의 관계</h1>
+<ul>
+<li><strong>고쟁이</strong> 개념 p.137 (3) / STEP 1 577~580 (유형 11) / STEP 2 675~684 / STEP 3 713~716</li>
+</ul>
+<p><strong>학습 목표</strong></p>
+<ol>
+<li>n이 충분히 클 때 B(n, p)가 근사적으로 N(np, npq)를 따름을 이해한다.</li>
+<li>"B 설정 → N(np, npq) → 표준화 → 표"의 4단계로 이항분포의 확률을 구한다.</li>
+<li>실생활 상황, 역산(k 구하기), 비율로 주어진 조건을 처리한다.</li>
+</ol>
+<h2>수업 흐름 (50분)</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>시간</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>도입</td>
+<td>8분</td>
+<td>동전 100번 → P(X≤45)를 직접 더할 수 있나? → 막대그래프가 종 모양</td>
+</tr>
+<tr>
+<td>개념</td>
+<td>7분</td>
+<td>근사 조건(np≥5, nq≥5), 4단계 절차</td>
+</tr>
+<tr>
+<td>예제 1~4</td>
+<td>12분</td>
+<td>동전 → 공식 → 주사위 번역 → 실생활</td>
+</tr>
+<tr>
+<td>예제 5~8</td>
+<td>18분</td>
+<td>식에서 n, p 읽기 → 역산 k → 비율 → 두 분포 비교</td>
+</tr>
+<tr>
+<td>마무리</td>
+<td>5분</td>
+<td>01 확률분포 단원 전체 흐름도 정리, 과제</td>
+</tr>
+</tbody>
+</table>
+<h2>1. 도입: 심플한 예시로 감 잡기</h2>
+<p><strong>칠판</strong>: 동전 한 개를 100번 던질 때 앞면이 나온 횟수 X. 3차시 그대로 $X\sim B\left(100,\frac12\right)$.</p>
+<ul>
+<li>"앞면이 45번 이하일 확률은?" → $\sum_{x=0}^{45}{}_{100}C_x\left(\frac12\right)^{100}$. 항이 46개. 손으로는 불가능.</li>
+<li>그런데 X의 확률분포를 <strong>막대그래프</strong>로 그리면(공학도구나 교과서 그림) 평균 50을 중심으로 한 종 모양이다. n이 클수록 더 매끈해진다.</li>
+<li>그러면 <strong>모양만 정규분포로 바꾸고 넓이로 구하자.</strong> 평균과 분산은 이항분포 것을 그대로: $np=50$, $npq=25$ → $N(50,5^2)$.</li>
+<li>$P(X\le45)=P\left(Z\le\frac{45-50}{5}\right)=P(Z\le-1)=0.5-0.3413=0.1587$. 46개 항의 합이 표 한 번으로 끝났다.</li>
+</ul>
+<p><strong>감각 한 줄</strong>: "이항분포의 평균·분산은 그대로 쓰고, 모양만 정규분포로 바꾼다." (큰수의 법칙과 같은 방향: n이 크면 이항분포가 안정된 종 모양에 가까워진다.)</p>
+<h2>2. 개념 정리</h2>
+<ul>
+<li>$X\sim B(n,p)$에서 n이 충분히 크면 $X$는 근사적으로 $N(np,\,npq)$를 따른다. ($q=1-p$)</li>
+<li>"충분히 크다"의 기준: $np\ge5,\ nq\ge5$. 교과서 문제는 모두 이 조건을 만족하도록 만들어져 있다.</li>
+<li><strong>4단계 절차</strong>
+  ① 상황 → $B(n,p)$ ② $np$, $npq$ 계산 → $N(np,\,npq)$, $\sigma=\sqrt{npq}$ ③ $Z=\dfrac{X-np}{\sqrt{npq}}$ ④ 표</li>
+<li>역산형: $P(X\le k)=\alpha$가 주어지면 표에서 z를 찾아 $k=np+z\sqrt{npq}$.</li>
+<li>비율로 주어진 조건은 <strong>횟수로 바꾼다</strong>: 1600대 중 47.5 % ↔ 760대.</li>
+</ul>
+<h3>자주 하는 실수</h3>
+<ul>
+<li>표준편차를 $npq$로 쓴다(제곱근을 안 씌움).</li>
+<li>B(n, p)를 세우지 않고 바로 "평균 몇, 표준편차 몇"을 추측한다 → 반드시 n, p를 적게 한다.</li>
+</ul>
+<h2>3. 예제 8 (기본 → 확장)</h2>
+<p>표준정규분포표 (예제 공통): P(0≤Z≤0.5)=0.1915, P(0≤Z≤1)=0.3413, P(0≤Z≤1.5)=0.4332, P(0≤Z≤2)=0.4772, P(0≤Z≤2.5)=0.4938, P(0≤Z≤3)=0.4987</p>
+<h3>예제 1 [기본] 도입 그대로</h3>
+<p>동전 한 개를 100번 던질 때 앞면이 나오는 횟수 X에 대하여 (1) X가 근사적으로 따르는 정규분포 (2) P(X≤45) (3) P(40≤X≤60)</p>
+<p><strong>풀이</strong> (1) $B(100,\frac12)$, $np=50$, $npq=25$ → $N(50,5^2)$ (2) $P(Z\le-1)=0.1587$ (3) $P(-2\le Z\le2)=0.9544$</p>
+<p><strong>고쟁이</strong> 578, 676</p>
+<h3>예제 2 [기본] 공식 적용</h3>
+<p>$X\sim B\left(48,\frac34\right)$일 때 P(33≤X≤42)</p>
+<p><strong>풀이</strong> $np=36$, $npq=48\times\frac34\times\frac14=9$ → $N(36,3^2)$.
+$P\left(\frac{33-36}{3}\le Z\le\frac{42-36}{3}\right)=P(-1\le Z\le2)=0.3413+0.4772=0.8185$.</p>
+<p><strong>고쟁이</strong> 577</p>
+<h3>예제 3 [기본] 상황 번역</h3>
+<p>주사위 한 개를 180번 던질 때 2의 눈이 나오는 횟수가 35 이상일 확률은?</p>
+<p><strong>풀이</strong> ① $X\sim B\left(180,\frac16\right)$ ② $np=30$, $npq=180\times\frac16\times\frac56=25$ → $N(30,5^2)$ ③ $P(X\ge35)=P(Z\ge1)$ ④ $0.5-0.3413=0.1587$</p>
+<p><strong>포인트</strong> 578의 (1)(2)(3) 소문항이 바로 이 4단계다. 처음 몇 문제는 이 번호를 붙여 쓰게 한다.</p>
+<p><strong>고쟁이</strong> 578, 677, 678</p>
+<h3>예제 4 [기본→확장] 실생활</h3>
+<p>어느 약의 치유율이 60 %라 한다. 150명에게 투여했을 때 78명 이상이 치유될 확률은?</p>
+<p><strong>풀이</strong> $X\sim B(150,0.6)$, $np=90$, $npq=150\times0.6\times0.4=36$ → $N(90,6^2)$.
+$P(X\ge78)=P\left(Z\ge\frac{78-90}{6}\right)=P(Z\ge-2)=0.5+0.4772=0.9772$.</p>
+<p><strong>포인트</strong> 경계가 평균 왼쪽이면 답이 0.5보다 커야 한다. 68-95-99.7 감각으로 검산(78은 m−2σ).</p>
+<p><strong>고쟁이</strong> 579, 680, 682</p>
+<h3>예제 5 [확장] 식에서 n, p 읽기 + 근사</h3>
+<p>$P(X=x)={}_{100}C_x\,p^x(1-p)^{100-x}\ (x=0,1,\cdots,100)$이고 E(X)=20일 때 P(24≤X≤30)</p>
+<p><strong>풀이</strong> n=100, $100p=20$ → $p=0.2$. $npq=100\times0.2\times0.8=16$ → $N(20,4^2)$.
+$P(1\le Z\le2.5)=0.4938-0.3413=0.1525$.</p>
+<p><strong>고쟁이</strong> 580</p>
+<h3>예제 6 [확장] 역산: 경계값 k</h3>
+<p>동전 한 개를 400번 던질 때 앞면이 나오는 횟수 X에 대하여 P(X≤k)=0.9772를 만족시키는 k</p>
+<p><strong>풀이</strong> $B(400,\frac12)$ → $N(200,10^2)$. $P(X\le k)=0.9772=0.5+0.4772$ → $\frac{k-200}{10}=2$ → k=220.</p>
+<p><strong>포인트</strong> 4차시 예제 8(상위 k %)과 같은 역산. 678(P(X≤n)≤0.8413인 n의 최댓값)은 부등식 버전.</p>
+<p><strong>고쟁이</strong> 676, 678, 681</p>
+<h3>예제 7 [확장] 비율로 주어진 조건</h3>
+<p>어느 판매점에서 휴대폰이 팔릴 때 A사 제품일 확률은 50 %다. 한 달 동안 1600대를 판매했을 때 A사 제품의 비율이 47.5 % 이상 52.5 % 이하일 확률은?</p>
+<p><strong>풀이</strong> A사 제품 대수 $X\sim B(1600,\frac12)$, $np=800$, $npq=400$ → $N(800,20^2)$.
+비율 → 대수: $1600\times0.475=760$, $1600\times0.525=840$.
+$P(760\le X\le840)=P(-2\le Z\le2)=0.9544$.</p>
+<p><strong>포인트</strong> "비율 → 횟수"로 바꾸는 이 한 줄이 6차시 <strong>표본비율</strong>의 씨앗이다. 다음 시간에 $\hat p=\frac{X}{n}$으로 다시 만난다.</p>
+<p><strong>고쟁이</strong> 679, 683, 684</p>
+<h3>예제 8 [확장] 두 이항분포 비교</h3>
+<p>서로 다른 동전 2개를 동시에 100번 던질 때 한 개만 앞면이 나오는 횟수를 X, A·B 두 사람이 가위바위보를 162번 할 때 A가 이기는 횟수를 Y라 하자. P(X≤30)=P(Y≥k)를 만족시키는 k</p>
+<p><strong>풀이</strong> 한 개만 앞면일 확률 $\frac12$ → $X\sim B(100,\frac12)$ → $N(50,5^2)$. A가 이길 확률 $\frac13$ → $Y\sim B(162,\frac13)$, $np=54$, $npq=36$ → $N(54,6^2)$.
+$P(X\le30)=P\left(Z\le\frac{30-50}{5}\right)=P(Z\le-4)$. $P(Y\ge k)=P\left(Z\ge\frac{k-54}{6}\right)$.
+대칭이므로 $\frac{k-54}{6}=4$ → k=78.</p>
+<p><strong>포인트</strong> 표 값이 필요 없는 문제. "표준화한 경계가 같으면 확률이 같다"는 4차시 예제 7의 논리다.</p>
+<p><strong>고쟁이</strong> 675</p>
+<h2>4. 마무리: 01 확률분포 단원 흐름도 (5분)</h2>
+<ul>
+<li>확률변수 X가 <strong>이산</strong> → 표나 식으로 분포 → E(X), V(X), σ(X) → aX+b</li>
+<li>이산 중에서도 "독립시행의 횟수"면 <strong>이항분포 B(n, p)</strong> → 평균 np, 분산 npq</li>
+<li>확률변수 X가 <strong>연속</strong> → 확률은 넓이 → 종 모양이면 <strong>정규분포 N(m, σ²)</strong> → 표준화 Z → 표</li>
+<li>
+<p>n이 크면 <strong>B(n, p) ≈ N(np, npq)</strong> 로 두 줄기가 만난다 (오늘)</p>
+</li>
+<li>
+<p><strong>과제(필수, STEP 1)</strong> 577, 578, 579, 580</p>
+</li>
+<li><strong>과제(선택, STEP 2)</strong> 676, 677, 678, 679, 681, 684</li>
+<li><strong>도전(STEP 3)</strong> 713, 714, 715</li>
+<li><strong>다음 차시 예고</strong>: "전교생 키 평균을 알고 싶은데 30명만 잴 수 있다면?"</li>
+</ul></section><section class="doc"><h1>6차시. 통계적 추정 (1) 모집단과 표본, 표본평균·표본비율의 분포</h1>
+<ul>
+<li><strong>고쟁이</strong> 개념 p.179~180 / STEP 1 717~742 (유형 01~05) / STEP 2 764~794, 스키마 p.203 / STEP 3 821~826, 831</li>
+</ul>
+<p><strong>학습 목표</strong></p>
+<ol>
+<li>전수조사·표본조사, 임의추출, 복원·비복원추출의 뜻을 알고 모평균·표본평균 등의 기호를 구분한다.</li>
+<li>작은 모집단에서 표본평균의 분포를 직접 만들어 $E(\bar X)=m$, $V(\bar X)=\dfrac{\sigma^2}{n}$을 확인하고 공식으로 쓴다.</li>
+<li>정규모집단에서 $\bar X\sim N\left(m,\dfrac{\sigma^2}{n}\right)$을 이용해 확률을 구한다.</li>
+<li>표본비율 $\hat p=\dfrac{X}{n}$의 평균·분산을 구하고 정규근사로 확률을 구한다.</li>
+</ol>
+<h2>수업 흐름 (50분)</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>시간</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>도입</td>
+<td>8분</td>
+<td>전교생 키 → 30명만 재기 / 용어 / 모집단 {1, 2, 3}에서 크기 2 표본 9가지 나열</td>
+</tr>
+<tr>
+<td>개념 1</td>
+<td>7분</td>
+<td>$E(\bar X)=m$, $V(\bar X)=\sigma^2/n$, 정규모집단이면 $\bar X$도 정규</td>
+</tr>
+<tr>
+<td>예제 1~4</td>
+<td>13분</td>
+<td>직접 나열 → 표본통계량 계산 → 공식 → 모집단 분포표에서 σ(X̄)</td>
+</tr>
+<tr>
+<td>개념 2</td>
+<td>5분</td>
+<td>표본비율: $\hat p=X/n$, $X\sim B(n,p)$이므로 $E=p$, $V=pq/n$</td>
+</tr>
+<tr>
+<td>예제 5~8</td>
+<td>14분</td>
+<td>정규모집단 → 활용 → 표본비율 기본 → 표본비율 활용</td>
+</tr>
+<tr>
+<td>마무리</td>
+<td>3분</td>
+<td>과제</td>
+</tr>
+</tbody>
+</table>
+<h2>1. 도입: 심플한 예시로 감 잡기</h2>
+<p><strong>상황</strong>: 전교생 1000명의 키 평균을 알고 싶다. 다 재면 정확하지만(전수조사) 시간이 많이 든다. 30명만 뽑아 재고(표본조사) 전체를 <strong>추측</strong>하자.</p>
+<ul>
+<li>뽑을 때는 누구나 같은 확률로(임의추출). 뽑은 사람을 다시 넣고 뽑으면 복원, 안 넣으면 비복원. 모집단이 크면 둘의 차이는 거의 없다.</li>
+<li>용어: 모집단의 평균·분산·표준편차는 $m,\ \sigma^2,\ \sigma$(모평균, 모분산, 모표준편차). 뽑은 표본의 평균은 $\bar X$(표본평균), 표본분산 $S^2$은 <strong>n−1로 나눈다</strong>(2022 개정, 720).</li>
+<li>핵심 질문: "30명을 다시 뽑으면 $\bar X$가 똑같이 나올까?" → 아니다. <strong>$\bar X$는 뽑을 때마다 달라지는 확률변수</strong>다. 그러면 분포가 있을 것이고, 평균과 분산도 있다.</li>
+</ul>
+<p><strong>직접 만들어 보기 (가장 중요한 5분)</strong>: 모집단이 1, 2, 3 세 개의 공(각 확률 1/3)이고 크기 2인 표본을 <strong>복원추출</strong>한다.</p>
+<ul>
+<li>모평균 $m=2$, 모분산 $\sigma^2=\frac{1+4+9}{3}-4=\frac23$.</li>
+<li>가능한 표본 9가지: (1,1) (1,2) (1,3) (2,1) (2,2) (2,3) (3,1) (3,2) (3,3) → 각각의 $\bar X$: 1, 1.5, 2, 1.5, 2, 2.5, 2, 2.5, 3</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>$\bar X$</th>
+<th>1</th>
+<th>1.5</th>
+<th>2</th>
+<th>2.5</th>
+<th>3</th>
+<th>합계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P</td>
+<td>1/9</td>
+<td>2/9</td>
+<td>3/9</td>
+<td>2/9</td>
+<td>1/9</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>$E(\bar X)=\frac{1\cdot1+1.5\cdot2+2\cdot3+2.5\cdot2+3\cdot1}{9}=\frac{18}{9}=2=m$ ✓</li>
+<li>$E(\bar X^2)=\frac{1+4.5+12+12.5+9}{9}=\frac{39}{9}=\frac{13}{3}$, $V(\bar X)=\frac{13}{3}-4=\frac13=\frac{\sigma^2}{2}$ ✓</li>
+</ul>
+<p><strong>감각 두 줄</strong>: 표본평균의 평균은 모평균과 <strong>같고</strong>, 분산은 <strong>1/n로 줄어든다</strong>. "많이 뽑을수록 표본평균은 모평균 근처에 몰린다." 분포 모양도 가운데가 높은 산 모양으로 바뀐다(모집단은 평평했는데!).</p>
+<h2>2. 개념 정리</h2>
+<h3>(1) 표본평균 $\bar X$의 분포</h3>
+<ul>
+<li>모평균 m, 모표준편차 σ인 모집단에서 크기 n인 표본을 임의추출할 때
+  $E(\bar X)=m,\quad V(\bar X)=\dfrac{\sigma^2}{n},\quad \sigma(\bar X)=\dfrac{\sigma}{\sqrt n}$</li>
+<li>모집단이 $N(m,\sigma^2)$이면 $\bar X\sim N\left(m,\dfrac{\sigma^2}{n}\right)$. 모집단이 정규분포가 아니어도 n이 충분히 크면(n≥30) 근사적으로 그렇다.</li>
+<li>표준화: $Z=\dfrac{\bar X-m}{\sigma/\sqrt n}$</li>
+</ul>
+<h3>(2) 용어 구분 (723~729 OX)</h3>
+<table>
+<thead>
+<tr>
+<th>기호</th>
+<th>뜻</th>
+<th>상수/변수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$m$, $\sigma$</td>
+<td>모평균, 모표준편차</td>
+<td>상수</td>
+</tr>
+<tr>
+<td>$\bar X$, $S$</td>
+<td>표본평균, 표본표준편차</td>
+<td>확률변수 (표본마다 다름)</td>
+</tr>
+<tr>
+<td>$E(\bar X)=m$, $\sigma(\bar X)=\sigma/\sqrt n$</td>
+<td>표본평균의 평균, 표준편차</td>
+<td>상수</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>729 ④ "$\bar X$의 분포는 항상 모집단의 분포와 같다" → 거짓. 도입 예시가 반례.</li>
+</ul>
+<h3>(3) 표본비율 $\hat p$의 분포</h3>
+<ul>
+<li>모비율 p인 모집단에서 크기 n인 표본 중 특성을 갖는 개수 X는 $X\sim B(n,p)$. 표본비율 $\hat p=\dfrac Xn$.</li>
+<li>$E(\hat p)=\dfrac{np}{n}=p,\quad V(\hat p)=\dfrac{npq}{n^2}=\dfrac{pq}{n},\quad \sigma(\hat p)=\sqrt{\dfrac{pq}{n}}$</li>
+<li>n이 충분히 크면 $\hat p$는 근사적으로 $N\left(p,\dfrac{pq}{n}\right)$. (5차시 이항분포의 정규근사를 n으로 나눈 것.)</li>
+<li>735: $V(\hat p)$는 n에 반비례(○), $\sigma(\hat p)$는 $\sqrt n$에 반비례이므로 "n에 반비례"는 ×.</li>
+</ul>
+<h3>자주 하는 실수</h3>
+<ul>
+<li>$\sigma(\bar X)=\sigma/n$으로 쓴다. <strong>분산</strong>이 1/n, 표준편차는 $1/\sqrt n$.</li>
+<li>표본평균 문제에서 모표준편차 σ로 표준화한다. 반드시 $\sigma/\sqrt n$.</li>
+<li>모분산이 주어졌는데 표준편차로 착각한다(725: 모분산 36 → σ=6).</li>
+</ul>
+<h2>3. 예제 8 (기본 → 확장)</h2>
+<p>표준정규분포표 (예제 공통): P(0≤Z≤1)=0.3413, P(0≤Z≤1.5)=0.4332, P(0≤Z≤2)=0.4772, P(0≤Z≤2.5)=0.4938</p>
+<h3>예제 1 [기본] 표본평균의 분포를 직접 만들기</h3>
+<p>모집단의 확률분포가 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>합계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P(X=x)</td>
+<td>1/3</td>
+<td>1/3</td>
+<td>1/3</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>크기 2인 표본을 복원추출하여 구한 표본평균 $\bar X$에 대하여 (1) $P(\bar X=2)$ (2) $E(\bar X)$, $V(\bar X)$</p>
+<p><strong>풀이</strong> (도입 표) (1) (1,3), (2,2), (3,1) → 3/9 = 1/3. (2) $E(\bar X)=2$, $V(\bar X)=\frac13$.
+공식 검산: $m=2$, $\sigma^2=\frac23$, $\frac{\sigma^2}{2}=\frac13$ ✓.</p>
+<p><strong>포인트</strong> 721은 모집단이 1, 2, 3에 확률 1/4, 1/4, 1/2인 버전: $P(\bar X=2)=\frac14\cdot\frac12\cdot2+\frac14\cdot\frac14=\frac{5}{16}$.</p>
+<p><strong>고쟁이</strong> 721, 764, 765, 766, 768</p>
+<h3>예제 2 [기본] 표본통계량 계산</h3>
+<p>크기 5인 표본 1, 3, 5, 7, 9의 표본평균 $\bar X$, 표본분산 $S^2$, 표본표준편차 $S$</p>
+<p><strong>풀이</strong> $\bar X=5$. $S^2=\frac{16+4+0+4+16}{5-1}=10$. $S=\sqrt{10}$.</p>
+<p><strong>포인트</strong> n−1로 나누는 이유는 "그래야 $E(S^2)=\sigma^2$"라고만 말해 준다. 모분산과 달리 <strong>표본분산은 분모가 n−1</strong>임을 시험 직전까지 한 번 더 확인.</p>
+<p><strong>고쟁이</strong> 719, 720</p>
+<h3>예제 3 [기본] 공식 적용</h3>
+<p>(1) 평균 20, 표준편차 4인 모집단에서 크기 16인 표본 → $E(\bar X)$, $\sigma(\bar X)$</p>
+<p>(2) 모평균 6, 모분산 36인 모집단에서 크기 16인 표본 → $\sigma(2\bar X-3)$</p>
+<p><strong>풀이</strong> (1) 20, $\frac{4}{\sqrt{16}}=1$ (2) $\sigma=6$, $\sigma(\bar X)=\frac64=\frac32$, $\sigma(2\bar X-3)=2\times\frac32=3$</p>
+<p><strong>포인트</strong> (2)에서 모<strong>분산</strong> 36 → σ=6부터. 2차시 aX+b 공식이 $\bar X$에도 그대로 적용된다.</p>
+<p><strong>고쟁이</strong> 723, 724, 725, 726, 769</p>
+<h3>예제 4 [기본→확장] 모집단 분포표에서 $\sigma(\bar X)$</h3>
+<p>모집단의 확률분포가 X: −2, 0, 1 에 확률 1/4, 1/4, 1/2일 때, 크기 4인 표본을 복원추출하여 구한 표본평균 $\bar X$의 표준편차</p>
+<p><strong>풀이</strong> $m=-\frac12+0+\frac12=0$, $E(X^2)=1+0+\frac12=\frac32$, $\sigma^2=\frac32$.
+$V(\bar X)=\frac{3/2}{4}=\frac38$, $\sigma(\bar X)=\sqrt{\frac38}=\dfrac{\sqrt6}{4}$.</p>
+<p><strong>포인트</strong> "모집단의 분산을 먼저(2차시), 그다음 n으로 나누기(6차시)." 727, 767(서술형), 770이 이 2단계.</p>
+<p><strong>고쟁이</strong> 727, 728, 767, 770, 772</p>
+<h3>예제 5 [확장] 정규모집단에서 $\bar X$의 분포</h3>
+<p>(1) $N(10,4^2)$에서 크기 4인 표본 → $\bar X$의 평균과 분산의 합</p>
+<p>(2) $N(11,2^2)$에서 크기 25인 표본 → $P(10\le\bar X\le12)$</p>
+<p><strong>풀이</strong> (1) $\bar X\sim N(10,2^2)$ → 10+4=14.</p>
+<p>(2) $\bar X\sim N\left(11,\left(\frac25\right)^2\right)$. $P\left(\frac{10-11}{0.4}\le Z\le\frac{12-11}{0.4}\right)=P(-2.5\le Z\le2.5)=2\times0.4938=0.9876$.</p>
+<p><strong>포인트</strong> "$\bar X$는 N(m, (σ/√n)²)" 한 줄을 쓰고 4차시처럼 표준화. 731(P(15≤X̄≤25)=P(0≤Z≤5) → σ/√n=2 → n=25)은 역산 버전.</p>
+<p><strong>고쟁이</strong> 724, 730, 731, 773, 775</p>
+<h3>예제 6 [확장] 표본평균 활용 (스키마 p.203)</h3>
+<p>어느 고등학교 3학년 남학생의 키는 평균 175 cm, 표준편차 5 cm인 정규분포를 따른다. 25명을 임의추출할 때 표본평균이 173 cm 이상 175 cm 이하일 확률은?</p>
+<p><strong>풀이</strong> $\bar X\sim N\left(175,\left(\frac{5}{\sqrt{25}}\right)^2\right)=N(175,1^2)$.
+$P(173\le\bar X\le175)=P(-2\le Z\le0)=0.4772$.</p>
+<p><strong>포인트</strong> 782(달걀 4개 세트 무게 182 g 이상)는 "합 ≥ 182 ↔ 평균 ≥ 45.5"로 바꾼 뒤 같은 절차. 합의 조건은 평균의 조건으로 바꾼다.</p>
+<p><strong>고쟁이</strong> 732, 733, 734, 782, 783, 785</p>
+<h3>예제 7 [기본] 표본비율의 기본</h3>
+<p>(1) 어느 학교 학생 500명 중 70명을 임의추출하여 조사했더니 A형이 18명이었다. A형 학생의 표본비율 $\hat p$</p>
+<p>(2) 모비율이 $\frac14$인 모집단에서 크기 300인 표본을 임의추출할 때 $E(\hat p)$, $\sigma(\hat p)$</p>
+<p><strong>풀이</strong> (1) $\hat p=\frac{18}{70}=\frac{9}{35}$ (2) $E(\hat p)=\frac14$, $\sigma(\hat p)=\sqrt{\frac{\frac14\cdot\frac34}{300}}=\sqrt{\frac{1}{1600}}=\frac{1}{40}$</p>
+<p><strong>포인트</strong> 738 보기 ㄴ: p=0.9, n=100이면 $V(\hat p)=\frac{0.09}{100}=0.0009$. "0.03"은 분산이 아니라 표준편차.</p>
+<p><strong>고쟁이</strong> 722, 735, 736, 737, 738, 786, 788, 789</p>
+<h3>예제 8 [확장] 표본비율 활용</h3>
+<p>모비율이 0.8인 모집단에서 크기 100인 표본을 임의추출할 때 표본비율이 0.88 이상일 확률은?</p>
+<p><strong>풀이</strong> $E(\hat p)=0.8$, $V(\hat p)=\frac{0.8\times0.2}{100}=0.0016$, $\sigma(\hat p)=0.04$ → $\hat p\sim N(0.8,0.04^2)$.
+$P(\hat p\ge0.88)=P\left(Z\ge\frac{0.88-0.8}{0.04}\right)=P(Z\ge2)=0.5-0.4772=0.0228$.</p>
+<p><strong>포인트</strong> 5차시 예제 7(1600대 중 A사 비율)을 $\hat p$로 다시 풀면 $\sigma(\hat p)=\sqrt{\frac{0.25}{1600}}=0.0125$, $P(0.475\le\hat p\le0.525)=P(-2\le Z\le2)$ 로 같은 답이 나온다. 두 풀이를 나란히 보여 주면 "표본비율 = 이항분포 ÷ n"이 체감된다.</p>
+<p><strong>고쟁이</strong> 739, 740, 741, 742, 790, 791, 792</p>
+<h2>4. 마무리 &amp; 과제</h2>
+<ul>
+<li><strong>한 줄 정리</strong>: 표본평균은 "평균 그대로, 분산은 1/n". 표본비율은 "평균 p, 분산 pq/n". 둘 다 n 크면 정규분포.</li>
+<li><strong>과제(필수, STEP 1)</strong> 720, 721, 723, 724, 727, 729, 730, 732, 733, 734, 736, 738, 739</li>
+<li><strong>과제(선택, STEP 2)</strong> 766, 767, 768, 770, 774, 777, 782, 788, 789, 791, 792</li>
+<li><strong>도전(STEP 3)</strong> 821, 822, 823, 824, 826</li>
+<li><strong>다음 차시 예고</strong>: "표본평균 180 cm 하나를 보고 모평균이 180이라고 단정해도 될까?" → 신뢰구간</li>
+</ul></section><section class="doc"><h1>7차시. 통계적 추정 (2) 모평균·모비율의 추정</h1>
+<ul>
+<li><strong>고쟁이</strong> 개념 p.180~181 / STEP 1 743~763 (유형 06~09) / STEP 2 795~820, 스키마 p.204 / STEP 3 827~830, 832~835</li>
+</ul>
+<p><strong>학습 목표</strong></p>
+<ol>
+<li>신뢰구간이 "표본평균 ± k·σ/√n"으로 만들어지는 이유와 신뢰도의 뜻을 설명한다.</li>
+<li>모평균의 신뢰도 95 %, 99 % 신뢰구간과 그 길이를 구한다.</li>
+<li>신뢰구간·길이가 주어졌을 때 $\bar x$, n, σ, 신뢰도를 역산한다.</li>
+<li>모비율의 신뢰구간 $\hat p\pm k\sqrt{\dfrac{\hat p\hat q}{n}}$과 길이 조건에서 n의 최솟값을 구한다.</li>
+</ol>
+<h2>수업 흐름 (50분)</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>시간</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>도입</td>
+<td>8분</td>
+<td>표본평균 180 하나로 m을 단정할 수 있나? → $\bar X$의 흔들림 폭 → 95 % 그물</td>
+</tr>
+<tr>
+<td>개념 1</td>
+<td>7분</td>
+<td>신뢰구간 공식, 신뢰도의 뜻(그림), 길이와 n·신뢰도의 관계</td>
+</tr>
+<tr>
+<td>예제 1~4</td>
+<td>13분</td>
+<td>95 % 구간 → S로 대신(서술형) → 길이 → 구간에서 역산</td>
+</tr>
+<tr>
+<td>개념 2</td>
+<td>4분</td>
+<td>모비율: σ 자리에 $\sqrt{\hat p\hat q}$</td>
+</tr>
+<tr>
+<td>예제 5~8</td>
+<td>15분</td>
+<td>n 최솟값 → 신뢰도 역산 → 모비율 구간 → 모비율 n 최솟값</td>
+</tr>
+<tr>
+<td>마무리</td>
+<td>3분</td>
+<td>통계적 추정 OX 체크, 과제</td>
+</tr>
+</tbody>
+</table>
+<h2>1. 도입: 심플한 예시로 감 잡기</h2>
+<p><strong>상황</strong>: 어느 학교 학생 100명의 제자리멀리뛰기 기록을 재었더니 평균 $\bar x=180$ cm. 모표준편차는 10 cm로 알려져 있다. "이 학교 전체의 평균 m은 180이다"라고 말해도 될까?</p>
+<ul>
+<li>6차시: $\bar X$는 $N\left(m,\left(\frac{10}{\sqrt{100}}\right)^2\right)=N(m,1^2)$을 따른다. 즉 $\bar X$는 m 근처에서 <strong>±1 정도</strong> 흔들린다. 180이 딱 m일 리는 없고, m은 180 근처 어딘가다.</li>
+<li>얼마나 근처? 4차시 68-95-99.7: $\bar X$가 $m\pm1.96\times1$ 안에 있을 확률이 95 %. 즉 $|\bar X-m|\le1.96$일 확률 0.95.</li>
+<li>이걸 m 쪽에서 보면: <strong>$\bar X-1.96\le m\le\bar X+1.96$일 확률 0.95</strong>. 숫자를 넣으면 $178.04\le m\le181.96$. 이것이 <strong>신뢰도 95 %의 신뢰구간</strong>.</li>
+</ul>
+<p><strong>신뢰도의 뜻 (그림 필수)</strong>: m은 고정된 하나의 값(우리가 모를 뿐). 표본을 뽑을 때마다 $\bar x$가 달라지므로 구간도 달라진다. 표본을 100번 뽑아 구간을 100개 만들면 그중 <strong>약 95개가 m을 포함</strong>한다는 뜻. 한 번 만든 구간에 m이 "95 % 확률로 들어 있다"가 아니라, "이 방법으로 만든 구간은 95 %가 m을 잡는 그물"이라는 뜻이다. (803 ㄱ "구간 안에 반드시 m이 있다"는 ×)</p>
+<p><strong>그물 폭의 감각</strong>: 폭(길이) $=2\times1.96\times\frac{\sigma}{\sqrt n}$. 더 확실하게 잡고 싶으면(99 %) 그물을 넓혀야 하고(1.96 → 2.58), 표본을 많이 뽑으면(n↑) 그물이 좁아져도 된다. <strong>n을 4배 하면 폭은 절반.</strong></p>
+<h2>2. 개념 정리</h2>
+<h3>(1) 모평균의 신뢰구간</h3>
+<p>모집단이 $N(m,\sigma^2)$, 크기 n인 표본의 평균이 $\bar x$일 때</p>
+<ul>
+<li>신뢰도 95 %: $\bar x-1.96\dfrac{\sigma}{\sqrt n}\le m\le\bar x+1.96\dfrac{\sigma}{\sqrt n}$</li>
+<li>신뢰도 99 %: $\bar x-2.58\dfrac{\sigma}{\sqrt n}\le m\le\bar x+2.58\dfrac{\sigma}{\sqrt n}$</li>
+<li>신뢰도 α %: $P(|Z|\le k)=\dfrac{\alpha}{100}$인 k로 $\bar x\pm k\dfrac{\sigma}{\sqrt n}$. (표에서 $P(0\le Z\le k)=\dfrac{\alpha}{200}$)</li>
+<li>σ를 모르면 n이 충분히 클 때(n≥30) 표본표준편차 S를 대신 쓴다.</li>
+<li><strong>문제가 준 값을 쓴다</strong>: P(0≤Z≤2)=0.475로 주면 k=2, P(0≤Z≤2.6)=0.495로 주면 k=2.6.</li>
+</ul>
+<h3>(2) 신뢰구간의 길이와 역산 공식</h3>
+<ul>
+<li>길이 $l=2k\dfrac{\sigma}{\sqrt n}$. 신뢰도↑ → 길이↑, n↑ → 길이↓, n이 4배 → 길이 1/2, n이 100배 → 길이 1/10.</li>
+<li>구간 $a\le m\le b$가 주어지면 <strong>$\bar x=\dfrac{a+b}{2}$(중점)</strong>, $l=b-a$.</li>
+<li>신뢰구간의 길이는 m의 값, $\bar x$의 값과 무관하다 (795 (1)○, (2)×).</li>
+</ul>
+<h3>(3) 모비율의 신뢰구간</h3>
+<p>표본비율 $\hat p$, $\hat q=1-\hat p$, n이 충분히 클 때</p>
+<ul>
+<li>신뢰도 95 %: $\hat p-1.96\sqrt{\dfrac{\hat p\hat q}{n}}\le p\le\hat p+1.96\sqrt{\dfrac{\hat p\hat q}{n}}$, 길이 $2\times1.96\sqrt{\dfrac{\hat p\hat q}{n}}$</li>
+<li>모평균 공식에서 $\dfrac{\sigma}{\sqrt n}$ 자리에 $\sqrt{\dfrac{\hat p\hat q}{n}}$이 들어간 것뿐이다. 역산 요령도 같다.</li>
+</ul>
+<h3>자주 하는 실수</h3>
+<ul>
+<li>길이를 $k\frac{\sigma}{\sqrt n}$(반길이)로 쓴다. 길이는 <strong>2배</strong>.</li>
+<li>n의 최솟값에서 부등호 방향을 거꾸로 한다. $\frac{1}{\sqrt n}\le\cdots$ 이면 n은 <strong>크게</strong>.</li>
+<li>신뢰도 역산에서 $\frac{\alpha}{100}$과 $\frac{\alpha}{200}$을 혼동한다. 표가 $P(0\le Z\le k)$이면 반쪽이므로 $\frac{\alpha}{200}$.</li>
+</ul>
+<h2>3. 예제 8 (기본 → 확장)</h2>
+<p>예제 공통: P(0≤Z≤1.96)=0.475, P(0≤Z≤2)=0.475(문제에서 지정 시), P(0≤Z≤2.58)=0.495, P(0≤Z≤1.5)=0.43</p>
+<h3>예제 1 [기본] 95 % 신뢰구간</h3>
+<p>표준편차가 5인 정규분포를 따르는 모집단에서 크기 25인 표본을 임의추출하여 구한 표본평균이 100일 때, 모평균 m의 신뢰도 95 %의 신뢰구간 (P(0≤Z≤1.96)=0.475)</p>
+<p><strong>풀이</strong> $\frac{\sigma}{\sqrt n}=\frac{5}{5}=1$. $100-1.96\le m\le100+1.96$ → $98.04\le m\le101.96$.</p>
+<p><strong>고쟁이</strong> 743, 796</p>
+<h3>예제 2 [기본] σ 대신 S (서술형 틀)</h3>
+<p>어느 앱의 소비자 만족도를 조사하려고 100명을 임의추출했더니 표본평균 50점, 표본표준편차 15점이었다. 전체 소비자 평가 점수의 평균 m에 대한 신뢰도 95 %의 신뢰구간 (P(0≤Z≤1.96)=0.475)</p>
+<p><strong>풀이</strong> n=100≥30이므로 σ 대신 S=15. $\frac{S}{\sqrt n}=1.5$. $50\pm1.96\times1.5=50\pm2.94$ → $47.06\le m\le52.94$.</p>
+<p><strong>포인트</strong> 748(서술형, 99 %, P(0≤Z≤2.6)=0.495로 지정)은 $180\pm2.6\times1$ → $177.4\le m\le182.6$. 답안 세 줄: ① $\bar x$, σ(또는 S), n 적기 ② $k\frac{\sigma}{\sqrt n}$ 계산 ③ 구간.</p>
+<p><strong>고쟁이</strong> 748, 749, 752, 807</p>
+<h3>예제 3 [기본] 신뢰구간의 길이</h3>
+<p>(1) 표준편차 6인 정규모집단에서 크기 36인 표본으로 추정한 95 % 신뢰구간의 길이 (P(0≤Z≤1.96)=0.475)</p>
+<p>(2) 표준편차 σ인 정규모집단에서 크기 16인 표본으로 추정한 신뢰구간의 길이가 l일 때, 같은 신뢰도로 크기 64인 표본으로 추정한 신뢰구간의 길이</p>
+<p><strong>풀이</strong> (1) $2\times1.96\times\frac{6}{6}=3.92$ (2) n이 4배 → $\sqrt n$이 2배 → 길이 $\frac l2$</p>
+<p><strong>고쟁이</strong> 745, 746, 750, 751</p>
+<h3>예제 4 [기본→확장] 구간에서 $\bar x$와 n 역산</h3>
+<p>모표준편차 16 g인 정규모집단에서 크기 n인 표본으로 추정한 모평균의 신뢰도 95 %의 신뢰구간이 $164.5\le m\le172.5$일 때 n (P(0≤Z≤2)=0.475로 계산)</p>
+<p><strong>풀이</strong> 중점 $\bar x=168.5$, 길이 8. $2\times2\times\frac{16}{\sqrt n}=8$ → $\frac{64}{\sqrt n}=8$ → $\sqrt n=8$ → n=64.</p>
+<p><strong>포인트</strong> "길이 = 2k σ/√n" 하나로 n, σ, k 중 무엇이든 역산한다. 800(n+$\bar x$), 808(a+n), 809(a+n)이 전부 이 식.</p>
+<p><strong>고쟁이</strong> 754, 800, 808, 809, 813</p>
+<h3>예제 5 [확장] 길이 조건에서 n의 최솟값</h3>
+<p>모표준편차 2인 정규모집단에서 신뢰도 99 %로 모평균을 추정할 때 신뢰구간의 길이가 1.2 이하가 되도록 하는 n의 최솟값 (P(|Z|≤2.58)=0.99)</p>
+<p><strong>풀이</strong> $2\times2.58\times\frac{2}{\sqrt n}\le1.2$ → $\frac{10.32}{\sqrt n}\le1.2$ → $\sqrt n\ge8.6$ → $n\ge73.96$ → n=74.</p>
+<p><strong>포인트</strong> 부등호를 넘길 때 방향 주의. 753(길이 3 이하, k=3, σ=6 → $\frac{36}{\sqrt n}\le3$ → n≥144), 806(모평균과 표본평균의 차 ≤ 0.7 → <strong>반길이</strong> 조건 $1.96\frac{10}{\sqrt n}\le0.7$ → n≥784)에서 "길이"인지 "차(반길이)"인지 구분.</p>
+<p><strong>고쟁이</strong> 744, 753, 806, 811</p>
+<h3>예제 6 [확장] 신뢰도 역산</h3>
+<p>$N(m,20^2)$인 모집단에서 크기 100인 표본의 평균이 119.6이었다. 이 표본으로 추정한 신뢰도 α %의 신뢰구간이 $116.6\le m\le122.6$일 때 α (P(0≤Z≤1.5)=0.43)</p>
+<p><strong>풀이</strong> 반길이 3 $=k\times\frac{20}{10}=2k$ → k=1.5. $P(|Z|\le1.5)=2\times0.43=0.86$ → α=86.</p>
+<p><strong>포인트</strong> 스키마 p.204(801): 79.6 % ↔ k=1.27, 길이 2배 ↔ k=2.54 ↔ 98.9 %. "길이가 a배면 k도 a배"를 표에서 찾는다.</p>
+<p><strong>고쟁이</strong> 797, 801, 802, 810, 812</p>
+<h3>예제 7 [확장] 모비율의 신뢰구간</h3>
+<p>어느 온라인 쇼핑몰 이용자 1600명을 임의추출하여 조사했더니 1280명이 신규 제품을 재구매할 의사가 있다고 답했다. 전체 이용자 중 재구매 의사가 있는 비율 p에 대한 신뢰도 95 %의 신뢰구간 (P(0≤Z≤2)=0.475로 계산)</p>
+<p><strong>풀이</strong> $\hat p=\frac{1280}{1600}=0.8$, $\hat q=0.2$, $\sqrt{\frac{\hat p\hat q}{n}}=\sqrt{\frac{0.16}{1600}}=\frac{0.4}{40}=0.01$.
+$0.8\pm2\times0.01$ → $0.78\le p\le0.82$, 즉 $\frac{39}{50}\le p\le\frac{41}{50}$.</p>
+<p><strong>포인트</strong> 756(n=100, $\hat p$=0.1, k=1.96): $\sqrt{0.09/100}=0.03$, $0.1\pm0.0588$ → $0.0412\le p\le0.1588$. 757(길이): $2\times2.58\times\sqrt{\frac{0.64\times0.36}{144}}=2\times2.58\times0.04=0.2064$.</p>
+<p><strong>고쟁이</strong> 756, 757, 758, 760, 761, 819</p>
+<h3>예제 8 [확장] 모비율: 길이 조건에서 n의 최솟값</h3>
+<p>어느 백화점 고객 n명을 임의추출했더니 20 %가 오전에 방문했다. 오전 방문 고객의 비율 p에 대한 신뢰도 95 %의 신뢰구간 $a\le p\le b$에서 $b-a\le0.1$이 되도록 하는 n의 최솟값 (P(|Z|≤2)=0.95로 계산)</p>
+<p><strong>풀이</strong> $2\times2\times\sqrt{\frac{0.2\times0.8}{n}}\le0.1$ → $\sqrt{\frac{0.16}{n}}\le0.025$ → $\frac{0.16}{n}\le0.000625$ → $n\ge256$. 최솟값 256.</p>
+<p><strong>포인트</strong> 양변을 제곱할 때 소수 계산이 번거로우면 $\sqrt{\frac{0.16}{n}}=\frac{0.4}{\sqrt n}$으로 바꿔 $\frac{0.4}{\sqrt n}\le0.025$ → $\sqrt n\ge16$ → n≥256. 832(모비율과 표본비율의 차 ≤ 0.02 → <strong>반길이</strong> $1.96\sqrt{\frac{0.09}{n}}\le0.02$ → $\sqrt n\ge29.4$ → n≥864.36 → 865)도 같은 틀.</p>
+<p><strong>고쟁이</strong> 762, 763, 816, 817, 818, 820, 832</p>
+<h2>4. 마무리: 통계적 추정 OX 체크 (795, 747)</h2>
+<table>
+<thead>
+<tr>
+<th>문장</th>
+<th>O/X</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>신뢰구간의 길이는 모평균의 값과 관계없다</td>
+<td>○</td>
+<td>길이 $=2k\sigma/\sqrt n$에 m이 없다</td>
+</tr>
+<tr>
+<td>표본평균이 커지면 길이가 길어진다</td>
+<td>×</td>
+<td>$\bar x$는 중점만 옮긴다</td>
+</tr>
+<tr>
+<td>n 일정, 길이를 짧게 하면 신뢰도가 낮아진다</td>
+<td>○</td>
+<td>k가 작아진다</td>
+</tr>
+<tr>
+<td>신뢰도 일정, n을 100배 하면 길이는 1/10</td>
+<td>○</td>
+<td>$\sqrt{100}=10$</td>
+</tr>
+<tr>
+<td>신뢰도를 높이면서 n을 크게 하면 길이는 길어진다</td>
+<td>×</td>
+<td>둘이 반대 방향, 알 수 없다</td>
+</tr>
+<tr>
+<td>신뢰도를 높일 때 길이를 유지하려면 n을 작게 한다</td>
+<td>×</td>
+<td>n을 크게 해야 한다</td>
+</tr>
+<tr>
+<td>같은 표본에서 99 % 구간은 95 % 구간을 포함한다</td>
+<td>○</td>
+<td>중점이 같고 더 넓다</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>한 줄 정리</strong>: 신뢰구간 = 표본평균(또는 표본비율) ± k × (표준오차). 길이는 2k×(표준오차). 역산은 전부 이 식 하나.</li>
+<li><strong>과제(필수, STEP 1)</strong> 743, 744, 747, 748, 749, 753, 754, 756, 758, 759, 762</li>
+<li><strong>과제(선택, STEP 2)</strong> 795, 797, 800, 801, 804, 806, 808, 813, 816, 818, 819</li>
+<li><strong>도전(STEP 3)</strong> 827, 828, 830, 832, 833, 834</li>
+<li><strong>시험 전 점검</strong>: 문제마다 "k를 1.96으로 쓰는지 2로 쓰는지"를 조건에서 먼저 확인하는 습관.</li>
+</ul></section>
+</body></html>
